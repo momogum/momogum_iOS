@@ -1,7 +1,7 @@
 ---
-name: CHORE
-about: 자잘한 코드 수정과 파일 변경
-title: "[CHORE]"
+name: REFACTOR
+about: 전면 수정(코드 리팩토링)
+title: "[REFACTOR]"
 labels: ''
 assignees: ''
 

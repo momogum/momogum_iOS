@@ -1,7 +1,7 @@
 ---
-name: CHORE
-about: 자잘한 코드 수정과 파일 변경
-title: "[CHORE]"
+name: "\bFIX"
+about: 버그, 오류 수정
+title: "[FIX"
 labels: ''
 assignees: ''
 
