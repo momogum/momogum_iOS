@@ -6,27 +6,26 @@
 //
 
 import SwiftUI
-import SwiftData
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 struct momogumApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
+  
+    @UIApplicationDelegateAdaptor var appDelegate : AppDelegate
+    
+//    init() {
+//
+//        let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] ?? "" //없을 땐 빈칸
+//
+//        // Kakao SDK 초기화
+//        KakaoSDK.initSDK(appKey: kakaoAppKey as! String)
+//    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
     }
 }
+

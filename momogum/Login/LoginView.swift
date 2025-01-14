@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject var kakaoAuthViewModel : KakaoAuthViewModel = KakaoAuthViewModel()
     var body: some View {
         
         NavigationStack{
@@ -19,51 +20,88 @@ struct LoginView: View {
                 .padding(.bottom, 30)
             
             VStack{
-                Text("아이디")
+                Text("ID *")
+                    .font(.system(size: 16))
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(.leading,7)
+                    .padding(.leading,11)
                 
                 
                 TextField("아이디혹은 이메일 입력", text: .constant(""))
+                    .fontWeight(.semibold)
+                    .font(.system(size: 16))
                     .textInputAutocapitalization(.never)
-                    .padding(12)
-                    .border(Color.gray, width: 1)
+                    .padding(.bottom,15)
+                   .padding(.leading,11)
+                    .keyboardType(.emailAddress)
+
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 3) // 밑줄 두께
+                            .foregroundColor(Color.borderGray)
+                            ,
+                             alignment: .bottom
+                    )
                     .padding(.bottom,16)
                 
                 
             }
-            .padding(.horizontal,58)
+
+            .padding(.leading,27)
+            .padding(.trailing,38)
             .padding(.bottom,7)
             
             
             VStack{
-                Text("비밀번호")
+                Text("password *")
+                    .font(.system(size: 16))
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(.leading,7)
+                    .padding(.leading,11)
                 
                 
                 TextField("비밀번호 입력", text: .constant(""))
+                    .font(.system(size: 16))
+                    .fontWeight(.semibold)
                     .textInputAutocapitalization(.never)
-                    .padding(12)
-                    .border(Color.gray, width: 1)
+                    .padding(.bottom,15)
+                   .padding(.leading,11)
+                    .keyboardType(.emailAddress)
+                    .overlay(
+                        Rectangle()
+                            .frame(height: 3) // 밑줄 두께
+                            .foregroundColor(Color.borderGray)
+                            ,
+                             alignment: .bottom
+                    )
                     .padding(.bottom,16)
+                
             }
-            .padding(.horizontal,58)
-            
+            .padding(.leading,27)
+            .padding(.trailing,38)
             
             Button{
                 print("로그인 성공") // 로그인 성공시 메인탭뷰로 넘어가게
             }
             label: {
-                Text("로그인")
-                    .frame(width: 296, height: 49)
+                Text("로그인 하기")
+                    .fontWeight(.semibold)
+                    .frame(width: 340, height: 58)
                     .foregroundStyle(.white)
                     .background(Color.momogumRed)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-            
+           
+            Button{
+                KakaoAuthViewModel().handleKakaoLogin()
+            }
+            label: {
+                Text("카카오 로그인")
+                    .frame(width: 340, height: 58)
+                    .foregroundStyle(.white)
+                    .background(Color.yellow)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
             
             //회원가입뷰
             NavigationLink{
