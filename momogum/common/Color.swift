@@ -34,4 +34,9 @@ extension ShapeStyle where Self == Color {
     static var signupDescriptionGray : Color {
         Color(hex: 0x707070)
     }
+    
+    static var placeholderGray2 : Color {
+        Color(hex: 0xD9D9D9)
+    }
+    
 }

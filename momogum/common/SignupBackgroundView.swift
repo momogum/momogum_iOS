@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignupBackgroundView<Content: View>: View {
-    @Environment(\.dismiss) var dismiss    //환경변수에서 뒤로가는 정보를 dismiss에 저장하여 사용
+
     let content : Content
     
     init(@ViewBuilder content: () -> Content) {
@@ -16,7 +16,7 @@ struct SignupBackgroundView<Content: View>: View {
     }
     
     var body: some View {
-        Text("회원가입")
+        Text("정보 입력")
             .font(.system(size:20))
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity,alignment: .top)
@@ -26,17 +26,7 @@ struct SignupBackgroundView<Content: View>: View {
       
             content
         }
-        .navigationBarBackButtonHidden()
-        .toolbar{
-            ToolbarItem(placement: .topBarLeading){
-                Button{
-                    dismiss()
-                } label:{
-                    Text("이전단계")
-                        .tint(Color.black)
-                }
-            }
-        }
+      
         Spacer()
     }
 }

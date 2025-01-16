@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var kakaoAuthViewModel : KakaoAuthViewModel = KakaoAuthViewModel()
+    @FocusState private var isFocused: Bool // TextField의 포커스 상태
+    @FocusState private var isFocusedPWD: Bool 
     var body: some View {
         
         NavigationStack{
@@ -29,6 +31,7 @@ struct LoginView: View {
                 
                 TextField("아이디혹은 이메일 입력", text: .constant(""))
                     .fontWeight(.semibold)
+                    .foregroundStyle((isFocused ? Color.black : Color.placeholderGray2))
                     .font(.system(size: 16))
                     .textInputAutocapitalization(.never)
                     .padding(.bottom,15)
@@ -38,7 +41,7 @@ struct LoginView: View {
                     .overlay(
                         Rectangle()
                             .frame(height: 3) // 밑줄 두께
-                            .foregroundColor(Color.borderGray)
+                            .foregroundColor((isFocused ? Color.black : Color.placeholderGray2))
                             ,
                              alignment: .bottom
                     )
