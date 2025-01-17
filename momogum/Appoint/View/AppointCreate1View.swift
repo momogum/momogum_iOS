@@ -27,15 +27,9 @@ struct AppointCreate1View: View {
 //            .border(.black)
         }
         .defaultScrollAnchor(.center)
-
         
-        ScrollView {
-            Text("친구")
-                
-            
-            
-        }
-        .searchable(text: $searchText, prompt: "검색 바")
+        AppointFriendSearchView()
+            .border(.black)
         
         HStack {
             Spacer()
