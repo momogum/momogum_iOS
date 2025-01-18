@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MyProfileView: View {
+    @State private var selectedSegment = 0
+    
+    let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 24), count: 2)
+    
     var body: some View {
         NavigationStack{
             VStack{
@@ -101,11 +105,29 @@ struct MyProfileView: View {
                             .foregroundStyle(.black)
                     )
                     .padding(.top, 45)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 49)
             }
             
-            Divider()
             
+            // 내 게시물 / 저장 게시물 SegmentedControl
+            HStack {
+                Image(systemName: "doc.text")
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(selectedSegment == 0 ? Color.black : .gray)
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        selectedSegment = (selectedSegment == 1) ? 0 : selectedSegment
+                    }
+                
+                Image(systemName: "bookmark")
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(selectedSegment == 0 ? Color.gray : .black)
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        selectedSegment = (selectedSegment == 0) ? 1 : selectedSegment
+                    }
+            }
+            .padding(.bottom, 41)
             
         }
     }
