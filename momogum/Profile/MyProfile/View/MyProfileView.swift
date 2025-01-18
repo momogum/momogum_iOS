@@ -23,7 +23,7 @@ struct MyProfileView: View {
                     
                     // 내 유저 아이디
                     Text("내 유저 아이디")
-                        .frame(width: .infinity, height: 20)
+                        .frame(height: 20)
                         .fontWeight(.semibold)
                     
                     Spacer()
@@ -38,7 +38,7 @@ struct MyProfileView: View {
                 
                 HStack{
                     // 프로필 이미지
-                    Image("Image")
+                    Image("pixelsImage")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 76, height: 76)
@@ -54,11 +54,11 @@ struct MyProfileView: View {
                         VStack(alignment: .leading){
                             // 이름
                             Text("이름")
-                                .frame(width: .infinity,height: 16, alignment: .leading)
+                                .frame(height: 16, alignment: .leading)
                                 .fontWeight(.semibold)
                             
                             Text("한 줄 소개")
-                                .frame(width:.infinity,height: 12, alignment: .leading)
+                                .frame(height: 12, alignment: .leading)
                                 .fontWeight(.semibold)
                                 .foregroundStyle(.gray)
                         }
@@ -71,7 +71,7 @@ struct MyProfileView: View {
                                 isActive = true // 팔로워 버튼 클릭 시 화면 전환
                             }) {
                                 Text("팔로워 17")
-                                    .frame(width:.infinity, height: 13, alignment: .leading)
+                                    .frame(height: 13, alignment: .leading)
                                     .fontWeight(.semibold)
                                     .padding(.trailing, 43)
                                     .foregroundStyle(Color.black)
@@ -82,7 +82,7 @@ struct MyProfileView: View {
                                 isActive = true // 팔로잉 버튼 클릭 시 화면 전환
                             }) {
                                 Text("팔로잉 14")
-                                    .frame(width:.infinity, height: 13, alignment: .leading)
+                                    .frame(height: 13, alignment: .leading)
                                     .fontWeight(.semibold)
                                     .padding(.trailing, 43)
                                     .foregroundStyle(Color.black)

@@ -19,6 +19,7 @@ struct FollowView: View {
                 VStack {
                     Text("17 팔로워")
                         .frame(maxWidth: .infinity)
+                        .fontWeight(.semibold)
                         .foregroundColor(selectedSegment == 0 ? .black : .gray)
                         .onTapGesture {
                             selectedSegment = 0
@@ -32,8 +33,9 @@ struct FollowView: View {
                 
                 // 팔로잉 segment
                 VStack {
-                    Text("22 팔로잉")
+                    Text("14 팔로잉")
                         .frame(maxWidth: .infinity)
+                        .fontWeight(.semibold)
                         .foregroundColor(selectedSegment == 1 ? .black : .gray)
                         .onTapGesture {
                             selectedSegment = 1
@@ -44,12 +46,13 @@ struct FollowView: View {
                         .foregroundColor(selectedSegment == 1 ? .black : .clear)
                 }
             }
+            .padding(.bottom, 23)
             
             // 팔로워 / 팔로잉 목록
             if selectedSegment == 0 {
-//                MyFollower()
+                MyFollower()
             } else if selectedSegment == 1 {
-//                MyFollowing()
+                MyFollowing()
             }
         }
         .navigationBarBackButtonHidden()
@@ -57,7 +60,7 @@ struct FollowView: View {
             ToolbarItem(placement: .principal) {
                 Text("내 유저아이디")
                     .frame(height: 20)
-                    .font(.headline)
+                    .fontWeight(.semibold)
                     .foregroundColor(.black)
             }
             // 뒤로가기 버튼
