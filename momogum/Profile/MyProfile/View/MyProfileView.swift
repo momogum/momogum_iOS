@@ -10,7 +10,7 @@ import SwiftUI
 struct MyProfileView: View {
     @State private var selectedSegment = 0
     
-    let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 24), count: 2)
+    let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 2)
     
     var body: some View {
         NavigationStack{
@@ -128,6 +128,24 @@ struct MyProfileView: View {
                     }
             }
             .padding(.bottom, 41)
+            
+            // 게시물 Grid
+            ScrollView{
+                if selectedSegment == 0 {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(0..<30, id: \.self) { index in
+                            Rectangle()
+                                .frame(width: 160,height: 228)
+                                .foregroundStyle(Color.gray)
+                        }
+                    }
+                    .padding(.horizontal, 30)
+                } else if selectedSegment == 1 {
+                    Text("저장된 콘텐츠가 없습니다.")
+                        .padding()
+                        .foregroundStyle(.gray)
+                }
+            }
             
         }
     }
