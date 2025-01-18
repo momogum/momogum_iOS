@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MyProfileView: View {
     @State private var selectedSegment = 0
+    @State private var showFollowList = 0
+    @State private var isActive = false // 화면 전환 제어
     
     let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 2)
     
@@ -65,7 +67,8 @@ struct MyProfileView: View {
                         // 팔로워, 팔로잉
                         HStack{
                             Button(action: {
-                                print("팔로워 버튼 클릭")
+                                showFollowList = 0
+                                isActive = true // 팔로워 버튼 클릭 시 화면 전환
                             }) {
                                 Text("팔로워 17")
                                     .frame(width:.infinity, height: 13, alignment: .leading)
@@ -75,13 +78,18 @@ struct MyProfileView: View {
                             }
                             
                             Button(action: {
-                                print("팔로잉 버튼 클릭")
+                                showFollowList = 1
+                                isActive = true // 팔로잉 버튼 클릭 시 화면 전환
                             }) {
                                 Text("팔로잉 14")
                                     .frame(width:.infinity, height: 13, alignment: .leading)
                                     .fontWeight(.semibold)
                                     .padding(.trailing, 43)
                                     .foregroundStyle(Color.black)
+                            }
+                            
+                            NavigationLink(destination: FollowView(selectedSegment: $showFollowList), isActive: $isActive) {
+                                EmptyView()
                             }
                             
                         }

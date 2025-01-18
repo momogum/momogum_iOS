@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D82DEAB2D2C1273008386FE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6D82DEAA2D2C1273008386FE /* .gitignore */; };
+		DB3E10532D3C052C002B96D2 /* FollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10522D3C052C002B96D2 /* FollowView.swift */; };
 		DB87A6A32D3BE98900DC0F7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB87A69A2D3BE98900DC0F7F /* Preview Assets.xcassets */; };
 		DB87A6A42D3BE98900DC0F7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB87A69C2D3BE98900DC0F7F /* Assets.xcassets */; };
 		DB87A6A52D3BE98900DC0F7F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6952D3BE98900DC0F7F /* Color.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		6D82DE8A2D2C114C008386FE /* momogum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = momogum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D82DEAA2D2C1273008386FE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DB3E10522D3C052C002B96D2 /* FollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowView.swift; sourceTree = "<group>"; };
 		DB87A6952D3BE98900DC0F7F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DB87A6972D3BE98900DC0F7F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DB87A6982D3BE98900DC0F7F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,22 @@
 				6D82DE8A2D2C114C008386FE /* momogum.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DB3E104E2D3C036D002B96D2 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E104F2D3C03D5002B96D2 /* View */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		DB3E104F2D3C03D5002B96D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E10522D3C052C002B96D2 /* FollowView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DB87A6962D3BE98900DC0F7F /* common */ = {
@@ -110,6 +128,7 @@
 		DB87A6AD2D3BE99100DC0F7F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DB3E104E2D3C036D002B96D2 /* Follow */,
 				DB87A6AE2D3BE9B400DC0F7F /* MyProfile */,
 			);
 			path = Profile;
@@ -208,6 +227,7 @@
 				DB87A6A52D3BE98900DC0F7F /* Color.swift in Sources */,
 				DB87A6B12D3BE9DD00DC0F7F /* MyProfileView.swift in Sources */,
 				DB87A6A62D3BE98900DC0F7F /* LoginView.swift in Sources */,
+				DB3E10532D3C052C002B96D2 /* FollowView.swift in Sources */,
 				DB87A6A72D3BE98900DC0F7F /* SplashView.swift in Sources */,
 				DB87A6A82D3BE98900DC0F7F /* ContentView.swift in Sources */,
 				DB87A6A92D3BE98900DC0F7F /* Item.swift in Sources */,
