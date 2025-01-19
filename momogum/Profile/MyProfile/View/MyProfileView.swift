@@ -46,7 +46,7 @@ struct MyProfileView: View {
                         .padding(5)
                         .overlay(
                             Circle()
-                                .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4) // 회색 테두리 추가
+                                .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4)
                         )
                         .padding(.trailing, 35)
                     
@@ -100,7 +100,7 @@ struct MyProfileView: View {
             
             // 프로필 편집 버튼
             NavigationLink{
-                
+                EditProfileView()
             } label: {
                 RoundedRectangle(cornerRadius: 12)
                     .frame(width: 315, height: 36)
