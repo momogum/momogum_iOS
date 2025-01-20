@@ -12,6 +12,8 @@ struct MyProfileView: View {
     @State private var showFollowList = 0
     @State private var isActive = false // 화면 전환 제어
     
+    @Bindable var viewModel: ProfileViewModel
+    
     let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 2)
     
     var body: some View {
@@ -38,18 +40,33 @@ struct MyProfileView: View {
                 
                 HStack{
                     // 프로필 이미지
-                    Image("pixelsImage")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 76, height: 76)
-                        .clipShape(Circle())
-                        .padding(5)
-                        .overlay(
-                            Circle()
-                                .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4)
-                        )
-                        .padding(.trailing, 35)
-                    
+                    if let profileImage = viewModel.profileImage {
+                        profileImage
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 76, height: 76)
+                            .clipShape(Circle())
+                            .padding(5)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4)
+                            )
+                            .padding(.trailing, 35)
+                    } else {
+                        Image("defaultProfile")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 76, height: 76)
+                            .clipShape(Circle())
+                            .padding(5)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.gray.opacity(0.6), lineWidth: 5) // 회색 테두리 추가
+                            )
+                            .padding(.trailing, 35)
+                    }
+
+                    // 이름 / 한 줄 소개
                     VStack(alignment: .leading){
                         VStack(alignment: .leading){
                             // 이름
@@ -100,7 +117,7 @@ struct MyProfileView: View {
             
             // 프로필 편집 버튼
             NavigationLink{
-                EditProfileView()
+                EditProfileView(viewModel: viewModel)
             } label: {
                 RoundedRectangle(cornerRadius: 12)
                     .frame(width: 315, height: 36)
@@ -157,9 +174,4 @@ struct MyProfileView: View {
             
         }
     }
-}
-
-
-#Preview {
-    MyProfileView()
 }

@@ -10,20 +10,19 @@ import PhotosUI
 
 struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
+    @Bindable var viewModel: ProfileViewModel
     
     @State private var userName: String = ""
     @State private var userID: String = ""
     @State private var userInfo: String = ""
-    @State private var selectedImageItem: PhotosPickerItem? = nil
-    @State private var userImage: Image? = nil
     
     var body: some View {
         VStack(alignment: .center){
             
             // 프로필 이미지
-            PhotosPicker(selection: $selectedImageItem) {
+            PhotosPicker(selection: $viewModel.selectedItem) {
                 HStack(alignment: .bottom, spacing: 0) {
-                    if let profileImage = userImage {
+                    if let profileImage = viewModel.profileImage {
                         profileImage
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -54,7 +53,11 @@ struct EditProfileView: View {
                 }
                 .padding(.bottom, 60)
             }
-            
+            .onChange(of: viewModel.selectedItem) { oldValue, newValue in
+                Task{
+                    await viewModel.convertImage(item: newValue)
+                }
+            }
             
             // 이름 수정
             VStack(alignment: .leading){
@@ -137,8 +140,4 @@ struct EditProfileView: View {
             }
         }
     }
-}
-
-#Preview {
-    EditProfileView()
 }

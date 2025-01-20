@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D82DEAB2D2C1273008386FE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6D82DEAA2D2C1273008386FE /* .gitignore */; };
+		DB0CE1B42D3E489100FA2920 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0CE1B32D3E489100FA2920 /* ProfileViewModel.swift */; };
 		DB3E10532D3C052C002B96D2 /* FollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10522D3C052C002B96D2 /* FollowView.swift */; };
 		DB3E10562D3C0B1D002B96D2 /* MyFollower.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10552D3C0B1D002B96D2 /* MyFollower.swift */; };
 		DB3E10582D3C0B30002B96D2 /* MyFollowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10572D3C0B30002B96D2 /* MyFollowing.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		6D82DE8A2D2C114C008386FE /* momogum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = momogum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D82DEAA2D2C1273008386FE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DB0CE1B32D3E489100FA2920 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DB3E10522D3C052C002B96D2 /* FollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowView.swift; sourceTree = "<group>"; };
 		DB3E10552D3C0B1D002B96D2 /* MyFollower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFollower.swift; sourceTree = "<group>"; };
 		DB3E10572D3C0B30002B96D2 /* MyFollowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFollowing.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 				6D82DE8A2D2C114C008386FE /* momogum.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DB0CE1B22D3E486A00FA2920 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB0CE1B32D3E489100FA2920 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DB3E104E2D3C036D002B96D2 /* Follow */ = {
@@ -159,6 +169,7 @@
 		DB87A6AE2D3BE9B400DC0F7F /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				DB0CE1B22D3E486A00FA2920 /* ViewModel */,
 				DB87A6AF2D3BE9C500DC0F7F /* View */,
 			);
 			path = MyProfile;
@@ -261,6 +272,7 @@
 				DB87A6AB2D3BE98900DC0F7F /* SwiftUIView.swift in Sources */,
 				DB87A6AC2D3BE98900DC0F7F /* testing.swift in Sources */,
 				DB3E10582D3C0B30002B96D2 /* MyFollowing.swift in Sources */,
+				DB0CE1B42D3E489100FA2920 /* ProfileViewModel.swift in Sources */,
 				DB3E105A2D3C12B0002B96D2 /* FollowerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
