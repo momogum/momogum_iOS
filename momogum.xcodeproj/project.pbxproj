@@ -13,12 +13,49 @@
 		68CCB1852D365F58006D55E6 /* KakaoSDKCertCore in Frameworks */ = {isa = PBXBuildFile; productRef = 68CCB1842D365F58006D55E6 /* KakaoSDKCertCore */; };
 		68CCB1872D365F58006D55E6 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 68CCB1862D365F58006D55E6 /* KakaoSDKCommon */; };
 		6D82DEAB2D2C1273008386FE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6D82DEAA2D2C1273008386FE /* .gitignore */; };
+		DB0CE1B42D3E489100FA2920 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0CE1B32D3E489100FA2920 /* ProfileViewModel.swift */; };
+		DB3E10532D3C052C002B96D2 /* FollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10522D3C052C002B96D2 /* FollowView.swift */; };
+		DB3E10562D3C0B1D002B96D2 /* MyFollower.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10552D3C0B1D002B96D2 /* MyFollower.swift */; };
+		DB3E10582D3C0B30002B96D2 /* MyFollowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10572D3C0B30002B96D2 /* MyFollowing.swift */; };
+		DB3E105A2D3C12B0002B96D2 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E10592D3C12B0002B96D2 /* FollowerCell.swift */; };
+		DB3E105C2D3C12C3002B96D2 /* FollowingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E105B2D3C12C3002B96D2 /* FollowingCell.swift */; };
+		DB87A6A32D3BE98900DC0F7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB87A69A2D3BE98900DC0F7F /* Preview Assets.xcassets */; };
+		DB87A6A42D3BE98900DC0F7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB87A69C2D3BE98900DC0F7F /* Assets.xcassets */; };
+		DB87A6A52D3BE98900DC0F7F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6952D3BE98900DC0F7F /* Color.swift */; };
+		DB87A6A62D3BE98900DC0F7F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6972D3BE98900DC0F7F /* LoginView.swift */; };
+		DB87A6A72D3BE98900DC0F7F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6982D3BE98900DC0F7F /* SplashView.swift */; };
+		DB87A6A82D3BE98900DC0F7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A69D2D3BE98900DC0F7F /* ContentView.swift */; };
+		DB87A6A92D3BE98900DC0F7F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A69E2D3BE98900DC0F7F /* Item.swift */; };
+		DB87A6AA2D3BE98900DC0F7F /* momogumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A69F2D3BE98900DC0F7F /* momogumApp.swift */; };
+		DB87A6AB2D3BE98900DC0F7F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6A02D3BE98900DC0F7F /* SwiftUIView.swift */; };
+		DB87A6AC2D3BE98900DC0F7F /* testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6A12D3BE98900DC0F7F /* testing.swift */; };
+		DB87A6B12D3BE9DD00DC0F7F /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87A6B02D3BE9DD00DC0F7F /* MyProfileView.swift */; };
+		DBCDD1CD2D3CCF9300EF3491 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCDD1CC2D3CCF9300EF3491 /* EditProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6D82DE8A2D2C114C008386FE /* momogum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = momogum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D82DEAA2D2C1273008386FE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DB0CE1B32D3E489100FA2920 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DB3E10522D3C052C002B96D2 /* FollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowView.swift; sourceTree = "<group>"; };
+		DB3E10552D3C0B1D002B96D2 /* MyFollower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFollower.swift; sourceTree = "<group>"; };
+		DB3E10572D3C0B30002B96D2 /* MyFollowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFollowing.swift; sourceTree = "<group>"; };
+		DB3E10592D3C12B0002B96D2 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
+		DB3E105B2D3C12C3002B96D2 /* FollowingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingCell.swift; sourceTree = "<group>"; };
+		DB87A6952D3BE98900DC0F7F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		DB87A6972D3BE98900DC0F7F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DB87A6982D3BE98900DC0F7F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		DB87A69A2D3BE98900DC0F7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DB87A69C2D3BE98900DC0F7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB87A69D2D3BE98900DC0F7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DB87A69E2D3BE98900DC0F7F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		DB87A69F2D3BE98900DC0F7F /* momogumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = momogumApp.swift; sourceTree = "<group>"; };
+		DB87A6A02D3BE98900DC0F7F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		DB87A6A12D3BE98900DC0F7F /* testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testing.swift; sourceTree = "<group>"; };
+		DB87A6B02D3BE9DD00DC0F7F /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		DBCDD1CC2D3CCF9300EF3491 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		68CCB1892D365F89006D55E6 /* Exceptions for "momogum" folder in "momogum" target */ = {
@@ -41,6 +78,7 @@
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
+
 /* Begin PBXFrameworksBuildPhase section */
 		6D82DE872D2C114C008386FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -61,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				6D82DEAA2D2C1273008386FE /* .gitignore */,
-				6D82DE8C2D2C114C008386FE /* momogum */,
+				DB87A6A22D3BE98900DC0F7F /* momogum */,
 				6D82DE8B2D2C114C008386FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +110,111 @@
 				6D82DE8A2D2C114C008386FE /* momogum.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DB0CE1B22D3E486A00FA2920 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB0CE1B32D3E489100FA2920 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DB3E104E2D3C036D002B96D2 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E10542D3C0AEC002B96D2 /* Cells */,
+				DB3E104F2D3C03D5002B96D2 /* View */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		DB3E104F2D3C03D5002B96D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E10522D3C052C002B96D2 /* FollowView.swift */,
+				DB3E10552D3C0B1D002B96D2 /* MyFollower.swift */,
+				DB3E10572D3C0B30002B96D2 /* MyFollowing.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DB3E10542D3C0AEC002B96D2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E10592D3C12B0002B96D2 /* FollowerCell.swift */,
+				DB3E105B2D3C12C3002B96D2 /* FollowingCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		DB87A6962D3BE98900DC0F7F /* common */ = {
+			isa = PBXGroup;
+			children = (
+				DB87A6952D3BE98900DC0F7F /* Color.swift */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		DB87A6992D3BE98900DC0F7F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DB87A6972D3BE98900DC0F7F /* LoginView.swift */,
+				DB87A6982D3BE98900DC0F7F /* SplashView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DB87A69B2D3BE98900DC0F7F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DB87A69A2D3BE98900DC0F7F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DB87A6A22D3BE98900DC0F7F /* momogum */ = {
+			isa = PBXGroup;
+			children = (
+				DB87A6AD2D3BE99100DC0F7F /* Profile */,
+				DB87A6962D3BE98900DC0F7F /* common */,
+				DB87A6992D3BE98900DC0F7F /* Login */,
+				DB87A69B2D3BE98900DC0F7F /* Preview Content */,
+				DB87A69C2D3BE98900DC0F7F /* Assets.xcassets */,
+				DB87A69D2D3BE98900DC0F7F /* ContentView.swift */,
+				DB87A69E2D3BE98900DC0F7F /* Item.swift */,
+				DB87A69F2D3BE98900DC0F7F /* momogumApp.swift */,
+				DB87A6A02D3BE98900DC0F7F /* SwiftUIView.swift */,
+				DB87A6A12D3BE98900DC0F7F /* testing.swift */,
+			);
+			path = momogum;
+			sourceTree = "<group>";
+		};
+		DB87A6AD2D3BE99100DC0F7F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DB3E104E2D3C036D002B96D2 /* Follow */,
+				DB87A6AE2D3BE9B400DC0F7F /* MyProfile */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DB87A6AE2D3BE9B400DC0F7F /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				DB0CE1B22D3E486A00FA2920 /* ViewModel */,
+				DB87A6AF2D3BE9C500DC0F7F /* View */,
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
+		DB87A6AF2D3BE9C500DC0F7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB87A6B02D3BE9DD00DC0F7F /* MyProfileView.swift */,
+				DBCDD1CC2D3CCF9300EF3491 /* EditProfileView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,9 +231,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				6D82DE8C2D2C114C008386FE /* momogum */,
 			);
 			name = momogum;
 			packageProductDependencies = (
@@ -146,6 +286,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB87A6A32D3BE98900DC0F7F /* Preview Assets.xcassets in Resources */,
+				DB87A6A42D3BE98900DC0F7F /* Assets.xcassets in Resources */,
 				6D82DEAB2D2C1273008386FE /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +299,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCDD1CD2D3CCF9300EF3491 /* EditProfileView.swift in Sources */,
+				DB87A6A52D3BE98900DC0F7F /* Color.swift in Sources */,
+				DB3E10562D3C0B1D002B96D2 /* MyFollower.swift in Sources */,
+				DB87A6B12D3BE9DD00DC0F7F /* MyProfileView.swift in Sources */,
+				DB87A6A62D3BE98900DC0F7F /* LoginView.swift in Sources */,
+				DB3E10532D3C052C002B96D2 /* FollowView.swift in Sources */,
+				DB87A6A72D3BE98900DC0F7F /* SplashView.swift in Sources */,
+				DB87A6A82D3BE98900DC0F7F /* ContentView.swift in Sources */,
+				DB87A6A92D3BE98900DC0F7F /* Item.swift in Sources */,
+				DB87A6AA2D3BE98900DC0F7F /* momogumApp.swift in Sources */,
+				DB3E105C2D3C12C3002B96D2 /* FollowingCell.swift in Sources */,
+				DB87A6AB2D3BE98900DC0F7F /* SwiftUIView.swift in Sources */,
+				DB87A6AC2D3BE98900DC0F7F /* testing.swift in Sources */,
+				DB3E10582D3C0B30002B96D2 /* MyFollowing.swift in Sources */,
+				DB0CE1B42D3E489100FA2920 /* ProfileViewModel.swift in Sources */,
+				DB3E105A2D3C12B0002B96D2 /* FollowerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

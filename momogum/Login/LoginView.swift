@@ -108,7 +108,7 @@ struct LoginView: View {
             
             //회원가입뷰
             NavigationLink{
-                SignupStep1View()
+//                SignupStep1View()
             }label: {
                 HStack(spacing: 0) {
                     Text("계정이 없으신가요? ")
