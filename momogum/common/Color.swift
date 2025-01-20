@@ -21,7 +21,22 @@ extension Color {
 
 
 extension ShapeStyle where Self == Color {
+  
     static var momogumRed : Color {
         Color(hex: 0xE05A55)
     }
+    static var placeholderGray : Color {
+        Color(hex : 0xA2A2A2)
+    }
+    static var borderGray : Color {
+        Color(hex : 0xF3F3F3)
+    }
+    static var signupDescriptionGray : Color {
+        Color(hex: 0x707070)
+    }
+    
+    static var placeholderGray2 : Color {
+        Color(hex: 0xD9D9D9)
+    }
+    
 }
