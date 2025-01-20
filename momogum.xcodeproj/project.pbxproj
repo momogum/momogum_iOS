@@ -56,8 +56,7 @@
 		DBCDD1CC2D3CCF9300EF3491 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-<<<<<<< HEAD
-=======
+
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		68CCB1892D365F89006D55E6 /* Exceptions for "momogum" folder in "momogum" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -79,7 +78,7 @@
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
->>>>>>> origin/develop
+
 /* Begin PBXFrameworksBuildPhase section */
 		6D82DE872D2C114C008386FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
