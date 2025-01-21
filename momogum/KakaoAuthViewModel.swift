@@ -4,11 +4,17 @@
 //
 //  Created by 서재민 on 1/15/25.
 //
-
+import SwiftUI
 import Foundation
 import Combine
 import KakaoSDKUser
+import KakaoSDKAuth
+import KakaoSDKCommon
+
+
 class KakaoAuthViewModel : ObservableObject {
+    
+    
     
     func handleKakaoLogout(){
         UserApi.shared.logout {(error) in
@@ -33,7 +39,7 @@ class KakaoAuthViewModel : ObservableObject {
                 }
                 else {
                     print("loginWithKakaoTalk() success.")
-
+                    
                     // 성공 시 동작 구현
                     _ = oauthToken
                 }
@@ -53,4 +59,27 @@ class KakaoAuthViewModel : ObservableObject {
                 }
         }
     }
+    
+    func handleHasToken(){
+        
+        if (AuthApi.hasToken()) {
+            UserApi.shared.accessTokenInfo { (_, error) in
+                if let error = error {
+                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
+                        //로그인 필요
+                    }
+                    else {
+                        //기타 에러
+                    }
+                }
+                else {
+                    //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                }
+            }
+        }
+        else {
+            //로그인 필요
+        }
+    }
+    
 }

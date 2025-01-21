@@ -13,7 +13,8 @@ struct ContentView: View {
         ZStack{
             if showMainView{
                 
-                LoginView()
+//                LoginView()
+                MainTabVIew()
                 
             } else{
                 SplashView()
