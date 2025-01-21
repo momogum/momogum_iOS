@@ -12,8 +12,13 @@ struct SignupStep1View: View {
     
     @Environment(\.dismiss) var dismiss
 //    @Environment(SignupViewModel.self) var signupViewModel
-    
+    @State private var inputText: String = ""
+
     @FocusState private var isFocused: Bool // TextField의 포커스 상태
+    
+    @State private var showError: Bool = false // 에러 메시지 표시 여부
+    
+    
     
     //MARK: - View
     var body: some View {
@@ -33,7 +38,7 @@ struct SignupStep1View: View {
                         .font(.system(size:16))
                         .fontWeight(.regular)
                         .foregroundStyle(Color.gray)
-                }
+                } // Step1/2
                 .padding(.top,43)
                 .padding(.leading,38)
                 .frame(maxWidth: .infinity,alignment: .leading)
@@ -55,18 +60,32 @@ struct SignupStep1View: View {
                 
                 VStack{
                     HStack{
-                        TextField("머머금", text: .constant(""))
+                        TextField("머머금", text: $inputText,onEditingChanged: { editing in
+                            if editing {
+                                isFocused = true
+                            }
+
+                        })
                             .modifier(SignupTextfieldModifer())
                             .focused($isFocused)
-                            .foregroundStyle(isFocused ? Color.black : Color.signupDescriptionGray)
+                            .foregroundStyle(isFocused ? Color.black : Color.placeholderGray3)
+                            .onChange(of: inputText) { _, newValue in
+                                // 입력 값 길이 제한
+                                if isFocused && newValue.count > 1 {
+                                    showError = !validateInput(inputText) || newValue.count > 12
+                                }
+                           }
+                        
                         Text("(최대12자)")
                             .padding(.top,142)
                             .padding(.trailing,32)
+                        
+                        
                     }
                     // Divider의 색상을 TextField 상태에 따라 변경
                     Divider()
                         .frame(height: 2)
-                        .background(isFocused ? Color.black : Color.placeholderGray2)
+                        .background(isFocused ? Color.black : Color.placeholderGray3)
                         .padding(.horizontal,32)
                     
                     Text("한글, 영어소문자,영어 대문자 사용가능")
@@ -74,19 +93,41 @@ struct SignupStep1View: View {
                         .padding(.leading,43)
                         .font(.system(size:16))
                         .fontWeight(.regular)
+                    
+                    
+                    if showError && isFocused && !validateInput(inputText) {
+                        Text("잘못된 입력이에요")
+                            .foregroundColor(.red)
+                            .fontWeight(.regular)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading,43)
+                    }
+                    else if !showError && isFocused && validateInput(inputText)  {
+                        Text("사용 가능한 이름이에요.")
+                            .foregroundColor(.green)
+                            .fontWeight(.regular)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading,43)
+                        
+                        
+                    }
+
                 }
-                
-                
+                Spacer()
+
                 NavigationLink{
                     SignupStep2View()
                 }label: {
                     Text("다음")
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .foregroundStyle(.gray)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 .padding(.trailing, 49)
-                .offset(y:200)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.bottom ,93)
+                .disabled(showError || !validateInput(inputText))
+                .foregroundStyle(showError || !isFocused || !validateInput(inputText) ? .gray : . momogumRed)
+                
             }
             .navigationBarBackButtonHidden()
             .toolbar{
@@ -101,7 +142,12 @@ struct SignupStep1View: View {
             }
         }
     }
-    
+    // 입력 값 검증 함수
+    func validateInput(_ text: String) -> Bool {
+        let regex = "^[가-힣a-zA-Z]+$" // 한글과 영어 대소문자만 허용
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+    }
+
 }
 
 #Preview {
