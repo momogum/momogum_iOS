@@ -8,25 +8,29 @@
 import SwiftUI
 
 struct AppointView: View {
-    @State var stack: NavigationPath = NavigationPath()
+    @Binding var tabIndex: Int
     
     var body: some View {
-        NavigationStack (path: $stack) {
+        NavigationStack {
             VStack (alignment: .leading) {
-//                HStack {
-//                    Text("로고")
-//                        .frame(height: 80)
-//                    Spacer()
-//                }
-//                
-//                Divider()
+                HStack {
+                    Text("로고")
+                        .frame(height: 80)
+                    Spacer()
+                }
+                
+                Divider()
                 
                 ScrollView {
                     VStack (alignment: .leading) {
+                        Text("약속 잡기")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.vertical)
                         
                         HStack {
                             NavigationLink {
-                                AppointCreate1View(stack: $stack)
+                                AppointCreate1View()
                             } label: {
                                 Rectangle()
                                     .frame(width: 250, height: 150)
@@ -44,23 +48,6 @@ struct AppointView: View {
                         }
                         .frame(maxWidth: .infinity)
                         
-                        Text("수락 대기 중인 약속")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.top)
-                        
-                        Text("당신의 결정을 기다리는 약속이 있어요.")
-                            .foregroundStyle(.gray)
-                            .padding(.vertical, 0.5)
-                        
-                        ScrollView (.horizontal, showsIndicators: true) {
-                            HStack {
-                                NearAppointCellView()
-                                NearAppointCellView()
-                                NearAppointCellView()
-                            }
-                        }
-                        
                         
                         
                         Text("다가오는 식사 약속")
@@ -77,7 +64,10 @@ struct AppointView: View {
                         }
                         
                         
-                        
+                        Text("받은 초대장")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.vertical)
                     }
                     
                     
@@ -89,5 +79,5 @@ struct AppointView: View {
 }
 
 #Preview {
-    AppointView()
+    AppointView(tabIndex: .constant(2))
 }
