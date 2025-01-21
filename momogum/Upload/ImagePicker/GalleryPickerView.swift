@@ -8,80 +8,74 @@ import SwiftUI
 import PhotosUI
 
 struct GalleryPickerView: View {
-    @Environment(\.dismiss) var dismiss
-    @Binding var tabIndex: Int
-    @State private var isPermissionGranted = false
     @State private var selectedImages: [UIImage] = []
-    @State private var selectedImage: UIImage? = nil
+    @State private var isPermissionGranted = false
     @State private var showPermissionAlert = false
 
     var body: some View {
-        GeometryReader { geometry in
-            let gridItems = [
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8)
-            ]
-            let gridItemSize = (geometry.size.width - 48) / 3
+        NavigationView {
+            GeometryReader { geometry in
+                let gridItems = [
+                    GridItem(.flexible(), spacing: 8),
+                    GridItem(.flexible(), spacing: 8),
+                    GridItem(.flexible(), spacing: 8)
+                ]
+                let gridItemSize = (geometry.size.width - 48) / 3
 
-            ZStack(alignment: .top) {
-                if isPermissionGranted {
-                    ScrollView {
-                        LazyVGrid(columns: gridItems, spacing: 8) {
-                            ForEach(selectedImages, id: \.self) { image in
-                                NavigationLink(destination: ImageEditorView(image: image, tabIndex: $tabIndex)) {
-                                    ImageThumbnail(image: image, size: gridItemSize)
+                ZStack(alignment: .top) {
+                    if isPermissionGranted {
+                        ScrollView {
+                            LazyVGrid(columns: gridItems, spacing: 8) {
+                                ForEach(selectedImages, id: \.self) { image in
+                                    NavigationLink(destination: ImageEditorView(image: image)) {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: gridItemSize, height: gridItemSize)
+                                            .clipped()
+                                    }
                                 }
                             }
+                            .padding(.top, 80)
+                            .padding(.horizontal, 16)
                         }
-                        .padding(.top, 80)
-                        .padding(.horizontal, 16)
+                    } else {
+                        Text("사진 권한이 필요합니다. 설정에서 권한을 허용해주세요.")
+                            .multilineTextAlignment(.center)
+                            .padding()
                     }
-                } else {
-                    Text("사진 권한이 필요합니다. 설정에서 권한을 허용해주세요.")
-                        .multilineTextAlignment(.center)
-                        .padding()
-                }
 
-                // Custom Header
-                VStack {
-                    ZStack {
-                        Text("사진 선택")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
+                    VStack {
+                        ZStack {
+                            Text("사진 선택")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
 
-                        HStack {
-                            Button(action: { dismiss() }) {
-                                Image(systemName: "xmark")
-                                    .foregroundColor(.black)
+                            HStack {
+                                Spacer()
                             }
-                            Spacer()
+                            .padding(.horizontal, 16)
                         }
-                        .padding(.horizontal, 16)
+                        .frame(height: 60)
+                        .background(Color.white)
                     }
-                    .frame(height: 60)
-                    .background(Color.white)
-
-                    Spacer()
                 }
-                .zIndex(1)
-            }
-            .navigationBarHidden(true)
-            .onAppear {
-                requestPhotoLibraryPermission()
-            }
-            .alert(isPresented: $showPermissionAlert) {
-                Alert(
-                    title: Text("권한 필요"),
-                    message: Text("사진 라이브러리에 접근하려면 권한이 필요합니다. 설정에서 권한을 허용해주세요."),
-                    primaryButton: .default(Text("설정으로 이동"), action: {
-                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(settingsURL)
-                        }
-                    }),
-                    secondaryButton: .cancel()
-                )
+                .onAppear {
+                    requestPhotoLibraryPermission()
+                }
+                .alert(isPresented: $showPermissionAlert) {
+                    Alert(
+                        title: Text("권한 필요"),
+                        message: Text("사진 라이브러리에 접근하려면 권한이 필요합니다."),
+                        primaryButton: .default(Text("설정으로 이동"), action: {
+                            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                                UIApplication.shared.open(settingsURL)
+                            }
+                        }),
+                        secondaryButton: .cancel()
+                    )
+                }
             }
         }
     }
@@ -105,7 +99,6 @@ struct GalleryPickerView: View {
 
     private func fetchPhotos() {
         guard isPermissionGranted else { return }
-
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
@@ -122,7 +115,7 @@ struct GalleryPickerView: View {
                 contentMode: .aspectFill,
                 options: options
             ) { image, _ in
-                if let image = image, !selectedImages.contains(image) {
+                if let image = image {
                     DispatchQueue.main.async {
                         selectedImages.append(image)
                     }
@@ -132,19 +125,6 @@ struct GalleryPickerView: View {
     }
 }
 
-struct ImageThumbnail: View {
-    var image: UIImage
-    var size: CGFloat
-
-    var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .scaledToFill()
-            .frame(width: size, height: size)
-            .clipped()
-    }
-}
-
 #Preview {
-    GalleryPickerView(tabIndex: .constant(1)) // 수정: 기본값 전달
+    GalleryPickerView() // 수정: 기본값 전달
 }
