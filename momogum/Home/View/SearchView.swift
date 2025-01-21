@@ -51,6 +51,7 @@ struct SearchView: View {
                         .fill(Color(.systemGray6))
                 )
                 .padding(.horizontal, 16)
+                .padding(.top, 24)
                 
                 // 텍스트 필드 하단에 회색 구분선 추가
                 Divider()
