@@ -31,16 +31,18 @@ struct HomeView: View {
                         .scaledToFit()
                         .frame(width: 106, height: 37)
                         .clipped() // 이미지 외부 영역 제거
-                        .padding(.leading, 24)
+                        .padding(.leading, 20)
+                        .padding(.top, 20)
                     
                     Spacer()
-                        .frame(width: 135)
+                        .frame(width: 124)
                     
                     NavigationLink(destination: SearchView()) {
                         Image(systemName: "magnifyingglass")
                             .imageScale(.large)
                             .foregroundStyle(.black)
-                            .padding(.trailing, 3)
+                            .padding(.trailing, 12)
+                            .padding(.top, 20)
                     }
                     
                     Spacer()
@@ -50,7 +52,8 @@ struct HomeView: View {
                         Image(systemName: "bell")
                             .imageScale(.large)
                             .foregroundStyle(.black)
-                            .padding(.trailing, 33)
+                            .padding(.trailing, 27)
+                            .padding(.top, 20)
                     }
                 }
                 .background(Color.clear) // 배경을 투명하게 설정
@@ -66,7 +69,6 @@ struct HomeView: View {
                             NavigationLink(destination: StoryView(userID: "")) {
                                 Circle()
                                     .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255)) // #CFCFCF 색상
-                                    .padding(8)
                                     .cornerRadius(10)
                                     .frame(width: 88, height: 88)
                             }
@@ -74,7 +76,7 @@ struct HomeView: View {
                                 .bold()
                                 .font(.system(size: 10))
                         }
-                        
+                        .padding(.leading, 24)
                     }
                 }
                 Spacer()
