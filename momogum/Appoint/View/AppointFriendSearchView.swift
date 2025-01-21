@@ -24,7 +24,7 @@ struct AppointFriendSearchView: View {
                     
                 }
             }
-            .searchable(text: $searchText, placement: .toolbar ,prompt: "검색 바")
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always) ,prompt: "검색 바")
         }
 //        .toolbarVisibility(.hidden)
     }
