@@ -30,7 +30,7 @@ struct MainTabVIew: View {
                     Text("업로드")
                 }
                 .tag(1)
-            AppointView(tabIndex: $tabIndex)
+            AppointView()
                 .tabItem{
                     Image(systemName: "calendar")
                     Text("약속관리")
