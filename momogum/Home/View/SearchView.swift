@@ -11,13 +11,10 @@ struct SearchView: View {
     @State private var searchQuery: String = ""
     @State private var isEditing: Bool = false // 텍스트 필드 편집 상태를 추적
     @State private var selectedButton: String = "계정" // 초기 선택된 버튼
+    @Environment(\.presentationMode) var presentationMode // 뒤로가기 기능을 위해 사용
     
     var body: some View {
         VStack {
-            Text("검색하기")
-                .padding()
-                .fontWeight(.bold)
-            
             VStack {
                 HStack {
                     // 텍스트 필드 왼쪽의 검색 아이콘
@@ -101,10 +98,31 @@ struct SearchView: View {
             }
             Spacer()
         }
+        .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack(spacing: 0) { // 쉐브론과 텍스트를 배치
+                    // 쉐브론 아이콘
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.black)
+                    }
+                    
+                    Spacer()
+                        .frame(width: 130) // 쉐브론과 텍스트 간격
+                    
+                    // "검색하기" 텍스트
+                    Text("검색하기")
+                        .font(.system(size: 18, weight: .bold)) // 텍스트 크기 및 굵기
+                        .foregroundColor(.black)
+                }
+            }
+        }
     }
 }
 
 #Preview {
     SearchView()
 }
-

@@ -21,17 +21,17 @@ struct StoryView: View {
                 .padding(.bottom, 92)
             
             HStack {
-                Image("smile")
+                Image("no")
                     .scaledToFit() // 비율 유지
-                    .frame(width: 100, height: 100) // 크기 설정
+                    .frame(width: 95, height: 95) // 크기 설정
                 
-                Image("normal")
+                Image("notbad")
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 95, height: 95)
                 
-                Image("sad")
+                Image("yes")
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 95, height: 95)
             }
             
             // 밥일기 작성 버튼
