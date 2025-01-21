@@ -38,5 +38,7 @@ extension ShapeStyle where Self == Color {
     static var placeholderGray2 : Color {
         Color(hex: 0xD9D9D9)
     }
-    
+    static var placeholderGray3 : Color {
+        Color(hex: 0xF3F3F3)
+    }
 }

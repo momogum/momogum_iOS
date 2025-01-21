@@ -20,74 +20,14 @@ struct LoginView: View {
                 .padding(.horizontal,126)
                 .padding(.top, 100)
                 .padding(.bottom, 30)
-            
-            VStack{
-                Text("ID *")
-                    .font(.system(size: 16))
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(.leading,11)
-                
-                
-                TextField("아이디혹은 이메일 입력", text: .constant(""))
-                    .fontWeight(.semibold)
-                    .foregroundStyle((isFocused ? Color.black : Color.placeholderGray2))
-                    .font(.system(size: 16))
-                    .textInputAutocapitalization(.never)
-                    .padding(.bottom,15)
-                   .padding(.leading,11)
-                    .keyboardType(.emailAddress)
+            Spacer()
 
-                    .overlay(
-                        Rectangle()
-                            .frame(height: 3) // 밑줄 두께
-                            .foregroundColor((isFocused ? Color.black : Color.placeholderGray2))
-                            ,
-                             alignment: .bottom
-                    )
-                    .padding(.bottom,16)
-                
-                
-            }
-
-            .padding(.leading,27)
-            .padding(.trailing,38)
-            .padding(.bottom,7)
-            
-            
-            VStack{
-                Text("password *")
-                    .font(.system(size: 16))
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(.leading,11)
-                
-                
-                TextField("비밀번호 입력", text: .constant(""))
-                    .font(.system(size: 16))
-                    .fontWeight(.semibold)
-                    .textInputAutocapitalization(.never)
-                    .padding(.bottom,15)
-                   .padding(.leading,11)
-                    .keyboardType(.emailAddress)
-                    .overlay(
-                        Rectangle()
-                            .frame(height: 3) // 밑줄 두께
-                            .foregroundColor(Color.borderGray)
-                            ,
-                             alignment: .bottom
-                    )
-                    .padding(.bottom,16)
-                
-            }
-            .padding(.leading,27)
-            .padding(.trailing,38)
-            
             Button{
-                print("로그인 성공") // 로그인 성공시 메인탭뷰로 넘어가게
+                KakaoAuthViewModel().handleKakaoLogout()
+                print("카카오 로그아웃 성공") // 로그인 성공시 메인탭뷰로 넘어가게
             }
             label: {
-                Text("로그인 하기")
+                Text("카카오 로그아웃")
                     .fontWeight(.semibold)
                     .frame(width: 340, height: 58)
                     .foregroundStyle(.white)
@@ -97,13 +37,10 @@ struct LoginView: View {
            
             Button{
                 KakaoAuthViewModel().handleKakaoLogin()
+                //만약 카카오 최초로그인이라면, SignupStep1View로 넘긴다
             }
             label: {
-                Text("카카오 로그인")
-                    .frame(width: 340, height: 58)
-                    .foregroundStyle(.white)
-                    .background(Color.yellow)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                Image("KakaoLogin")
             }
             
             //회원가입뷰
