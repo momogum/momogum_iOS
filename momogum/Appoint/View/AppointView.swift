@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AppointView: View {
+    @Binding var tabIndex: Int
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .leading) {
@@ -77,5 +79,5 @@ struct AppointView: View {
 }
 
 #Preview {
-    AppointView()
+    AppointView(tabIndex: .constant(2))
 }
