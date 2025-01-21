@@ -36,7 +36,7 @@ struct MainTabVIew: View {
                     Text("약속관리")
                 }
                 .tag(2)
-            Text("Search")
+            MyProfileView()
                 .tabItem{
                     Image(systemName: "person")
                     Text("내프로필")

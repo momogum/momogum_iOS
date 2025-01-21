@@ -26,24 +26,14 @@ struct EditProfileView: View {
                         profileImage
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 76, height: 76)
+                            .frame(width: 88, height: 88)
                             .clipShape(Circle())
-                            .padding(5)
-                            .overlay(
-                                Circle()
-                                    .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4)
-                            )
                     } else {
                         Image("defaultProfile")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 76, height: 76)
+                            .frame(width: 88, height: 88)
                             .clipShape(Circle())
-                            .padding(5)
-                            .overlay(
-                                Circle()
-                                    .stroke(Color.gray.opacity(0.6), lineWidth: 5) // 회색 테두리 추가
-                            )
                     }
                     
                     // 수정 버튼
