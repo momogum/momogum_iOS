@@ -122,6 +122,7 @@ struct EditProfileView: View {
             // 뒤로가기 버튼
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    viewModel.resetEditingProfileImage()
                     dismiss()
                 } label: {
                     Image(systemName: "arrow.backward")
