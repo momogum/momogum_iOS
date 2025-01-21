@@ -12,7 +12,12 @@ struct AppointCreate1View: View {
     @State var searchText = ""
     @Binding var stack: NavigationPath
     
+    @Environment(AppointViewModel.self) var appointViewModel
+    
+    
+    
     var body: some View {
+        @Bindable var viewModel = appointViewModel
         
         VStack {
             Text("식사를 함께할 친구를 선택해주세요")

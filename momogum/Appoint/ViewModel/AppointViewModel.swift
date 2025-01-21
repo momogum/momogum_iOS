@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct AppointViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    AppointViewModel()
+@Observable
+class AppointViewModel {
+    var appointName:String = ""
+    var menuName:String = ""
+    var pickedDate: Date = Date()
+    var placeName:String = ""
+    var specialNotation:String = ""
+    var pickedFriends:[String] = []
 }

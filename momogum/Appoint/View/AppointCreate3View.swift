@@ -11,13 +11,10 @@ struct AppointCreate3View: View {
     @Environment(\.dismiss) var dismiss
     @Binding var stack: NavigationPath
     
-    @State var appointName:String = ""
-    @State var menuName:String = ""
-//    @State var pickedDate = Date()
-    @State var placeName:String = ""
-    @State var specialNotation:String = ""
+    @Environment(AppointViewModel.self) var appointViewModel
     
     var body: some View {
+        @Bindable var viewModel = appointViewModel
         
         VStack {
             Spacer()
@@ -27,7 +24,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 더술 출발, 돈까스 먹장...", text: $appointName)
+            TextField("ex) 더술 출발, 돈까스 먹장...", text: $viewModel.appointName)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -38,7 +35,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 더술 닭한마리, 투파피 파스타", text: $menuName)
+            TextField("ex) 더술 닭한마리, 투파피 파스타", text: $viewModel.menuName)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -49,7 +46,7 @@ struct AppointCreate3View: View {
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
             
-            DatePicker("", selection: .constant(Date()))
+            DatePicker("", selection: $viewModel.pickedDate)
                 .labelsHidden()
                 .datePickerStyle(.automatic)
                 .environment(\.locale, Locale(identifier: String(Locale.preferredLanguages[0])))
@@ -60,7 +57,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 중앙동 다이소 앞, 학교 쪽문 앞", text: $placeName)
+            TextField("ex) 중앙동 다이소 앞, 학교 쪽문 앞", text: $viewModel.placeName)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -72,7 +69,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 꾸밈단계 2단계", text: $specialNotation)
+            TextField("ex) 꾸밈단계 2단계", text: $viewModel.specialNotation)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))

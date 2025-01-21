@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AppointCreate2View: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(AppointViewModel.self) var appointViewModel
+    
     @Binding var stack: NavigationPath
     
     var body: some View {
+        @Bindable var viewModel = appointViewModel
+        
         VStack (spacing: 15) {
             Text("어울리는 식사 카드를 골라주세요")
                 .font(.title3)

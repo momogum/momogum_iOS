@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AppointCreate4View: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(AppointViewModel.self) var appointViewModel
     
     var body: some View {
+        @Bindable var viewModel = appointViewModel
         
         VStack {
             ZStack {

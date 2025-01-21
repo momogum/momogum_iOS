@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AppointView: View {
-//    @Binding var tabIndex: Int
     @State var stack: NavigationPath = NavigationPath()
     
     var body: some View {
