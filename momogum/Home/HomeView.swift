@@ -110,7 +110,7 @@ struct HomeView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(columns: columns, spacing: 16) { // columns는 이미 정의된 GridItem 배열
                             ForEach(0..<6) { index in
-                                NavigationLink(destination: GalleryPickerView(tabIndex: .constant(1))) {
+                                NavigationLink(destination: GalleryPickerView()) {
                                     VStack(spacing: 0) {
                                         // 상단 이미지 부분
                                         Rectangle()
