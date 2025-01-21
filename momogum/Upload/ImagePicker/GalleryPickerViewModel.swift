@@ -1,18 +1,17 @@
 //
 //  GalleryPickerViewModel.swift
-//  momogum
+//  momogum_practice
 //
-//  Created by 김윤진 on 1/21/25.
+//  Created by 조승연 on 1/17/25.
 //
 
 import SwiftUI
 
-struct GalleryPickerViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class GalleryPickerViewModel: ObservableObject {
+    @Published var images: [GalleryImageModel] = []
+    
+    func fetchGalleryImages() {
+        // Logic to fetch images from the gallery
     }
 }
 
-#Preview {
-    GalleryPickerViewModel()
-}
