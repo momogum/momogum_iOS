@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AppointView: View {
-    @Binding var tabIndex: Int
+//    @Binding var tabIndex: Int
+    @State var stack: NavigationPath = NavigationPath()
     
     var body: some View {
         NavigationStack {
@@ -30,7 +31,7 @@ struct AppointView: View {
                         
                         HStack {
                             NavigationLink {
-                                AppointCreate1View()
+                                AppointCreate1View(stack: $stack)
                             } label: {
                                 Rectangle()
                                     .frame(width: 250, height: 150)
@@ -79,5 +80,5 @@ struct AppointView: View {
 }
 
 #Preview {
-    AppointView(tabIndex: .constant(2))
+    AppointView()
 }
