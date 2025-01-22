@@ -14,7 +14,7 @@ struct ContentView: View {
             if showMainView{
                 
 //                LoginView()
-                MainTabVIew()
+                MainTabView()
                 
             } else{
                 SplashView()
