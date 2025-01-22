@@ -140,7 +140,7 @@ struct AppointCreate4View: View {
                     .foregroundStyle(.black.opacity(0.7))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text(viewModel.specialNotation)
+                Text(viewModel.note)
                     .font(.title3)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)

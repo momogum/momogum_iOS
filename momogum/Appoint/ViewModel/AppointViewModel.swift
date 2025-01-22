@@ -13,6 +13,6 @@ class AppointViewModel {
     var menuName: String = ""
     var pickedDate: Date = Date()
     var placeName: String = ""
-    var specialNotation: String = ""
+    var note: String = ""
     var pickedFriends: [String] = []
 }

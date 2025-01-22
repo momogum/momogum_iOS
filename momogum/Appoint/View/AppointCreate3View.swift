@@ -70,7 +70,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 꾸밈단계 2단계", text: $viewModel.specialNotation)
+            TextField("ex) 꾸밈단계 2단계", text: $viewModel.note)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
