@@ -57,6 +57,7 @@ struct AppointCreate1View: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("약속잡기")
         .navigationBarBackButtonHidden(true)
+        .toolbarVisibility(.hidden, for: .tabBar)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {

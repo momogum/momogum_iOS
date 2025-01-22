@@ -15,4 +15,15 @@ class AppointViewModel {
     var placeName: String = ""
     var note: String = ""
     var pickedFriends: [String] = []
+    
+    
+    
+    func createAppoint() {
+        appointName = ""
+        menuName = ""
+        pickedDate = Date()
+        placeName = ""
+        note = ""
+        pickedFriends = []
+    }
 }
