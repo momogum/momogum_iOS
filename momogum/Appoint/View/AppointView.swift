@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppointView: View {
     @State var stack: NavigationPath = NavigationPath()
+    @State var appointViewModel = AppointViewModel()
     
     var body: some View {
         NavigationStack {
@@ -31,6 +32,7 @@ struct AppointView: View {
                         HStack {
                             NavigationLink {
                                 AppointCreate1View(stack: $stack)
+                                    .environment(appointViewModel)
                             } label: {
                                 Rectangle()
                                     .frame(width: 250, height: 150)

@@ -10,7 +10,7 @@ import SwiftUI
 struct AppointCreate2View: View {
     @Environment(\.dismiss) var dismiss
     @Environment(AppointViewModel.self) var appointViewModel
-    
+
     @Binding var stack: NavigationPath
     
     var body: some View {
@@ -26,7 +26,7 @@ struct AppointCreate2View: View {
                 .font(.title2)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
-//                .padding(.horizontal)
+                .padding(.horizontal)
             
             ScrollView (.horizontal, showsIndicators: true) {
                 HStack {
@@ -96,6 +96,7 @@ struct AppointCreate2View: View {
                 Spacer()
                 NavigationLink {
                     AppointCreate3View(stack: $stack)
+                        .environment(viewModel)
                 } label: {
                     Text("다음")
                         .fontWeight(.bold)
@@ -138,4 +139,6 @@ struct AppointCreate2View: View {
 
 #Preview {
     AppointCreate2View(stack: AppointView().$stack)
+        .environment(AppointViewModel())
+
 }

@@ -80,7 +80,7 @@ struct AppointCreate4View: View {
                 .foregroundStyle(.gray.opacity(0.2))
                 .padding()
             
-            TextField("돈까스 먹장", text: .constant(""))
+            TextField(viewModel.appointName, text: $viewModel.appointName)
                 .padding(.leading)
                 .frame(width: 180, height: 30)
                 .overlay {
@@ -99,7 +99,7 @@ struct AppointCreate4View: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
                 
-                Text("식사 메뉴")
+                Text(viewModel.menuName)
                     .font(.title3)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -112,7 +112,7 @@ struct AppointCreate4View: View {
                     .foregroundStyle(.black.opacity(0.7))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("2025년 1월 9일 18:00")
+                Text("")
                     .font(.title3)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -126,7 +126,7 @@ struct AppointCreate4View: View {
                     .foregroundStyle(.black.opacity(0.7))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("중ㅇ아동 다이송 앞")
+                Text(viewModel.placeName)
                     .font(.title3)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -140,7 +140,7 @@ struct AppointCreate4View: View {
                     .foregroundStyle(.black.opacity(0.7))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("꾸밈단계 2단계")
+                Text(viewModel.specialNotation)
                     .font(.title3)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -193,4 +193,5 @@ struct AppointCreate4View: View {
 
 #Preview {
     AppointCreate4View()
+
 }

@@ -9,10 +9,10 @@ import SwiftUI
 
 @Observable
 class AppointViewModel {
-    var appointName:String = ""
-    var menuName:String = ""
+    var appointName: String = ""
+    var menuName: String = ""
     var pickedDate: Date = Date()
-    var placeName:String = ""
-    var specialNotation:String = ""
-    var pickedFriends:[String] = []
+    var placeName: String = ""
+    var specialNotation: String = ""
+    var pickedFriends: [String] = []
 }

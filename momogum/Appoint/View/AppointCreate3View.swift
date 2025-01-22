@@ -9,10 +9,11 @@ import SwiftUI
 
 struct AppointCreate3View: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(AppointViewModel.self) var appointViewModel
+
     @Binding var stack: NavigationPath
     
-    @Environment(AppointViewModel.self) var appointViewModel
-    
+
     var body: some View {
         @Bindable var viewModel = appointViewModel
         
@@ -82,6 +83,7 @@ struct AppointCreate3View: View {
                 
                 NavigationLink {
                     AppointCreate4View()
+                        .environment(viewModel)
                 } label: {
                     Text("다음")
                         .fontWeight(.bold)
@@ -95,7 +97,6 @@ struct AppointCreate3View: View {
             }
         }
         .padding(.horizontal)
-//        .padding(.top, 50)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("약속잡기")
         .navigationBarBackButtonHidden(true)
@@ -124,4 +125,5 @@ struct AppointCreate3View: View {
 
 #Preview {
     AppointCreate3View(stack: AppointView().$stack)
+        .environment(AppointViewModel())
 }

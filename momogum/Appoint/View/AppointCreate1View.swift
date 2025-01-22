@@ -9,11 +9,10 @@ import SwiftUI
 
 struct AppointCreate1View: View {
     @Environment(\.dismiss) var dismiss
-    @State var searchText = ""
-    @Binding var stack: NavigationPath
-    
     @Environment(AppointViewModel.self) var appointViewModel
     
+    @Binding var stack: NavigationPath
+    @State var searchText = ""
     
     
     var body: some View {
@@ -42,6 +41,7 @@ struct AppointCreate1View: View {
                 Spacer()
                 NavigationLink {
                     AppointCreate2View(stack: $stack)
+                        .environment(viewModel)
                 } label: {
                     Text("다음")
                         .fontWeight(.bold)
@@ -53,8 +53,6 @@ struct AppointCreate1View: View {
                     
                 }
             }
-            
-            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("약속잡기")
@@ -80,12 +78,10 @@ struct AppointCreate1View: View {
                 }
             }
         }
-        
     }
-    
-    
 }
 
 #Preview {
     AppointCreate1View(stack: AppointView().$stack)
+        .environment(AppointViewModel())
 }
