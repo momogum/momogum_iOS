@@ -24,7 +24,7 @@ struct MainTabVIew: View {
                     Text("홈")
                 }
                 .tag(0)
-            Text("feed")
+            GalleryPickerView()
                 .tabItem{
                     Image(systemName: "plus")
                     Text("업로드")

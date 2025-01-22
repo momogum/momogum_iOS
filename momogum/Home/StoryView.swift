@@ -35,7 +35,7 @@ struct StoryView: View {
             }
             
             // 밥일기 작성 버튼
-            NavigationLink(destination: GalleryPickerView(tabIndex: .constant(1))) { 
+            NavigationLink(destination: GalleryPickerView()) { 
                 Text("바로 밥일기 작성하기")
                     .font(.headline)
                     .foregroundColor(Color(red: 224/255, green: 90/255, blue: 85/255)) // E05A55 색상 적용 (RGB로 변환)
