@@ -2,28 +2,33 @@
 //  AppointViewModel.swift
 //  momogum
 //
-//  Created by nelime on 1/21/25.
+//  Created by nelime on 1/23/25.
 //
 
-import SwiftUI
+import Foundation
 
-@Observable
 class AppointViewModel {
-    var appointName: String = ""
-    var menuName: String = ""
-    var pickedDate: Date = Date()
-    var placeName: String = ""
-    var note: String = ""
-    var pickedFriends: [String] = []
+    
+    var appoints: [Appoint] = [Appoint.DUMMY_APM, Appoint.DUMMY_APM, Appoint.DUMMY_APM, Appoint.DUMMY_APM]
+    
+    init() {
+        Task {
+            await loadAllAppoints()
+        }
+    }
     
     
-    
-    func createAppoint() {
-        appointName = ""
-        menuName = ""
-        pickedDate = Date()
-        placeName = ""
-        note = ""
-        pickedFriends = []
+    func loadAllAppoints() async {
+//        do {
+//            let documents = try await Firestore.firestore().collection("posts").order(by: "date", descending: true).getDocuments().documents
+//            
+//            let appoints = try documents.map({ document in
+//                return try document.data(as: Appoint.self)
+//            })
+//            self.appoints = appoints
+//            
+//        } catch {
+//            print("DEBUG : Failed to load appoints with error \(error.localizedDescription)")
+//        }
     }
 }

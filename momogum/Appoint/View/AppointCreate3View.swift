@@ -9,10 +9,9 @@ import SwiftUI
 
 struct AppointCreate3View: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(AppointViewModel.self) var appointViewModel
-
-    @Binding var stack: NavigationPath
+    @Environment(NewAppointViewModel.self) var appointViewModel
     
+    @Binding var path: [String]
 
     var body: some View {
         @Bindable var viewModel = appointViewModel
@@ -81,10 +80,7 @@ struct AppointCreate3View: View {
             HStack {
                 Spacer()
                 
-                NavigationLink {
-                    AppointCreate4View()
-                        .environment(viewModel)
-                } label: {
+                NavigationLink(value: "create4") {
                     Text("다음")
                         .fontWeight(.bold)
                         .frame(width: 90, height: 40)
@@ -92,7 +88,6 @@ struct AppointCreate3View: View {
                         .foregroundStyle(.white)
                         .clipShape(Rectangle())
                         .padding(.trailing, 30)
-                    
                 }
             }
         }
@@ -113,7 +108,7 @@ struct AppointCreate3View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    stack.removeLast(stack.count)
+                    path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
                         .tint(.black)
@@ -124,6 +119,6 @@ struct AppointCreate3View: View {
 }
 
 #Preview {
-    AppointCreate3View(stack: AppointView().$stack)
-        .environment(AppointViewModel())
+    AppointCreate3View(path: AppointView().$path)
+        .environment(NewAppointViewModel())
 }

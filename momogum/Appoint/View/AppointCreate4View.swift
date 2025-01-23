@@ -9,7 +9,9 @@ import SwiftUI
 
 struct AppointCreate4View: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(AppointViewModel.self) var appointViewModel
+    @Environment(NewAppointViewModel.self) var appointViewModel
+    
+    @Binding var path: [String]
     
     var body: some View {
         @Bindable var viewModel = appointViewModel
@@ -112,7 +114,7 @@ struct AppointCreate4View: View {
                     .foregroundStyle(.black.opacity(0.7))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("")
+                Text("\(viewModel.pickedDate)")
                     .font(.title3)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -153,7 +155,7 @@ struct AppointCreate4View: View {
             .padding(.horizontal, 30)
             
             NavigationLink {
-                AppointSentView()
+                AppointSentView(path: $path)
             } label: {
                 Text("초대장 보내기")
                     .fontWeight(.bold)
@@ -181,7 +183,7 @@ struct AppointCreate4View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    print()
+                    path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
                         .tint(.black)
@@ -192,6 +194,6 @@ struct AppointCreate4View: View {
 }
 
 #Preview {
-    AppointCreate4View()
+    AppointCreate4View(path: AppointView().$path)
 
 }

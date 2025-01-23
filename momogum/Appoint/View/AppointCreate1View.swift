@@ -9,10 +9,10 @@ import SwiftUI
 
 struct AppointCreate1View: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(AppointViewModel.self) var appointViewModel
+    @Environment(NewAppointViewModel.self) var appointViewModel
     
-    @Binding var stack: NavigationPath
     @State var searchText = ""
+    @Binding var path: [String]
     
     
     var body: some View {
@@ -31,7 +31,6 @@ struct AppointCreate1View: View {
                     }
                 }
                 .padding(.top)
-                //            .border(.black)
             }
             .defaultScrollAnchor(.center)
             
@@ -39,10 +38,7 @@ struct AppointCreate1View: View {
             
             HStack {
                 Spacer()
-                NavigationLink {
-                    AppointCreate2View(stack: $stack)
-                        .environment(viewModel)
-                } label: {
+                NavigationLink(value: "create2") {
                     Text("다음")
                         .fontWeight(.bold)
                         .frame(width: 90, height: 40)
@@ -50,7 +46,6 @@ struct AppointCreate1View: View {
                         .foregroundStyle(.white)
                         .clipShape(Rectangle())
                         .padding(.trailing, 30)
-                    
                 }
             }
         }
@@ -71,8 +66,7 @@ struct AppointCreate1View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    stack.removeLast(stack.count)
-
+                    path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
                         .tint(.black)
@@ -83,6 +77,6 @@ struct AppointCreate1View: View {
 }
 
 #Preview {
-    AppointCreate1View(stack: AppointView().$stack)
-        .environment(AppointViewModel())
+    AppointCreate1View(path: AppointView().$path)
+        .environment(NewAppointViewModel())
 }
