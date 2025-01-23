@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속생성의 2단계, 식사카드를 고르는 뷰
 struct AppointCreate2View: View {
     @Environment(\.dismiss) var dismiss
     @Environment(NewAppointViewModel.self) var appointViewModel

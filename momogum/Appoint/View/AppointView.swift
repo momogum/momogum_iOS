@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속잡기 메인 페이지
 struct AppointView: View {
     @State var path: [String] = []
     @State var newAppointViewModel = NewAppointViewModel()

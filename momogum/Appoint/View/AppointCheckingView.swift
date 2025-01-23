@@ -4,9 +4,11 @@
 //
 //  Created by nelime on 1/20/25.
 //
+//
 
 import SwiftUI
 
+/// 초대장 생성 이후 약속 내용을 확인하는 뷰
 struct AppointCheckingView: View {
     @Environment(\.dismiss) var dismiss
     

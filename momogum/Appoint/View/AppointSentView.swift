@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속생성의 마지막 단계, 초대장을 보냈다는 화면 + 초대장 확인 버튼
 struct AppointSentView: View {
     @Environment(\.dismiss) var dismiss
     

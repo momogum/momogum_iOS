@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속생성의 3단계, 모임이름(appointName), 식사메뉴(menuName), 식사일정(pickedDate), 식사장소(placeName), 특별소식(note) 적는 뷰
 struct AppointCreate3View: View {
     @Environment(\.dismiss) var dismiss
     @Environment(NewAppointViewModel.self) var appointViewModel

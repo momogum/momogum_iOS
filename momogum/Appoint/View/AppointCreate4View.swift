@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속생성의 4단계, 초대장 생성 직전 마지막 편집하는 뷰
 struct AppointCreate4View: View {
     @Environment(\.dismiss) var dismiss
     @Environment(NewAppointViewModel.self) var appointViewModel
@@ -195,5 +196,6 @@ struct AppointCreate4View: View {
 
 #Preview {
     AppointCreate4View(path: AppointView().$path)
+        .environment(NewAppointViewModel())
 
 }

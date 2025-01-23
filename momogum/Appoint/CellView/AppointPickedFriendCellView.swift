@@ -27,7 +27,6 @@ struct AppointPickedFriendCellView: View {
         }
         .frame(width: 80, height: 110)
         .padding(.top, 5)
-//        .border(.black)
     }
 }
 

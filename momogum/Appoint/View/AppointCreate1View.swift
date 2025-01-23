@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속 생성의 1단계, 친구 선택하는 뷰
 struct AppointCreate1View: View {
     @Environment(\.dismiss) var dismiss
     @Environment(NewAppointViewModel.self) var appointViewModel
