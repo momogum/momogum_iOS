@@ -17,7 +17,7 @@ struct EditProfileView: View {
     @State private var userInfo: String = ""
     
     var body: some View {
-        VStack(alignment: .center){
+        VStack(alignment: .center, spacing: 0){
             
             // 프로필 이미지
             PhotosPicker(selection: $viewModel.selectedItem) {
