@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AppointCreate2View: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var stack: NavigationPath
+    @Environment(NewAppointViewModel.self) var appointViewModel
+    
+    @Binding var path: [String]
     
     var body: some View {
+        @Bindable var viewModel = appointViewModel
+        
         VStack (spacing: 15) {
             Text("어울리는 식사 카드를 골라주세요")
                 .font(.title3)
@@ -22,7 +26,7 @@ struct AppointCreate2View: View {
                 .font(.title2)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
-//                .padding(.horizontal)
+                .padding(.horizontal)
             
             ScrollView (.horizontal, showsIndicators: true) {
                 HStack {
@@ -90,9 +94,8 @@ struct AppointCreate2View: View {
             
             HStack {
                 Spacer()
-                NavigationLink {
-                    AppointCreate3View(stack: $stack)
-                } label: {
+                
+                NavigationLink(value: "create3") {
                     Text("다음")
                         .fontWeight(.bold)
                         .frame(width: 90, height: 40)
@@ -100,7 +103,6 @@ struct AppointCreate2View: View {
                         .foregroundStyle(.white)
                         .clipShape(Rectangle())
                         .padding(.trailing, 30)
-                    
                 }
             }
         }
@@ -121,7 +123,7 @@ struct AppointCreate2View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    stack.removeLast(stack.count)
+                    path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
                         .tint(.black)
@@ -133,5 +135,7 @@ struct AppointCreate2View: View {
 }
 
 #Preview {
-    AppointCreate2View(stack: AppointView().$stack)
+    AppointCreate2View(path: AppointView().$path)
+        .environment(NewAppointViewModel())
+
 }

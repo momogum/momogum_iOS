@@ -9,15 +9,12 @@ import SwiftUI
 
 struct AppointCreate3View: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var stack: NavigationPath
+    @Environment(NewAppointViewModel.self) var appointViewModel
     
-    @State var appointName:String = ""
-    @State var menuName:String = ""
-//    @State var pickedDate = Date()
-    @State var placeName:String = ""
-    @State var specialNotation:String = ""
-    
+    @Binding var path: [String]
+
     var body: some View {
+        @Bindable var viewModel = appointViewModel
         
         VStack {
             Spacer()
@@ -27,7 +24,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 더술 출발, 돈까스 먹장...", text: $appointName)
+            TextField("ex) 더술 출발, 돈까스 먹장...", text: $viewModel.appointName)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -38,7 +35,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 더술 닭한마리, 투파피 파스타", text: $menuName)
+            TextField("ex) 더술 닭한마리, 투파피 파스타", text: $viewModel.menuName)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -49,7 +46,7 @@ struct AppointCreate3View: View {
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
             
-            DatePicker("", selection: .constant(Date()))
+            DatePicker("", selection: $viewModel.pickedDate)
                 .labelsHidden()
                 .datePickerStyle(.automatic)
                 .environment(\.locale, Locale(identifier: String(Locale.preferredLanguages[0])))
@@ -60,7 +57,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 중앙동 다이소 앞, 학교 쪽문 앞", text: $placeName)
+            TextField("ex) 중앙동 다이소 앞, 학교 쪽문 앞", text: $viewModel.placeName)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -72,7 +69,7 @@ struct AppointCreate3View: View {
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            TextField("ex) 꾸밈단계 2단계", text: $specialNotation)
+            TextField("ex) 꾸밈단계 2단계", text: $viewModel.note)
                 .padding(.leading)
                 .frame(height: 40)
                 .background(.gray.opacity(0.2))
@@ -83,9 +80,7 @@ struct AppointCreate3View: View {
             HStack {
                 Spacer()
                 
-                NavigationLink {
-                    AppointCreate4View()
-                } label: {
+                NavigationLink(value: "create4") {
                     Text("다음")
                         .fontWeight(.bold)
                         .frame(width: 90, height: 40)
@@ -93,12 +88,10 @@ struct AppointCreate3View: View {
                         .foregroundStyle(.white)
                         .clipShape(Rectangle())
                         .padding(.trailing, 30)
-                    
                 }
             }
         }
         .padding(.horizontal)
-//        .padding(.top, 50)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("약속잡기")
         .navigationBarBackButtonHidden(true)
@@ -115,7 +108,7 @@ struct AppointCreate3View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    stack.removeLast(stack.count)
+                    path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
                         .tint(.black)
@@ -126,5 +119,6 @@ struct AppointCreate3View: View {
 }
 
 #Preview {
-    AppointCreate3View(stack: AppointView().$stack)
+    AppointCreate3View(path: AppointView().$path)
+        .environment(NewAppointViewModel())
 }

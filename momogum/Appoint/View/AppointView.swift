@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct AppointView: View {
-//    @Binding var tabIndex: Int
-    @State var stack: NavigationPath = NavigationPath()
+    @State var path: [String] = []
+    @State var newAppointViewModel = NewAppointViewModel()
+    @State var viewModel = AppointViewModel()
+    
     
     var body: some View {
-        NavigationStack {
+        NavigationStack (path: $path) {
             VStack (alignment: .leading) {
                 HStack {
                     Text("로고")
@@ -30,9 +32,7 @@ struct AppointView: View {
                             .padding(.vertical)
                         
                         HStack {
-                            NavigationLink {
-                                AppointCreate1View(stack: $stack)
-                            } label: {
+                            NavigationLink(value: "create1") {
                                 Rectangle()
                                     .frame(width: 250, height: 150)
                                     .tint(.gray.opacity(0.5))
@@ -46,6 +46,22 @@ struct AppointView: View {
                                         }
                                     }
                             }
+                            .navigationDestination(for: String.self) { value in
+                                if value == "create1" {
+                                    AppointCreate1View(path: $path)
+                                        .environment(newAppointViewModel)
+                                } else if (value == "create2") {
+                                    AppointCreate2View(path: $path)
+                                        .environment(newAppointViewModel)
+                                } else if (value == "create3") {
+                                    AppointCreate3View(path: $path)
+                                        .environment(newAppointViewModel)
+                                } else if (value == "create4") {
+                                    AppointCreate4View(path: $path)
+                                        .environment(newAppointViewModel)
+                                }
+                                
+                            }
                         }
                         .frame(maxWidth: .infinity)
                         
@@ -58,9 +74,9 @@ struct AppointView: View {
                         
                         ScrollView (.horizontal, showsIndicators: true) {
                             HStack {
-                                NearAppointCellView()
-                                NearAppointCellView()
-                                NearAppointCellView()
+                                ForEach(viewModel.appoints) { appoint in
+                                    NearAppointCellView(appoint: appoint)
+                                }
                             }
                         }
                         
@@ -69,12 +85,30 @@ struct AppointView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .padding(.vertical)
+                        
+                        ScrollView (.horizontal, showsIndicators: true) {
+                            HStack {
+                                ForEach(viewModel.appoints) { appoint in
+                                    NearAppointCellView(appoint: appoint)
+                                }
+                            }
+                        }
                     }
                     
                     
                 }
             }
             .padding(.horizontal, 10)
+            .refreshable {
+                print("refreshed")
+                await viewModel.loadAllAppoints()
+                print(viewModel.appoints.count)
+            }
+            .task {
+                print("task-refreshed")
+                await viewModel.loadAllAppoints()
+                
+            }
         }
     }
 }
