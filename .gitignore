@@ -6,7 +6,7 @@
 xcuserdata/
 momogum.xcodeproj/xcuserdata/
 momogum.xcodeproj/xcuserdata/nelime.xcuserdatad/xcschemes/xcschememanagement.plist
-
+Config.xcconfig
 ## Xcode 8 and earlier
 *.xcscmblueprint
 *.xccheckout
