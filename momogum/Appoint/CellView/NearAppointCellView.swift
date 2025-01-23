@@ -8,25 +8,27 @@
 import SwiftUI
 
 struct NearAppointCellView: View {
+    let appoint: Appoint
+    
     var body: some View {
         Rectangle()
             .frame(width: 250, height: 150)
             .foregroundStyle(.gray.opacity(0.2))
             .overlay {
                 VStack (alignment: .leading) {
-                    Text("12월 14일 금요일 12:00")
+                    Text("\(appoint.pickedDate)")
                         .font(.system(size: 14))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("중앙동 다이소 앞")
+                    Text(appoint.placeName)
                         .font(.system(size: 14))
-                    Text("대파밈 모임")
+                    Text(appoint.appointName)
                         .font(.system(size: 18, weight: .bold))
                         .padding(.vertical, 2)
-                    Text("편백찜")
+                    Text(appoint.menuName)
                         .font(.system(size: 14))
                     
-                    Button {
-                        print("detail")
+                    NavigationLink {
+                        AppointCheckingView(appoint: appoint)
                     } label: {
                         Text("약속 자세히 보기")
                             .font(.caption)
@@ -38,11 +40,10 @@ struct NearAppointCellView: View {
 
                 }
                 .padding()
-//                .border(.black)
             }
     }
 }
 
 #Preview {
-    NearAppointCellView()
+    NearAppointCellView(appoint: Appoint.DUMMY_APM)
 }
