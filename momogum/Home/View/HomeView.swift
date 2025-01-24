@@ -90,23 +90,28 @@ struct HomeView: View {
                 }
                 
                 // 버튼 섹션
-                HStack(spacing: 20) {
-                    ForEach(0..<4, id: \.self) { index in
-                        Button(action: {
-                            selectedButtonIndex = index // 선택된 버튼 인덱스 업데이트
-                        }) {
-                            Text(buttonLabel(for: index))
-                                .padding(.horizontal, 16)
-                                .frame(height: 32)
-                                .background(selectedButtonIndex == index ? selectedButtonColor : normalButtonColor) // 동적 색상
-                                .foregroundColor(selectedButtonIndex == index ? .white : .gray) // 동적 텍스트 색상
-                                .bold()
-                                .cornerRadius(10)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(0..<9, id: \.self) { index in // 버튼 수에 맞춰 반복문 범위 수정
+                            Button(action: {
+                                selectedButtonIndex = index // 선택된 버튼 인덱스 업데이트
+                            }) {
+                                Text(buttonLabel(for: index))
+                                    .padding(.horizontal, 16)
+                                    .frame(height: 32) // 높이는 고정
+                                    .fixedSize(horizontal: true, vertical: false) // 텍스트 길이에 맞춰 너비 자동 조정
+                                    .background(selectedButtonIndex == index ? selectedButtonColor : normalButtonColor) // 동적 색상
+                                    .foregroundColor(selectedButtonIndex == index ? .white : .gray) // 동적 텍스트 색상
+                                    .bold()
+                                    .cornerRadius(10)
+                            }
                         }
                     }
+                    .padding(.top, 24)
+                    .padding(.leading, 12)
                 }
-                .padding(.top, 24)
-                .padding(.leading, 12)
+
+
                 
                 if selectedButtonIndex != nil {
                     ScrollView(.vertical, showsIndicators: false) {
@@ -162,9 +167,14 @@ struct HomeView: View {
     private func buttonLabel(for index: Int) -> String {
         switch index {
         case 0: return "또올래요:)"
-        case 1: return "떡볶이"
-        case 2: return "돈까스"
-        case 3: return "피자"
+        case 1: return "한식"
+        case 2: return "중식"
+        case 3: return "일식"
+        case 4: return "양식"
+        case 5: return "아시안"
+        case 6: return "패스트푸드"
+        case 7: return "카페"
+        case 8: return "기타"
         default: return ""
         }
     }
