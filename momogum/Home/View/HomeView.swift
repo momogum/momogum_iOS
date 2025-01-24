@@ -99,7 +99,7 @@ struct HomeView: View {
                                 .padding(.horizontal, 16)
                                 .frame(height: 32)
                                 .background(selectedButtonIndex == index ? selectedButtonColor : normalButtonColor) // 동적 색상
-                                .foregroundColor(.white)
+                                .foregroundColor(selectedButtonIndex == index ? .white : .gray) // 동적 텍스트 색상
                                 .bold()
                                 .cornerRadius(10)
                         }
@@ -173,4 +173,3 @@ struct HomeView: View {
 #Preview {
     HomeView(tabIndex: .constant(0))
 }
-
