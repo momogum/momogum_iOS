@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct AppointView: View {
+
+    @State var stack: NavigationPath = NavigationPath()
+
     @State var path: [String] = []
     @State var newAppointViewModel = NewAppointViewModel()
     @State var viewModel = AppointViewModel()
     
+
     
     var body: some View {
         NavigationStack (path: $path) {

@@ -44,6 +44,8 @@ struct MainTabVIew: View {
                 .tag(3)
             
         }
+        .tint(Color(UIColor(red: 224/255, green: 90/255, blue: 85/255, alpha: 1.0)))
+
     }
 }
 
