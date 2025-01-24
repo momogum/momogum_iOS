@@ -9,10 +9,14 @@ import SwiftUI
 
 /// 약속잡기 메인 페이지
 struct AppointView: View {
+
+    @State var stack: NavigationPath = NavigationPath()
+
     @State var path: [String] = []
     @State var newAppointViewModel = NewAppointViewModel()
     @State var viewModel = AppointViewModel()
     
+
     
     var body: some View {
         NavigationStack (path: $path) {
