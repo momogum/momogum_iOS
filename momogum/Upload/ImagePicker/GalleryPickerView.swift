@@ -8,21 +8,6 @@ import SwiftUI
 import PhotosUI
 
 struct GalleryPickerView: View {
-    @Binding var tabIndex: Int
-    @Environment(\.presentationMode) var presentationMode // 뒤로가기 기능
-
-    var body: some View {
-        VStack {
-            Text("Hello, World!")
-        }
-        .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss() // 뒤로가기 동작
-                }) {
-                    Image(systemName: "chevron.left") // 쉐브론 아이콘
-                        .foregroundColor(.black) // 색상 설정
     @State private var selectedImages: [UIImage] = []
     @State private var isPermissionGranted = false
     @State private var showPermissionAlert = false
@@ -133,7 +118,7 @@ struct GalleryPickerView: View {
                 if let image = image {
                     DispatchQueue.main.async {
                         selectedImages.append(image)
-
+                    }
                 }
             }
         }
@@ -143,4 +128,3 @@ struct GalleryPickerView: View {
 #Preview {
     GalleryPickerView() // 수정: 기본값 전달
 }
-
