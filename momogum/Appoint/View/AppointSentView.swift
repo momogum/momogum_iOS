@@ -10,6 +10,8 @@ import SwiftUI
 struct AppointSentView: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var path: [String]
+    
     var body: some View {
         VStack {
             Text("초대장 보내기 완료!")
@@ -20,7 +22,7 @@ struct AppointSentView: View {
                 .padding()
             
             NavigationLink {
-                AppointCheckingView()
+                AppointCheckingView(appoint: Appoint.DUMMY_APM)
             } label: {
                 Text("보낸 초대장 확인하기")
             }
@@ -32,7 +34,7 @@ struct AppointSentView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    print()
+                    path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
                         .tint(.black)
@@ -43,5 +45,5 @@ struct AppointSentView: View {
 }
 
 #Preview {
-    AppointSentView()
+    AppointSentView(path: AppointView().$path)
 }

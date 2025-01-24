@@ -34,31 +34,33 @@ struct StoryView: View {
                     .scaledToFit()
                     .frame(width: 95, height: 95)
             }
-            
-            NavigationLink(destination: GalleryPickerView(tabIndex: .constant(1))) {
-                Text("바로 밥일기 작성하기")
-                    .font(.headline)
-                    .foregroundColor(Color(red: 224/255, green: 90/255, blue: 85/255)) // E05A55 색상
-                    .padding()
-                    .frame(width: 312, height: 52)
-                    .background(Color.clear)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color(red: 224/255, green: 90/255, blue: 85/255), lineWidth: 2)
-                    )
+            NavigationLink(destination: GalleryPickerView()) {
+                // 밥일기 작성 버튼
+                NavigationLink(destination: GalleryPickerView()) {
+                    Text("바로 밥일기 작성하기")
+                        .font(.headline)
+                        .foregroundColor(Color(red: 224/255, green: 90/255, blue: 85/255)) // E05A55 색상
+                        .padding()
+                        .frame(width: 312, height: 52)
+                        .background(Color.clear)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color(red: 224/255, green: 90/255, blue: 85/255), lineWidth: 2)
+                        )
+                }
+                .padding(.top, 114)
+                
+                Spacer()
             }
-            .padding(.top, 114)
-            
-            Spacer()
-        }
-        .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss() // 뒤로가기 동작
-                }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
+            .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss() // 뒤로가기 동작
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.black)
+                    }
                 }
             }
         }

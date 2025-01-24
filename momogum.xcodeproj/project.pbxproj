@@ -300,6 +300,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = momogum/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사용자가 사진을 선택하여 업로드할 수 있도록 사진 라이브러리에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -332,6 +333,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = momogum/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사용자가 사진을 선택하여 업로드할 수 있도록 사진 라이브러리에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

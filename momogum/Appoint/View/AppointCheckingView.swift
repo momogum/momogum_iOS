@@ -9,8 +9,11 @@ import SwiftUI
 
 struct AppointCheckingView: View {
     @Environment(\.dismiss) var dismiss
+    
     @State var showCancleAlert = false
     @State var showConfirmAlert = false
+    
+    let appoint: Appoint
     
     var body: some View {
         VStack {
@@ -97,7 +100,7 @@ struct AppointCheckingView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         
-                        Text("식사 메뉴")
+                        Text(appoint.menuName)
                             .font(.title3)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -110,7 +113,7 @@ struct AppointCheckingView: View {
                             .foregroundStyle(.black.opacity(0.7))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("2025년 1월 9일 18:00")
+                        Text("\(appoint.pickedDate)")
                             .font(.title3)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,7 +127,7 @@ struct AppointCheckingView: View {
                             .foregroundStyle(.black.opacity(0.7))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("중ㅇ아동 다이송 앞")
+                        Text(appoint.placeName)
                             .font(.title3)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -138,7 +141,7 @@ struct AppointCheckingView: View {
                             .foregroundStyle(.black.opacity(0.7))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("꾸밈단계 2단계")
+                        Text(appoint.note ?? "")
                             .font(.title3)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -150,12 +153,7 @@ struct AppointCheckingView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height: 350)
-                    //                .scaledToFit()
-                    //                .border(.black)
-                    
-                    
                 }
-                //            .border(.black)
                 .padding(.horizontal, 40)
             }
             
@@ -191,7 +189,7 @@ struct AppointCheckingView: View {
         }
         .padding(.horizontal)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("'돈까스 먹장'")
+        .navigationTitle(appoint.appointName)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -207,5 +205,5 @@ struct AppointCheckingView: View {
 }
 
 #Preview {
-    AppointCheckingView()
+    AppointCheckingView(appoint: Appoint.DUMMY_APM)
 }

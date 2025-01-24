@@ -12,7 +12,7 @@ struct MyProfileView: View {
     @State private var showFollowList = 0
     @State private var isActive = false // 화면 전환 제어
     
-    @Bindable var viewModel: ProfileViewModel
+    @State var viewModel: ProfileViewModel = ProfileViewModel()
     
     let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 2)
     
@@ -44,25 +44,15 @@ struct MyProfileView: View {
                         profileImage
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 76, height: 76)
+                            .frame(width: 88, height: 88)
                             .clipShape(Circle())
-                            .padding(5)
-                            .overlay(
-                                Circle()
-                                    .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4)
-                            )
                             .padding(.trailing, 35)
                     } else {
                         Image("defaultProfile")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 76, height: 76)
+                            .frame(width: 88, height: 88)
                             .clipShape(Circle())
-                            .padding(5)
-                            .overlay(
-                                Circle()
-                                    .stroke(Color.gray.opacity(0.6), lineWidth: 5) // 회색 테두리 추가
-                            )
                             .padding(.trailing, 35)
                     }
 

@@ -1,18 +1,13 @@
 //
 //  GalleryImageModel.swift
-//  momogum
+//  momogum_practice
 //
-//  Created by 김윤진 on 1/21/25.
+//  Created by 조승연 on 1/27/25.
 //
 
-import SwiftUI
+import Foundation
 
-struct GalleryImageModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    GalleryImageModel()
+struct GalleryImageModel {
+    let id: UUID
+    let imageURL: URL
 }

@@ -24,7 +24,7 @@ struct MainTabVIew: View {
                     Text("홈")
                 }
                 .tag(0)
-            Text("feed")
+            GalleryPickerView()
                 .tabItem{
                     Image(systemName: "plus")
                     Text("업로드")
@@ -36,7 +36,7 @@ struct MainTabVIew: View {
                     Text("약속관리")
                 }
                 .tag(2)
-            Text("Search")
+            MyProfileView()
                 .tabItem{
                     Image(systemName: "person")
                     Text("내프로필")
