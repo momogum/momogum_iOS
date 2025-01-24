@@ -44,10 +44,6 @@ struct GalleryProfileView: View {
                             .padding(.vertical, 4)
                             .padding(.top, 107)
                         }
-                    } else {
-                        Text("사진 권한이 필요합니다. 설정에서 권한을 허용해주세요.")
-                            .multilineTextAlignment(.center)
-                            .padding()
                     }
                     
                     VStack {
@@ -85,7 +81,9 @@ struct GalleryProfileView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Image(systemName: "xmark")
+                    Image("close")
+                        .resizable()
+                        .frame(width: 18, height: 18)
                         .tint(.black)
                 }
             }
