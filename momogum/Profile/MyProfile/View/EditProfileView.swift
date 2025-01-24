@@ -12,15 +12,20 @@ struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
     @Bindable var viewModel: ProfileViewModel
     
+    // 유저 정보
     @State private var userName: String = ""
     @State private var userID: String = ""
     @State private var userInfo: String = ""
+    
+    // 팝업창
+    @State private var showPopup = false
+    @State private var showPhotoPicker = false // PhotosPicker 활성화 여부
     
     var body: some View {
         VStack(alignment: .center, spacing: 0){
             
             // 프로필 이미지
-            PhotosPicker(selection: $viewModel.selectedItem) {
+            ZStack{
                 HStack(alignment: .bottom, spacing: 0) {
                     if let profileImage = viewModel.profileImage {
                         profileImage
@@ -40,14 +45,52 @@ struct EditProfileView: View {
                     Image("pencil")
                         .resizable()
                         .frame(width: 16, height: 16)
+                        .padding(.bottom, 10)
                 }
+                .padding(.top, 124)
                 .padding(.bottom, 60)
-            }
-            .onChange(of: viewModel.selectedItem) { oldValue, newValue in
-                Task{
-                    await viewModel.convertImage(item: newValue)
+                .onTapGesture {
+                    showPopup = true //클릭 시 팝업 표시
+                }
+                
+                // 팝업 띄우기
+                if showPopup {
+                    // 팝업 창
+                    
+                    VStack() {
+                        Button {
+                            viewModel.resetEditingProfileImage() // 기본 이미지로 변경
+                            showPopup = false
+                        } label: {
+                            Text("기본 이미지 사용")
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .foregroundColor(.black)
+                        }
+                        
+                        Divider()
+                        
+                        NavigationLink{
+                            GalleryProfileView(viewModel: viewModel)
+                        } label: {
+                            Text("갤러리에서 선택")
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .foregroundColor(.black)
+                        }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            showPopup = false // 팝업 닫기
+                        })
+                    }
+                    .frame(width: 231, height: 146)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.gray, lineWidth: 1) // 외곽선 색상과 두께 설정
+                    )
+                    .padding(.top, 239) // 상단 여백 추가
                 }
             }
+            .animation(.easeInOut, value: showPopup)
             
             // 이름 수정
             VStack(alignment: .leading){
@@ -94,7 +137,6 @@ struct EditProfileView: View {
             HStack{
                 Spacer()
                 Button{
-                    print("완료 버튼 클릭")
                     dismiss()
                 } label : {
                     Rectangle()
@@ -111,6 +153,8 @@ struct EditProfileView: View {
             .padding(.horizontal, 48)
             
         }
+        .toolbar(.hidden, for: .tabBar)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .principal) {
