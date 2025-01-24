@@ -16,7 +16,7 @@ struct StoryView: View {
             Text("오늘의 한 끼는 어땠나요?🍽️")
                 .font(.title)
                 .bold()
-                .padding(.top, 218)
+                .padding(.top, 170)
             
             Text("당신의 한 끼를 기록하고, 공유해주세요 :)")
                 .padding(.top, 1)
