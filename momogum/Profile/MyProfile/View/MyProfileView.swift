@@ -38,7 +38,7 @@ struct MyProfileView: View {
                 .padding(.horizontal, 31)
                 .padding(.bottom, 20)
                 
-                HStack{
+                HStack(spacing: 0){
                     // 프로필 이미지
                     if let profileImage = viewModel.profileImage {
                         profileImage
@@ -80,9 +80,11 @@ struct MyProfileView: View {
                                 Text("팔로워 17")
                                     .frame(height: 13, alignment: .leading)
                                     .fontWeight(.semibold)
-                                    .padding(.trailing, 43)
                                     .foregroundStyle(Color.black)
                             }
+//                            .padding(.trailing, 43)
+                            
+                            Spacer()
                             
                             Button(action: {
                                 showFollowList = 1
@@ -91,9 +93,10 @@ struct MyProfileView: View {
                                 Text("팔로잉 14")
                                     .frame(height: 13, alignment: .leading)
                                     .fontWeight(.semibold)
-                                    .padding(.trailing, 43)
                                     .foregroundStyle(Color.black)
                             }
+                            
+                            Spacer()
                             
                             NavigationLink(destination: FollowView(selectedSegment: $showFollowList), isActive: $isActive) {
                                 EmptyView()
@@ -103,6 +106,10 @@ struct MyProfileView: View {
                         
                     }
                 }
+                .edgesIgnoringSafeArea(.all)
+                .frame(maxWidth: .infinity)
+                .padding(.leading, 35)
+                .padding(.trailing, 37)
             }
             
             // 프로필 편집 버튼
@@ -116,12 +123,12 @@ struct MyProfileView: View {
                         Text("프로필 편집")
                             .frame(height: 10)
                             .fontWeight(.semibold)
-                            .padding()
                             .foregroundStyle(.black)
                     )
-                    .padding(.top, 45)
-                    .padding(.bottom, 49)
+                    .contentShape(Rectangle())
             }
+            .padding(.top, 45)
+            .padding(.bottom, 49)
             
             
             // 내 게시물 / 저장 게시물 SegmentedControl

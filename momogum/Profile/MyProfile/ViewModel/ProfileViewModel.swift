@@ -12,6 +12,7 @@ import PhotosUI
 class ProfileViewModel {
     var selectedItem: PhotosPickerItem?
     var profileImage: Image?
+    var previousProfileImage: Image?  // 이전 프로필 이미지 저장
     var uiImage: UIImage?
     
     var userName: String?
@@ -23,7 +24,21 @@ class ProfileViewModel {
         guard let item = item else { return }
         guard let data = try? await item.loadTransferable(type: Data.self) else { return }
         guard let uiImage = UIImage(data: data) else { return }
+        
+        // 이미지를 변경할 때마다 previousProfileImage 갱신
+        previousProfileImage = profileImage
+        
+        // 프로필 이미지 변경
         self.profileImage = Image(uiImage: uiImage)
         self.uiImage = uiImage
+    }
+    
+    // 뒤로가기 버튼 클릭시 이전 이미지로 복원 (프로필 수정 취소)
+    func resetEditingProfileImage() {
+        if let previousImage = previousProfileImage {
+            self.profileImage = previousImage
+        } else {
+            self.profileImage = Image("defaultProfile")
+        }
     }
 }
