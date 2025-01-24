@@ -155,8 +155,10 @@ struct AppointCreate4View: View {
             }
             .padding(.horizontal, 30)
             
-            NavigationLink {
-                AppointSentView(path: $path)
+            Button {
+                viewModel.createAppoint()
+                print("button pressed")
+                path.append("Sent")
             } label: {
                 Text("초대장 보내기")
                     .fontWeight(.bold)
@@ -164,7 +166,6 @@ struct AppointCreate4View: View {
                     .background(.black.opacity(0.7))
                     .foregroundStyle(.white)
                     .clipShape(Rectangle())
-                
             }
         }
         .padding(.horizontal)
@@ -184,6 +185,7 @@ struct AppointCreate4View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    viewModel.resetAppoint()
                     path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")

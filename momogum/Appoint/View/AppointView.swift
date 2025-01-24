@@ -60,6 +60,8 @@ struct AppointView: View {
                                 } else if (value == "create4") {
                                     AppointCreate4View(path: $path)
                                         .environment(newAppointViewModel)
+                                } else {
+                                    AppointSentView(path: $path)
                                 }
                                 
                             }

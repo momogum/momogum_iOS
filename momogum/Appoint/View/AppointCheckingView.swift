@@ -194,11 +194,11 @@ struct AppointCheckingView: View {
         .navigationTitle(appoint.appointName)
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     dismiss()
                 } label: {
-                    Image(systemName: "chevron.backward")
+                    Image(systemName: "xmark")
                         .tint(.black)
                 }
             }

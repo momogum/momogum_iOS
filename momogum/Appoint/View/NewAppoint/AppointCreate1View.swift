@@ -27,15 +27,30 @@ struct AppointCreate1View: View {
             
             ScrollView (.horizontal) {
                 HStack {
-                    ForEach(0..<4) { _ in
-                        AppointPickedFriendCellView()
+                    ForEach(viewModel.pickedFriends, id: \.self) { friend in
+                        AppointPickedFriendCellView(friend: friend)
+                            .environment(viewModel)
                     }
                 }
                 .padding(.top)
             }
             .defaultScrollAnchor(.center)
             
-            AppointFriendSearchView()
+            ScrollView{
+                Text("친구")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                LazyVStack {
+                    ForEach(0..<10) { _ in
+                        AppointFriendListCellView()
+                            .onTapGesture {
+                                
+                            }
+                    }
+                    
+                }
+            }
             
             HStack {
                 Spacer()
@@ -67,6 +82,7 @@ struct AppointCreate1View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    viewModel.resetAppoint()
                     path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")

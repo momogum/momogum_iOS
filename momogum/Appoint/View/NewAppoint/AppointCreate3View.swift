@@ -109,6 +109,7 @@ struct AppointCreate3View: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
+                    viewModel.resetAppoint()
                     path.removeLast(path.count)
                 } label: {
                     Image(systemName: "xmark")
