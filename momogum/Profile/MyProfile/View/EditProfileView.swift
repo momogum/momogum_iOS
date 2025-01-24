@@ -12,15 +12,19 @@ struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
     @Bindable var viewModel: ProfileViewModel
     
+    // 유저 정보
     @State private var userName: String = ""
     @State private var userID: String = ""
     @State private var userInfo: String = ""
     
+    // 팝업창
+    @State private var showPopup = false
+    @State private var showPhotoPicker = false // PhotosPicker 활성화 여부
+    
     var body: some View {
-        VStack(alignment: .center){
-            
-            // 프로필 이미지
-            PhotosPicker(selection: $viewModel.selectedItem) {
+        ZStack{
+            VStack(alignment: .center, spacing: 0){
+                // 프로필 이미지
                 HStack(alignment: .bottom, spacing: 0) {
                     if let profileImage = viewModel.profileImage {
                         profileImage
@@ -40,93 +44,139 @@ struct EditProfileView: View {
                     Image("pencil")
                         .resizable()
                         .frame(width: 16, height: 16)
+                        .padding(.bottom, 10)
                 }
+                .padding(.top, 124)
                 .padding(.bottom, 60)
+                .onTapGesture {
+                    showPopup = true //클릭 시 팝업 표시
+                }
+                
+                
+                // 이름 수정
+                VStack(alignment: .leading){
+                    Text("이름")
+                        .frame(height: 16)
+                        .fontWeight(.semibold)
+                    
+                    TextField("이름을 입력하세요", text: $userName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 298, height: 39)
+                }
+                .padding(.horizontal, 47)
+                .padding(.bottom, 51)
+                
+                
+                // 아이디 수정
+                VStack(alignment: .leading){
+                    Text("사용자 아이디")
+                        .frame(height: 16)
+                        .fontWeight(.semibold)
+                    
+                    TextField("아이디를 입력하세요", text: $userID)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 298, height: 39)
+                }
+                .padding(.horizontal, 47)
+                .padding(.bottom, 51)
+                
+                
+                // 한 줄 소개 수정
+                VStack(alignment: .leading){
+                    Text("한 줄 소개")
+                        .frame(height: 16)
+                        .fontWeight(.semibold)
+                    
+                    TextField("소개를 입력하세요", text: $userInfo)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 298, height: 39)
+                }
+                .padding(.horizontal, 47)
+                .padding(.bottom, 101)
+                
+                // 완료버튼
+                HStack{
+                    Spacer()
+                    Button{
+                        dismiss()
+                    } label : {
+                        Rectangle()
+                            .frame(width: 93, height: 41)
+                            .foregroundStyle(Color.gray)
+                            .overlay(
+                                Text("완료")
+                                    .frame(height: 20)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                            )
+                    }
+                }
+                .padding(.horizontal, 48)
+                
             }
-            .onChange(of: viewModel.selectedItem) { oldValue, newValue in
-                Task{
-                    await viewModel.convertImage(item: newValue)
+            .toolbar(.hidden, for: .tabBar)
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("프로필 편집")
+                        .frame(height: 20)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                }
+                // 뒤로가기 버튼
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        viewModel.resetEditingProfileImage()
+                        dismiss()
+                    } label: {
+                        Image(systemName: "arrow.backward")
+                            .tint(.black)
+                    }
                 }
             }
             
-            // 이름 수정
-            VStack(alignment: .leading){
-                Text("이름")
-                    .frame(height: 16)
-                    .fontWeight(.semibold)
+            // 팝업 띄우기
+            if showPopup {
+                Color.black.opacity(0) // 투명 배경
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        showPopup = false // 바깥 영역 터치 시 팝업 비활성화
+                    }
                 
-                TextField("이름을 입력하세요", text: $userName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 298, height: 39)
-            }
-            .padding(.horizontal, 47)
-            .padding(.bottom, 51)
-            
-            
-            // 아이디 수정
-            VStack(alignment: .leading){
-                Text("사용자 아이디")
-                    .frame(height: 16)
-                    .fontWeight(.semibold)
-                
-                TextField("아이디를 입력하세요", text: $userID)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 298, height: 39)
-            }
-            .padding(.horizontal, 47)
-            .padding(.bottom, 51)
-            
-            
-            // 한 줄 소개 수정
-            VStack(alignment: .leading){
-                Text("한 줄 소개")
-                    .frame(height: 16)
-                    .fontWeight(.semibold)
-                
-                TextField("소개를 입력하세요", text: $userInfo)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(width: 298, height: 39)
-            }
-            .padding(.horizontal, 47)
-            .padding(.bottom, 101)
-            
-            // 완료버튼
-            HStack{
-                Spacer()
-                Button{
-                    print("완료 버튼 클릭")
-                    dismiss()
-                } label : {
-                    Rectangle()
-                        .frame(width: 93, height: 41)
-                        .foregroundStyle(Color.gray)
-                        .overlay(
-                            Text("완료")
-                                .frame(height: 20)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.white)
-                        )
+                VStack {
+                    // 기본 이미지 사용
+                    Button {
+                        viewModel.resetEditingProfileImage() // 기본 이미지로 변경
+                        showPopup = false
+                    } label: {
+                        Text("기본 이미지 사용")
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .foregroundColor(.black)
+                    }
+                    
+                    Divider()
+                    
+                    // 갤러리에서 선택
+                    NavigationLink {
+                        GalleryProfileView(viewModel: viewModel)
+                    } label: {
+                        Text("갤러리에서 선택")
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .foregroundColor(.black)
+                    }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        showPopup = false
+                    })
                 }
-            }
-            .padding(.horizontal, 48)
-            
-        }
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("프로필 편집")
-                    .frame(height: 20)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-            }
-            // 뒤로가기 버튼
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "arrow.backward")
-                        .tint(.black)
-                }
+                .frame(width: 231, height: 146)
+                .background(Color.white)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                .padding(.bottom, 395)
             }
         }
     }
