@@ -138,7 +138,7 @@ struct EditProfileView: View {
             
             // 팝업 띄우기
             if showPopup {
-                Color.black.opacity(0) // 투명 배경
+                Color.black.opacity(0.001)
                     .ignoresSafeArea()
                     .onTapGesture {
                         showPopup = false // 바깥 영역 터치 시 팝업 비활성화
@@ -153,6 +153,7 @@ struct EditProfileView: View {
                         Text("기본 이미지 사용")
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .foregroundColor(.black)
+                            .fontWeight(.semibold)
                     }
                     
                     Divider()
@@ -164,6 +165,7 @@ struct EditProfileView: View {
                         Text("갤러리에서 선택")
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .foregroundColor(.black)
+                            .fontWeight(.semibold)
                     }
                     .simultaneousGesture(TapGesture().onEnded {
                         showPopup = false
