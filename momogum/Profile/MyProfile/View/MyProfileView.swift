@@ -184,6 +184,12 @@ struct MyProfileView: View {
             
             // 팝업 띄우기
             if showPopup {
+                Color.black.opacity(0.001)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        showPopup = false // 바깥 영역 터치 시 팝업 비활성화
+                    }
+                
                 SettingsPopupView(showPopup: $showPopup)
                     .padding(.bottom, 505)
                     .padding(.leading, 155)
