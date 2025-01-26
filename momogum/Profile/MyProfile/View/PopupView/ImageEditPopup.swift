@@ -19,10 +19,11 @@ struct ImageEditPopup: View {
                 showPopup = false
             } label: {
                 Text("기본 이미지 사용")
-                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .font(.system(size: 20))
                     .foregroundColor(.black)
                     .fontWeight(.semibold)
             }
+            .padding(.bottom, 15)
             
             Divider().frame(width: 188.5)
             
@@ -31,10 +32,11 @@ struct ImageEditPopup: View {
                 GalleryProfileView(viewModel: viewModel)
             } label: {
                 Text("갤러리에서 선택")
-                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .font(.system(size: 20))
                     .foregroundColor(.black)
                     .fontWeight(.semibold)
             }
+            .padding(.top, 15)
             .simultaneousGesture(TapGesture().onEnded {
                 showPopup = false
             })

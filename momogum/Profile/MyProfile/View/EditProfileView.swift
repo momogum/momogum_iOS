@@ -79,7 +79,7 @@ struct EditProfileView: View {
                     // 이름 수정
                     VStack(alignment: .leading){
                         Text("이름")
-                            .frame(height: 16)
+                            .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
                         TextField("이름을 입력하세요", text: $userName)
@@ -93,7 +93,7 @@ struct EditProfileView: View {
                     // 아이디 수정
                     VStack(alignment: .leading){
                         Text("사용자 아이디")
-                            .frame(height: 16)
+                            .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
                         TextField("아이디를 입력하세요", text: $userID)
@@ -107,7 +107,7 @@ struct EditProfileView: View {
                     // 한 줄 소개 수정
                     VStack(alignment: .leading){
                         Text("한 줄 소개")
-                            .frame(height: 16)
+                            .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
                         TextField("소개를 입력하세요", text: $userInfo)
@@ -128,7 +128,7 @@ struct EditProfileView: View {
                                 .foregroundStyle(Color.gray)
                                 .overlay(
                                     Text("완료")
-                                        .frame(height: 20)
+                                        .font(.system(size: 20))
                                         .fontWeight(.semibold)
                                         .foregroundStyle(.white)
                                 )

@@ -1,5 +1,5 @@
 //
-//  LogoutPopupView.swift
+//  DelAccPopupView.swift
 //  momogum
 //
 //  Created by 류한비 on 1/26/25.
@@ -7,19 +7,24 @@
 
 import SwiftUI
 
-struct LogoutPopupView: View {
-    @Binding var showLogoutPopup: Bool
+struct DelAccPopupView: View {
+    @Binding var showDelPopup: Bool
     
     var body: some View {
         VStack(spacing: 0) {
-            // 로그아웃
-            Text("지금 로그아웃합니다")
+            Text("정말 탈퇴하시겠습니까?")
                 .font(.system(size: 20))
-                .foregroundColor(.black)
+                .foregroundColor(.red)
                 .fontWeight(.semibold)
-                .padding(.top, 58)
+                .padding(.top, 48)
+                .padding(.bottom, 29)
             
-            Spacer().frame(width: 300, height: 59)
+            Text("삭제된 계정은 다시 복구할 수 없습니다.")
+                .font(.system(size: 16))
+                .foregroundColor(.gray)
+                .fontWeight(.semibold)
+            
+            Spacer().frame(width: 300, height: 47)
             
             Divider().frame(width: 269)
             
@@ -28,7 +33,7 @@ struct LogoutPopupView: View {
             HStack(alignment: .center, spacing: 0){
                 // 돌아가기
                 Button {
-                    showLogoutPopup = false
+                    showDelPopup = false
                 } label: {
                     Text("돌아가기")
                         .font(.system(size: 20))
@@ -40,11 +45,11 @@ struct LogoutPopupView: View {
                 
                 VerticalDivider()
                 
-                // 로그아웃
+                // 회원탈퇴
                 Button {
-                    showLogoutPopup = false
+                    showDelPopup = false
                 } label: {
-                    Text("로그아웃")
+                    Text("회원탈퇴")
                         .font(.system(size: 20))
                         .foregroundColor(.red)
                         .fontWeight(.semibold)
@@ -59,15 +64,5 @@ struct LogoutPopupView: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.gray, lineWidth: 1)
         )
-    }
-}
-
-struct VerticalDivider: View {
-    var width: CGFloat = 1
-    var height: CGFloat = 37
-    
-    var body: some View {
-        Divider()
-            .frame(width: width, height: height)
     }
 }
