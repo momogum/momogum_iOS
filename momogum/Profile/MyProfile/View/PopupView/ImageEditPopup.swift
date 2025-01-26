@@ -24,7 +24,7 @@ struct ImageEditPopup: View {
                     .fontWeight(.semibold)
             }
             
-            Divider()
+            Divider().frame(width: 188.5)
             
             // 갤러리에서 선택
             NavigationLink {

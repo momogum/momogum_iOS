@@ -12,6 +12,7 @@ struct MyProfileView: View {
     @State private var showFollowList = 0
     @State private var isActive = false // 화면 전환 제어
     @State private var showPopup = false
+    @State private var showLogoutPopup = false
     
     @State var viewModel: ProfileViewModel = ProfileViewModel()
     
@@ -190,10 +191,17 @@ struct MyProfileView: View {
                         showPopup = false // 바깥 영역 터치 시 팝업 비활성화
                     }
                 
-                SettingsPopupView(showPopup: $showPopup)
+                SettingsPopupView(showPopup: $showPopup, showLogoutPopup: $showLogoutPopup)
                     .padding(.bottom, UIScreen.main.bounds.height <= 812 ? 450 : 505)
                     .padding(.leading, UIScreen.main.bounds.height <= 812 ? 105 : 155)
                     .padding(.trailing, 37)
+            } else if showLogoutPopup {
+                Color.black.opacity(0.001)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        showLogoutPopup = false
+                    }
+                LogoutPopupView(showLogoutPopup: $showLogoutPopup)
             }
             
         }
