@@ -99,11 +99,13 @@ struct GalleryProfileView: View {
         Task {
             viewModel.uiImage = image
             viewModel.profileImage = Image(uiImage: image)
+            // convertImage 메서드 호출
+//            await viewModel.convertImage(item: image)
         }
     }
     
     private func requestPhotoLibraryPermission() {
-        PHPhotoLibrary.requestAuthorization { status in
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             DispatchQueue.main.async {
                 switch status {
                 case .authorized, .limited:
@@ -124,13 +126,12 @@ struct GalleryProfileView: View {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        let imageManager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.isSynchronous = true
+        options.deliveryMode = .highQualityFormat
         
         fetchResult.enumerateObjects { asset, _, _ in
-            let imageManager = PHImageManager.default()
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            options.deliveryMode = .highQualityFormat
-            
             imageManager.requestImage(
                 for: asset,
                 targetSize: CGSize(width: 200, height: 200),
