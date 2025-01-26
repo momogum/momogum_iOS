@@ -140,6 +140,7 @@ struct EditProfileView: View {
                 .padding(.top, 60)
             }
             .edgesIgnoringSafeArea(.all)
+            .toolbar(.hidden, for: .tabBar)
             .navigationBarBackButtonHidden()
             .disabled(showPopup)
             
@@ -152,8 +153,7 @@ struct EditProfileView: View {
                     }
                 
                 ImageEditPopup(viewModel: viewModel, showPopup: $showPopup)
-//                    .padding(.bottom, 200)
-                    .padding(.bottom, UIScreen.main.bounds.height < 700 ? 200 : 150)
+                    .padding(.bottom, UIScreen.main.bounds.height <= 812 ? 200 : 150)
             }
         }
     }

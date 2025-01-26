@@ -191,8 +191,8 @@ struct MyProfileView: View {
                     }
                 
                 SettingsPopupView(showPopup: $showPopup)
-                    .padding(.bottom, 505)
-                    .padding(.leading, 155)
+                    .padding(.bottom, UIScreen.main.bounds.height <= 812 ? 450 : 505)
+                    .padding(.leading, UIScreen.main.bounds.height <= 812 ? 105 : 155)
                     .padding(.trailing, 37)
             }
             
