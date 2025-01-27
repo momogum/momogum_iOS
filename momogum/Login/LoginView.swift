@@ -10,10 +10,11 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var kakaoAuthViewModel : KakaoAuthViewModel = KakaoAuthViewModel()
     @FocusState private var isFocused: Bool // TextField의 포커스 상태
-    @FocusState private var isFocusedPWD: Bool 
+    @FocusState private var isFocusedPWD: Bool
+    @State private var path: [String] = [] //path 설정
     var body: some View {
         
-        NavigationStack{
+        NavigationStack(path: $path){
             Image("Momogum")
                 .resizable()
                 .frame(width: 112, height: 112)

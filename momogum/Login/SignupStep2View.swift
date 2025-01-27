@@ -10,7 +10,7 @@ import SwiftUI
 struct SignupStep2View: View {
     //MARK: - Properties
     @Environment(\.dismiss) var dismiss
-//    @Environment(SignupViewModel.self) var signupViewModel
+    //    @Environment(SignupViewModel.self) var signupViewModel
     @FocusState private var isFocused: Bool
     
     //MARK: - View
@@ -47,9 +47,14 @@ struct SignupStep2View: View {
                             .modifier(SignupTextfieldModifer())
                             .focused($isFocused)
                             .foregroundStyle(isFocused ? Color.black : Color.signupDescriptionGray)
-                        Text("(최대12자)")
-                            .padding(.top,142)
-                            .padding(.trailing,32)
+                        Button{
+                            
+                        }label:{
+                            Text("중복확인")
+                        }
+                        .disabled(!isFocused)
+                        .padding(.top,142)
+                        .padding(.trailing,32)
                         
                     }
                     // Divider의 색상을 TextField 상태에 따라 변경
@@ -57,17 +62,31 @@ struct SignupStep2View: View {
                         .frame(height: 2)
                         .background(isFocused ? Color.black : Color.placeholderGray2)
                         .padding(.horizontal,32)
+                    HStack{
+                        Image("checkBox")
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                        Text("최소 5자~ 20자")
+                            .font(.system(size:16))
+                            .fontWeight(.regular)
+                            .foregroundStyle(Color.signupDescriptionGray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,34)
                     
-                    Text("최소 5자~ 20자")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading,43)
-                        .font(.system(size:16))
-                        .fontWeight(.regular)
-                    Text("영어소문자,숫자,'.','_'사용가능")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading,43)
-                        .font(.system(size:16))
-                        .fontWeight(.regular)
+                    HStack{
+                        
+                        Image("checkBox")
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                        
+                        Text("영어소문자,숫자,'.','_'사용가능")
+                            .font(.system(size:16))
+                            .fontWeight(.regular)
+                            .foregroundStyle(Color.signupDescriptionGray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading,34)
                 }
                 Spacer()
                 HStack{
@@ -94,7 +113,7 @@ struct SignupStep2View: View {
                 }
             }
             .navigationBarBackButtonHidden()
-
+            
         }
         
     }
