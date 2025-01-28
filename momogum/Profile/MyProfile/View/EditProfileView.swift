@@ -12,11 +12,6 @@ struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
     @Bindable var viewModel: ProfileViewModel
     
-    // 유저 정보
-    @State private var userName: String = ""
-    @State private var userID: String = ""
-    @State private var userInfo: String = ""
-    
     // 팝업창
     @State private var showPopup = false
     @State private var showPhotoPicker = false // PhotosPicker 활성화 여부
@@ -27,7 +22,7 @@ struct EditProfileView: View {
                 HStack(alignment: .center){
                     // back 버튼
                     Button{
-                        viewModel.resetEditingProfileImage()
+                        viewModel.resetUserData() // 임시 이미지 초기화
                         dismiss()
                     } label: {
                         Image("back")
@@ -50,7 +45,7 @@ struct EditProfileView: View {
                 
                 // 프로필 이미지
                 HStack(alignment: .bottom, spacing: 0) {
-                    if let profileImage = viewModel.profileImage {
+                    if let profileImage = viewModel.currentPreviewImage {
                         profileImage
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -82,7 +77,7 @@ struct EditProfileView: View {
                             .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
-                        TextField("이름을 입력하세요", text: $userName)
+                        TextField("이름을 입력하세요", text: $viewModel.draftUserName)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 298, height: 39)
                     }
@@ -96,7 +91,7 @@ struct EditProfileView: View {
                             .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
-                        TextField("아이디를 입력하세요", text: $userID)
+                        TextField("아이디를 입력하세요", text: $viewModel.draftUserID)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 298, height: 39)
                     }
@@ -110,7 +105,7 @@ struct EditProfileView: View {
                             .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
-                        TextField("소개를 입력하세요", text: $userInfo)
+                        TextField("소개를 입력하세요", text: $viewModel.draftUserBio)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .frame(width: 298, height: 39)
                     }
@@ -121,6 +116,7 @@ struct EditProfileView: View {
                     HStack{
                         Spacer()
                         Button{
+                            viewModel.saveUserData() // 확정
                             dismiss()
                         } label : {
                             Rectangle()

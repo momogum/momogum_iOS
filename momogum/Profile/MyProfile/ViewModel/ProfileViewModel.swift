@@ -6,41 +6,52 @@
 //
 
 import SwiftUI
-import PhotosUI
 
 @Observable
 class ProfileViewModel {
-    var selectedItem: PhotosPickerItem?
-    var profileImage: Image?
-    var previousProfileImage: Image?  // 이전 프로필 이미지 저장
+    var profileImage: Image? // 확정된 프로필 이미지
+    var currentPreviewImage: Image? // 편집 중에 보여지는 미리보기 이미지
     var uiImage: UIImage?
     
-    var userName: String?
-    var userID: String?
-    var userBio: String?
+    // 유저 정보 (확정)
+    var userName: String = "이름"
+    var userID: String = "유저 아이디"
+    var userBio: String = "한 줄 소개"
     
-    // 이미지 변경 함수
-    func convertImage(from uiImage: UIImage) async {
-        // 이미지를 변경할 때마다 previousProfileImage 갱신
-        previousProfileImage = profileImage
-        
-        // 프로필 이미지 변경
-        self.profileImage = Image(uiImage: uiImage)
+    // 유저 정보 (임시)
+    var draftUserName: String = ""
+    var draftUserID: String = ""
+    var draftUserBio: String = ""
+    
+    init() {
+        profileImage = Image("defaultProfile")
+        currentPreviewImage = profileImage
+    }
+    
+    // 임시 프로필 이미지 변경
+    func convertPreviewImage(from uiImage: UIImage) {
+        self.currentPreviewImage = Image(uiImage: uiImage)
         self.uiImage = uiImage
     }
     
-    // 뒤로가기 버튼 클릭시 이전 이미지로 복원 (프로필 수정 취소)
-    func resetEditingProfileImage() {
-        if let previousImage = previousProfileImage {
-            self.profileImage = previousImage
-        } else {
-            self.profileImage = Image("defaultProfile")
-        }
+    // 확정 (완료 버튼 클릭 시 호출)
+    func saveUserData() {
+        profileImage = currentPreviewImage
+        userName = draftUserName
+        userID = draftUserID
+        userBio = draftUserBio
     }
     
-    // 기본 이미지 사용
+    // 편집 취소 시 초기화
+    func resetUserData() {
+        currentPreviewImage = profileImage
+        draftUserName = userName
+        draftUserID = userID
+        draftUserBio = userBio
+    }
+    
+    // 기본 이미지로 임시 설정
     func setDefaultImage() {
-        previousProfileImage = profileImage
-        self.profileImage = Image("defaultProfile")
+        currentPreviewImage = Image("defaultProfile")
     }
 }

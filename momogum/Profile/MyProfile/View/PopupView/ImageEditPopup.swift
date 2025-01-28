@@ -15,7 +15,7 @@ struct ImageEditPopup: View {
         VStack {
             // 기본 이미지 사용
             Button {
-                viewModel.setDefaultImage() // 기본 이미지로 변경
+                viewModel.setDefaultImage()
                 showPopup = false
             } label: {
                 Text("기본 이미지 사용")

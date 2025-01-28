@@ -11,6 +11,7 @@ struct MyProfileView: View {
     @State private var selectedSegment = 0
     @State private var showFollowList = 0
     @State private var isActive = false // 화면 전환 제어
+    // 팝업창 제어
     @State private var showPopup = false
     @State private var showLogoutPopup = false
     @State private var showDelPopup = false
@@ -30,7 +31,7 @@ struct MyProfileView: View {
                             Spacer().frame(width: 24, height: 24)
                             
                             // 내 유저 아이디
-                            Text("내 유저 아이디")
+                            Text("\(viewModel.userID)")
                                 .frame(height: 20)
                                 .fontWeight(.semibold)
                             
@@ -71,11 +72,11 @@ struct MyProfileView: View {
                             VStack(alignment: .leading){
                                 VStack(alignment: .leading){
                                     // 이름
-                                    Text("이름")
+                                    Text("\(viewModel.userName)")
                                         .frame(height: 16, alignment: .leading)
                                         .fontWeight(.semibold)
                                     
-                                    Text("한 줄 소개")
+                                    Text("\(viewModel.userBio)")
                                         .frame(height: 12, alignment: .leading)
                                         .fontWeight(.semibold)
                                         .foregroundStyle(.gray)

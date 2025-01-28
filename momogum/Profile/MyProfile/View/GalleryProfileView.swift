@@ -97,7 +97,7 @@ struct GalleryProfileView: View {
     
     private func handleImageSelection(_ image: UIImage) {
         Task {
-            await viewModel.convertImage(from: image)
+            await viewModel.convertPreviewImage(from: image)
         }
     }
     
