@@ -11,6 +11,7 @@ import Foundation
 struct Appoint: Codable, Identifiable {
     let id: String
     
+    var senderName: String
     var appointName: String
     var menuName: String
     var pickedDate: Date
@@ -26,6 +27,7 @@ struct Appoint: Codable, Identifiable {
 extension Appoint {
     static var DUMMY_APM: Appoint = Appoint(
         id: UUID().uuidString,
+        senderName: "김더미",
         appointName: "더미 모임",
         menuName: "쿠차라 더미 부리또",
         pickedDate: Date(),

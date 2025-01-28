@@ -10,38 +10,55 @@ import SwiftUI
 struct NearAppointCellView: View {
     let appoint: Appoint
     
+    let dateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 M월 d일"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }
+    
+    
     var body: some View {
         
         Rectangle()
-            .frame(width: 156, height: 219)
-            .foregroundStyle(.gray.opacity(0.2))
+            .frame(width: 160, height: 220)
+            .foregroundStyle(.black_5)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay {
                 VStack (alignment: .leading) {
-                    Text("\(appoint.pickedDate)")
-                        .font(.system(size: 14))
+                    Text("\(appoint.pickedDate, formatter: dateFormatter())")
+                        .font(.mmg(.Caption2))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(appoint.placeName)
-                        .font(.system(size: 14))
-                    Text(appoint.appointName)
-                        .font(.system(size: 18, weight: .bold))
-                        .padding(.vertical, 2)
-                    Text(appoint.menuName)
-                        .font(.system(size: 14))
+                    Spacer()
                     
+                    Text(appoint.senderName)
+                        .font(.mmg(.Body4))
+                    + Text("님이")
+                        .font(.mmg(.Body3))
+                    
+                    Text(appoint.appointName)
+                        .font(.mmg(.Body4))
+                    + Text("에 초대합니다")
+                        .font(.mmg(.Body3))
+                    
+                    Spacer()
                     NavigationLink {
                         AppointCheckingView(appoint: appoint)
                     } label: {
-                        Text("약속 자세히 보기")
-                            .font(.caption)
+                        Text("초대장 열기")
+                            .font(.mmg(.Caption1))
                             .frame(width: 120, height: 25)
-                            .background(.gray.opacity(0.5))
-                            .foregroundStyle(.black)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .background(.Red_2)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
-
+                    
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 20)
+                .padding(.bottom, 30)
             }
+            .padding(.trailing, 10)
     }
 }
 

@@ -70,19 +70,21 @@ struct AppointView: View {
                             Text("수락 대기 중인 약속")
                                 .font(.mmg(.subheader3))
                             
-                            
-                            Text("당신의 결정을 기다리는 약속이 있어요!")
-                                .font(.mmg(.subheader4))
-                            
-                            ScrollView (.horizontal, showsIndicators: true) {
-                                HStack {
-                                    ForEach(viewModel.appoints) { appoint in
-                                        NearAppointCellView(appoint: appoint)
+                            if (viewModel.appoints.isEmpty) {
+                                
+                            } else {
+                                Text("당신의 결정을 기다리는 약속이 있어요!")
+                                    .font(.mmg(.subheader4))
+                                
+                                ScrollView (.horizontal, showsIndicators: true) {
+                                    HStack {
+                                        ForEach(viewModel.appoints) { appoint in
+                                            NearAppointCellView(appoint: appoint)
+                                        }
                                     }
                                 }
+                                .padding(.vertical, 20)
                             }
-                            .ignoresSafeArea()
-                            .padding(.vertical, 20)
                             
                             Text("다가오는 식사 약속")
                                 .font(.mmg(.subheader3))
@@ -90,11 +92,11 @@ struct AppointView: View {
                             ScrollView (.horizontal, showsIndicators: true) {
                                 HStack {
                                     ForEach(viewModel.appoints) { appoint in
-                                        NearAppointCellView(appoint: appoint)
+                                        WaitingConfirmCellView(appoint: appoint)
                                     }
                                 }
                             }
-                            .padding(.vertical, 20)
+                            .padding(.vertical, 10)
                         }
                         .padding(.leading, 30)
                     }
