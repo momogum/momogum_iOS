@@ -11,7 +11,10 @@ struct SignupStep2View: View {
     //MARK: - Properties
     @Environment(\.dismiss) var dismiss
     //    @Environment(SignupViewModel.self) var signupViewModel
+    @State private var inputText: String = ""
     @FocusState private var isFocused: Bool
+    @State private var lengthCheck: Bool = false
+    @State private var hasAllowedCharactersOnly: Bool = false
     
     //MARK: - View
     var body: some View {
@@ -43,19 +46,29 @@ struct SignupStep2View: View {
                     
                     HStack{
                         
-                        TextField("머머금", text: .constant(""))
+                        TextField("머머금", text: $inputText ,onEditingChanged: { editing in
+                            if editing {
+                                isFocused = true
+                            }
+                        })
                             .modifier(SignupTextfieldModifer())
                             .focused($isFocused)
                             .foregroundStyle(isFocused ? Color.black : Color.signupDescriptionGray)
+                            .onChange(of: inputText) { _ , newValue in
+                                validateInput2(newValue)
+                            }
+                        
+                        
                         Button{
                             
                         }label:{
                             Text("중복확인")
                         }
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.signupDescriptionGray)
                         .disabled(!isFocused)
                         .padding(.top,142)
                         .padding(.trailing,32)
-                        
                     }
                     // Divider의 색상을 TextField 상태에 따라 변경
                     Divider()
@@ -63,28 +76,20 @@ struct SignupStep2View: View {
                         .background(isFocused ? Color.black : Color.placeholderGray2)
                         .padding(.horizontal,32)
                     HStack{
-                        Image("checkBox")
-                            .resizable()
-                            .frame(width: 16, height: 16)
-                        Text("최소 5자~ 20자")
+                      
+                        validationText("최소 5자~ 20자",isValid: lengthCheck)
                             .font(.system(size:16))
                             .fontWeight(.regular)
-                            .foregroundStyle(Color.signupDescriptionGray)
+                            
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading,34)
                     
                     HStack{
-                        
-                        Image("checkBox")
-                            .resizable()
-                            .frame(width: 16, height: 16)
-                        
-                        Text("영어소문자,숫자,'.','_'사용가능")
+                        validationText("영어소문자,숫자,'.','_'사용가능", isValid: hasAllowedCharactersOnly)
                             .font(.system(size:16))
                             .fontWeight(.regular)
-                            .foregroundStyle(Color.signupDescriptionGray)
-                    }
+                            }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading,34)
                 }
@@ -117,7 +122,26 @@ struct SignupStep2View: View {
         }
         
     }
+    
+    //MARK: - Function
+    //리팩토링할때 옮기겠습니다
+    func validateInput2(_ text: String) {
+        let allowedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz0123456789._")
+        lengthCheck = text.count >= 5 &&
+                         text.count <= 20 &&
+                         text.range(of: "[a-z]", options: .regularExpression) != nil
+        hasAllowedCharactersOnly = text.unicodeScalars.allSatisfy { allowedCharacters.contains($0) } &&  text.range(of: "[a-z]", options: .regularExpression) != nil
+    }
 }
+    @ViewBuilder
+    func validationText(_ text: String, isValid: Bool) -> some View {
+        HStack {
+            Image(systemName:"checkmark.circle" )
+                .foregroundColor(isValid ? .green : .signupDescriptionGray)
+            Text(text)
+                .foregroundColor(isValid ? .green : .signupDescriptionGray)
+        }
+    }
 
 #Preview {
     SignupStep2View()
