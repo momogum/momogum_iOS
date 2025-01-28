@@ -109,7 +109,7 @@ struct MyProfileView: View {
                                     
                                     Spacer()
                                     
-                                    NavigationLink(destination: FollowView(selectedSegment: $showFollowList), isActive: $isActive) {
+                                    NavigationLink(destination: FollowView(viewModel: viewModel, selectedSegment: $showFollowList), isActive: $isActive) {
                                         EmptyView()
                                     }
                                     
