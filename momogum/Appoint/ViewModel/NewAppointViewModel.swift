@@ -14,11 +14,20 @@ class NewAppointViewModel {
     var pickedDate: Date = Date()
     var placeName: String = ""
     var note: String = ""
-    var pickedFriends: [String] = []
+    var pickedFriends: [String] = ["친구1", "친구2", "친구3", "친구4"]
     
     
     
     func createAppoint() {
+        appointName = ""
+        menuName = ""
+        pickedDate = Date()
+        placeName = ""
+        note = ""
+        pickedFriends = []
+    }
+    
+    func resetAppoint() {
         appointName = ""
         menuName = ""
         pickedDate = Date()
