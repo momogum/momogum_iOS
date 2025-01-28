@@ -97,10 +97,7 @@ struct GalleryProfileView: View {
     
     private func handleImageSelection(_ image: UIImage) {
         Task {
-            viewModel.uiImage = image
-            viewModel.profileImage = Image(uiImage: image)
-            // convertImage 메서드 호출
-//            await viewModel.convertImage(item: image)
+            await viewModel.convertImage(from: image)
         }
     }
     

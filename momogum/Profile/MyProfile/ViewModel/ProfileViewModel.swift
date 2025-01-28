@@ -20,11 +20,7 @@ class ProfileViewModel {
     var userBio: String?
     
     // 이미지 변경 함수
-    func convertImage(item: PhotosPickerItem?) async {
-        guard let item = item else { return }
-        guard let data = try? await item.loadTransferable(type: Data.self) else { return }
-        guard let uiImage = UIImage(data: data) else { return }
-        
+    func convertImage(from uiImage: UIImage) async {
         // 이미지를 변경할 때마다 previousProfileImage 갱신
         previousProfileImage = profileImage
         
@@ -40,5 +36,11 @@ class ProfileViewModel {
         } else {
             self.profileImage = Image("defaultProfile")
         }
+    }
+    
+    // 기본 이미지 사용
+    func setDefaultImage() {
+        previousProfileImage = profileImage
+        self.profileImage = Image("defaultProfile")
     }
 }
