@@ -38,7 +38,7 @@ struct AppointView: View {
 
                                             Text("식사 약속 만들기")
                                                 .foregroundStyle(.black)
-                                                .fontWeight(.bold)
+                                                .font(.mmg(.subheader3))
                                             
                                             
                                         }
@@ -68,8 +68,7 @@ struct AppointView: View {
                         
                         VStack (alignment: .leading) {
                             Text("수락 대기 중인 약속")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .font(.mmg(.subheader3))
                             
                             
                             Text("당신의 결정을 기다리는 약속이 있어요!")
@@ -86,8 +85,7 @@ struct AppointView: View {
                             .padding(.vertical, 20)
                             
                             Text("다가오는 식사 약속")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .font(.mmg(.subheader3))
                             
                             ScrollView (.horizontal, showsIndicators: true) {
                                 HStack {
