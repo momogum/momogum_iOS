@@ -10,8 +10,8 @@ import SwiftUI
 /// 약속생성의 마지막 단계, 초대장을 보냈다는 화면 + 초대장 확인 버튼
 struct AppointSentView: View {
     @Environment(\.dismiss) var dismiss
-    
     @Binding var path: [String]
+    @State var isPresented: Bool = false
     
     var body: some View {
         VStack {
@@ -22,13 +22,17 @@ struct AppointSentView: View {
                 .foregroundStyle(.gray.opacity(0.2))
                 .padding()
             
-            NavigationLink {
-                AppointCheckingView(appoint: Appoint.DUMMY_APM)
+            Button {
+                isPresented = true
             } label: {
                 Text("보낸 초대장 확인하기")
             }
 
         }
+        .fullScreenCover(isPresented: $isPresented, content: {
+            AppointCheckingView(appoint: Appoint.DUMMY_APM)
+
+        })
         .padding(.horizontal)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
