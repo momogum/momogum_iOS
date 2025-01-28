@@ -11,8 +11,9 @@ struct NearAppointCellView: View {
     let appoint: Appoint
     
     var body: some View {
+        
         Rectangle()
-            .frame(width: 250, height: 150)
+            .frame(width: 156, height: 219)
             .foregroundStyle(.gray.opacity(0.2))
             .overlay {
                 VStack (alignment: .leading) {

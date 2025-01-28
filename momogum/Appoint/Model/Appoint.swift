@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 초대장 모델, 8속성 [id, appointName, menuName, pickedDate, placeName, note, pickedFriends, isConfirmed]
 struct Appoint: Codable, Identifiable {
     let id: String
     
@@ -23,5 +24,13 @@ struct Appoint: Codable, Identifiable {
 }
 
 extension Appoint {
-    static var DUMMY_APM: Appoint = Appoint(id: UUID().uuidString, appointName: "더미 모임", menuName: "쿠차라 더미 부리또", pickedDate: Date(), placeName: "마포구 더미동", note: "꾸밈단계 더미단계", pickedFriends: ["test", "test2", "test3"])
+    static var DUMMY_APM: Appoint = Appoint(
+        id: UUID().uuidString,
+        appointName: "더미 모임",
+        menuName: "쿠차라 더미 부리또",
+        pickedDate: Date(),
+        placeName: "마포구 더미동",
+        note: "꾸밈단계 더미단계",
+        pickedFriends: ["test", "test2", "test3"]
+    )
 }
