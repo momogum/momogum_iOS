@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 약속잡기 메인 페이지
 struct AppointView: View {
 
     @State var stack: NavigationPath = NavigationPath()
@@ -15,40 +16,34 @@ struct AppointView: View {
     @State var newAppointViewModel = NewAppointViewModel()
     @State var viewModel = AppointViewModel()
     
-
-    
     var body: some View {
         NavigationStack (path: $path) {
             VStack (alignment: .leading) {
-                HStack {
-                    Text("로고")
-                        .frame(height: 80)
-                    Spacer()
-                }
-                
-                Divider()
-                
                 ScrollView {
                     VStack (alignment: .leading) {
-                        Text("약속 잡기")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.vertical)
-                        
                         HStack {
                             NavigationLink(value: "create1") {
                                 Rectangle()
-                                    .frame(width: 250, height: 150)
-                                    .tint(.gray.opacity(0.5))
+                                    .frame(width: 336, height: 146)
+                                    .tint(Color.white.opacity(1))
+                                    .overlay(RoundedRectangle(cornerRadius: 20)
+                                        .stroke(lineWidth: 3)
+                                        .tint(.gray.opacity(0.5)))
                                     .overlay {
-                                        VStack {
-                                            Text("식사약속 만들기")
+                                        VStack {                                            Image(systemName: "plus.circle.fill")
+                                                .resizable()
+                                                .frame(width: 35, height: 35)
+                                                .foregroundStyle(.gray.opacity(0.5))
+                                                .padding(.bottom, 16)
+
+                                            Text("식사 약속 만들기")
                                                 .foregroundStyle(.black)
-                                                .padding(.bottom)
-                                            Image(systemName: "plus")
-                                                .foregroundStyle(.black)
+                                                .font(.mmg(.subheader3))
+                                            
+                                            
                                         }
                                     }
+                                    .padding(.vertical, 30)
                             }
                             .navigationDestination(for: String.self) { value in
                                 if value == "create1" {
@@ -63,53 +58,54 @@ struct AppointView: View {
                                 } else if (value == "create4") {
                                     AppointCreate4View(path: $path)
                                         .environment(newAppointViewModel)
+                                } else {
+                                    AppointSentView(path: $path)
                                 }
                                 
                             }
                         }
                         .frame(maxWidth: .infinity)
                         
-                        
-                        
-                        Text("다가오는 식사 약속")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.vertical)
-                        
-                        ScrollView (.horizontal, showsIndicators: true) {
-                            HStack {
-                                ForEach(viewModel.appoints) { appoint in
-                                    NearAppointCellView(appoint: appoint)
+                        VStack (alignment: .leading) {
+                            Text("수락 대기 중인 약속")
+                                .font(.mmg(.subheader3))
+                            
+                            
+                            Text("당신의 결정을 기다리는 약속이 있어요!")
+                                .font(.mmg(.subheader4))
+                            
+                            ScrollView (.horizontal, showsIndicators: true) {
+                                HStack {
+                                    ForEach(viewModel.appoints) { appoint in
+                                        NearAppointCellView(appoint: appoint)
+                                    }
                                 }
                             }
-                        }
-                        
-                        
-                        Text("받은 초대장")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.vertical)
-                        
-                        ScrollView (.horizontal, showsIndicators: true) {
-                            HStack {
-                                ForEach(viewModel.appoints) { appoint in
-                                    NearAppointCellView(appoint: appoint)
+                            .ignoresSafeArea()
+                            .padding(.vertical, 20)
+                            
+                            Text("다가오는 식사 약속")
+                                .font(.mmg(.subheader3))
+                            
+                            ScrollView (.horizontal, showsIndicators: true) {
+                                HStack {
+                                    ForEach(viewModel.appoints) { appoint in
+                                        NearAppointCellView(appoint: appoint)
+                                    }
                                 }
                             }
+                            .padding(.vertical, 20)
                         }
+                        .padding(.leading, 30)
                     }
                     
                     
                 }
             }
-            .padding(.horizontal, 10)
             .refreshable {
-                print("refreshed")
                 await viewModel.loadAllAppoints()
-                print(viewModel.appoints.count)
             }
             .task {
-                print("task-refreshed")
                 await viewModel.loadAllAppoints()
                 
             }

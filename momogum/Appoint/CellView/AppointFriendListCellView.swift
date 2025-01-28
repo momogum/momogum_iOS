@@ -32,7 +32,6 @@ struct AppointFriendListCellView: View {
                     .padding(.trailing, 30)
             }
         }
-//        .border(.black)
     }
 }
 
