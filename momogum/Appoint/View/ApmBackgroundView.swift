@@ -10,21 +10,36 @@ import SwiftUI
 struct ApmBackgroundView<Content: View>: View {
     @Environment(\.dismiss) var dismiss
     @Environment(NewAppointViewModel.self) var appointViewModel
-    
     @Binding var path: [String]
-
-    let content: Content
     
-    init(@ViewBuilder content: () -> Content, path: Binding<[String]>) {
-        self.content = content()
+    let content: Content
+
+    init(path: Binding<[String]>, @ViewBuilder content: () -> Content) {
         self._path = path
+        self.content = content()
     }
     
     var body: some View {
         @Bindable var viewModel = appointViewModel
         
-        VStack {
+        ZStack {
             content
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(value: "create2") {
+                        Text("다음")
+                            .font(.mmg(.subheader3))
+                            .frame(width: 100, height: 50)
+                            .background(.Red_2)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(30)
+                    }
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("약속잡기")
@@ -36,6 +51,10 @@ struct ApmBackgroundView<Content: View>: View {
                     dismiss()
                 } label: {
                     Image("back")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(.leading, 5)
+                        .foregroundStyle(.black)
                 }
                 
             }
@@ -46,6 +65,10 @@ struct ApmBackgroundView<Content: View>: View {
                     path.removeLast(path.count)
                 } label: {
                     Image("close")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(.trailing, 5)
+                        .foregroundStyle(.black)
                 }
             }
         }
