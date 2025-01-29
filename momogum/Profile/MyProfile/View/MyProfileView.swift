@@ -56,15 +56,27 @@ struct MyProfileView: View {
                                 profileImage
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 88, height: 88)
+                                    .frame(width: 78, height: 78)
                                     .clipShape(Circle())
+                                    .padding(3)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(lineWidth: 4)
+                                            .foregroundStyle(Color.black_4)
+                                    )
                                     .padding(.trailing, 35)
                             } else {
                                 Image("defaultProfile")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 88, height: 88)
+                                    .frame(width: 78, height: 78)
                                     .clipShape(Circle())
+                                    .padding(3)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(lineWidth: 4)
+                                            .foregroundStyle(Color.black_4)
+                                    )
                                     .padding(.trailing, 35)
                             }
                             
@@ -77,9 +89,9 @@ struct MyProfileView: View {
                                         .fontWeight(.semibold)
                                     
                                     Text("\(viewModel.userBio)")
-                                        .frame(height: 12, alignment: .leading)
+                                        .font(.system(size: 13))
                                         .fontWeight(.semibold)
-                                        .foregroundStyle(.gray)
+                                        .foregroundStyle(Color.black_2)
                                 }
                                 .padding(.bottom, 16)
                                 
@@ -144,35 +156,53 @@ struct MyProfileView: View {
                     
                     // 내 게시물 / 저장 게시물 SegmentedControl
                     HStack {
-                        Image(systemName: "doc.text")
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(selectedSegment == 0 ? Color.black : .gray)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                selectedSegment = (selectedSegment == 1) ? 0 : selectedSegment
-                            }
+                        VStack(spacing: 0){
+                            Image(systemName: "doc.text")
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
+                                .cornerRadius(8)
+                                .onTapGesture {
+                                    selectedSegment = (selectedSegment == 1) ? 0 : selectedSegment
+                                }
+                                .padding(.bottom, 16)
+                            
+                            Rectangle()
+                                .frame(width: 166, height: 2)
+                                .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
+
+                        }
+                        .padding(.trailing, 10)
                         
-                        Image(systemName: "bookmark")
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(selectedSegment == 0 ? Color.gray : .black)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                selectedSegment = (selectedSegment == 0) ? 1 : selectedSegment
-                            }
+                        VStack(spacing: 0){
+                            Image(systemName: "bookmark")
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(selectedSegment == 0 ? Color.black_4 : .momogumRed)
+                                .cornerRadius(8)
+                                .onTapGesture {
+                                    selectedSegment = (selectedSegment == 0) ? 1 : selectedSegment
+                                }
+                                .padding(.bottom, 16)
+                            
+                            Rectangle()
+                                .frame(width: 166, height: 2)
+                                .foregroundStyle(selectedSegment == 0 ? Color.black_4 : .momogumRed)
+                        }
                     }
                     .padding(.bottom, 41)
+                    .padding(.horizontal, 10)
                     
                     // 게시물 Grid
                     ScrollView{
                         if selectedSegment == 0 {
-                            LazyVGrid(columns: columns, spacing: 16) {
+                            LazyVGrid(columns: columns, spacing: 20) {
                                 ForEach(0..<30, id: \.self) { index in
                                     Rectangle()
-                                        .frame(width: 160,height: 228)
+                                        .frame(width: 166,height: 241)
                                         .foregroundStyle(Color.gray)
+                                        .cornerRadius(8)
                                 }
                             }
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal, 20)
                         } else if selectedSegment == 1 {
                             Text("저장된 콘텐츠가 없습니다.")
                                 .padding()
@@ -215,4 +245,8 @@ struct MyProfileView: View {
             
         }
     }
+}
+
+#Preview {
+    MyProfileView()
 }

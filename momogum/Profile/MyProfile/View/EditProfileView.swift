@@ -51,12 +51,24 @@ struct EditProfileView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 88, height: 88)
                             .clipShape(Circle())
+                            .padding(3)
+                            .overlay(
+                                Circle()
+                                    .stroke(lineWidth: 4)
+                                    .foregroundStyle(Color.black_4)
+                            )
                     } else {
                         Image("defaultProfile")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 88, height: 88)
                             .clipShape(Circle())
+                            .padding(3)
+                            .overlay(
+                                Circle()
+                                    .stroke(lineWidth: 4)
+                                    .foregroundStyle(Color.black_4)
+                            )
                     }
                     
                     // 수정 버튼
@@ -153,4 +165,8 @@ struct EditProfileView: View {
             }
         }
     }
+}
+
+#Preview {
+    EditProfileView(viewModel: ProfileViewModel())
 }

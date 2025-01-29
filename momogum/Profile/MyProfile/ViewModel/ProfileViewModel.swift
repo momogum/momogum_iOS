@@ -14,14 +14,15 @@ class ProfileViewModel {
     var uiImage: UIImage?
     
     // 유저 정보 (확정)
-    var userName: String = "이름"
-    var userID: String = "유저 아이디"
-    var userBio: String = "한 줄 소개"
+    // 뷰 확인을 위해 초기값 설정함
+    var userName: String = "머머금"
+    var userID: String = "momogum._."
+    var userBio: String = "오늘은 또 뭘 먹을까!? 🍪"
     
     // 유저 정보 (임시)
-    var draftUserName: String = ""
-    var draftUserID: String = ""
-    var draftUserBio: String = ""
+    var draftUserName: String = "머머금"
+    var draftUserID: String = "momogum._."
+    var draftUserBio: String = "오늘은 또 뭘 먹을까!? 🍪"
     
     init() {
         profileImage = Image("defaultProfile")
