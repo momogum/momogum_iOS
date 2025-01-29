@@ -54,11 +54,11 @@ struct AppointSentView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button {
                     path.removeLast(path.count)
                 } label: {
-                    Image(systemName: "xmark")
+                    Image("cancle")
                         .tint(.black)
                 }
             }
