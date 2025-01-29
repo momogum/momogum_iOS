@@ -15,10 +15,36 @@ struct SignupStep2View: View {
     @FocusState private var isFocused: Bool
     @State private var lengthCheck: Bool = false
     @State private var hasAllowedCharactersOnly: Bool = false
-    
+    @State private var isDuplicated: Bool = false
+     private var isButtonEnabled: Bool {
+           return lengthCheck && hasAllowedCharactersOnly
+       }
+    @Binding var path: [String]
+
     //MARK: - View
     var body: some View {
+        HStack{
+                Button {
+                    path = []
+                }label:{
+                    Image(systemName: "xmark")
+                }
+                .foregroundStyle(Color.black)
+                .padding(.leading, 28)
+                .frame(width: 24, height: 24)
+                
+            Text("정보 입력")
+                .font(.system(size:20))
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity,alignment: .top)
+                .padding(.leading, 107)
+                .padding(.trailing,159)
+                .padding(.bottom,5)
+        }
         SignupBackgroundView{
+            
+              
+                
             VStack{
                 HStack(spacing: 3){
                     Text("STEP 2")
@@ -65,8 +91,8 @@ struct SignupStep2View: View {
                             Text("중복확인")
                         }
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color.signupDescriptionGray)
-                        .disabled(!isFocused)
+                        .foregroundStyle(isButtonEnabled ? Color.momogumRed : Color.signupDescriptionGray)
+                        .disabled(!isButtonEnabled)
                         .padding(.top,142)
                         .padding(.trailing,32)
                     }
@@ -109,6 +135,8 @@ struct SignupStep2View: View {
                         EmptyView() //maintap들어갈예정
                     }label: {
                         Text("완료")
+                            .disabled(!isButtonEnabled)
+                        //+백엔드 중복확인 api값
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .foregroundStyle(.gray)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -143,6 +171,8 @@ struct SignupStep2View: View {
         }
     }
 
+
+
 #Preview {
-    SignupStep2View()
+    SignupStep2View(path: .constant([]))
 }

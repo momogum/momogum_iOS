@@ -45,15 +45,22 @@ struct LoginView: View {
             }
             
             //회원가입뷰
-            NavigationLink{
-                SignupStep1View()
-            }label: {
+            NavigationLink(value: "SignupStep1View"){
+             
                 HStack(spacing: 0) {
                     Text("계정이 없으신가요? ")
                         .foregroundColor(.primary) // 기본 색상
                     Text("회원가입하기")
                         .foregroundColor(Color.momogumRed) // 강조된 색상
                         .fontWeight(.bold) // 굵게 설정
+                }
+                .navigationDestination(for: String.self) { value in
+                    if value == "SignupStep1View" {
+                        SignupStep1View(path: $path)
+                    }
+                    else if value == "SignupStep2View" {
+                        SignupStep2View(path: $path)
+                    }
                 }
                 .foregroundStyle(.black)
                 .background{
