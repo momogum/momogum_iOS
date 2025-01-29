@@ -15,19 +15,36 @@ struct AppointSentView: View {
     
     var body: some View {
         VStack {
+            Spacer()
+            
             Text("초대장 보내기 완료!")
+                .font(.mmg(.subheader2))
+                .padding(.bottom, 20)
             
             Rectangle()
                 .frame(width: 170, height: 120)
                 .foregroundStyle(.gray.opacity(0.2))
                 .padding()
             
+            Spacer()
+            
             Button {
                 isPresented = true
             } label: {
                 Text("보낸 초대장 확인하기")
+                    .font(.mmg(.subheader3))
+                    .frame(width: 280, height: 60)
+                    .background(.black_6)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(lineWidth: 1)
+                    }
+                    .foregroundStyle(.Red_2)
+
+                    
             }
 
+            Spacer()
         }
         .fullScreenCover(isPresented: $isPresented, content: {
             AppointCheckingView(appoint: Appoint.DUMMY_APM)

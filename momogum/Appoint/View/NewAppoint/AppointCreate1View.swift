@@ -49,6 +49,21 @@ struct AppointCreate1View: View {
                     }
                 }
             }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(value: "create2") {
+                        Text("다음")
+                            .font(.mmg(.subheader3))
+                            .frame(width: 100, height: 50)
+                            .background(.Red_2)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(30)
+                    }
+                }
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ struct AppointCreate2View: View {
             VStack {
                 Text("어울리는 식사 카드를 골라주세요")
                     .font(.mmg(.Body2))
+                    .padding(.top, 30)
                 
                 VStack {
                     Text("기본")
@@ -85,9 +86,25 @@ struct AppointCreate2View: View {
                                 .foregroundStyle(.gray.opacity(0.2))
                         }
                     }
+                    Spacer()
                 }
                 .padding(.leading, 20)
 
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(value: "create3") {
+                        Text("다음")
+                            .font(.mmg(.subheader3))
+                            .frame(width: 100, height: 50)
+                            .background(.Red_2)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(30)
+                    }
+                }
             }
         }
     }
