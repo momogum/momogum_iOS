@@ -207,17 +207,17 @@ struct MyProfileView: View {
                         if selectedSegment == 0 {
                             LazyVGrid(columns: columns, spacing: 20) {
                                 ForEach(0..<30, id: \.self) { index in
-                                    Rectangle()
-                                        .frame(width: 166,height: 241)
-                                        .foregroundStyle(Color.gray)
-                                        .cornerRadius(8)
+                                    CardPostCell(selectedSegment: $selectedSegment)
                                 }
                             }
                             .padding(.horizontal, 20)
                         } else if selectedSegment == 1 {
-                            Text("저장된 콘텐츠가 없습니다.")
-                                .padding()
-                                .foregroundStyle(.gray)
+                            LazyVGrid(columns: columns, spacing: 20) {
+                                ForEach(0..<30, id: \.self) { index in
+                                    CardPostCell(selectedSegment: $selectedSegment)
+                                }
+                            }
+                            .padding(.horizontal, 20)
                         }
                     }
                     
@@ -256,5 +256,8 @@ struct MyProfileView: View {
             
         }
     }
+}
+#Preview{
+    MyProfileView()
 }
 
