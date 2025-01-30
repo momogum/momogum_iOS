@@ -16,7 +16,6 @@ struct EditImageView: View {
             HStack(spacing : 0){
                 // back 버튼
                 Button{
-                    viewModel.resetUserData()
                     navigationPath.removeLast(1)
                 } label: {
                     Image("back")

@@ -80,6 +80,7 @@ struct GalleryProfileView: View {
             // 뒤로가기 버튼
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    viewModel.resetUserData()
                     navigationPath.removeLast(1)
                 } label: {
                     Image("close")
