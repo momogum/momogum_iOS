@@ -40,16 +40,16 @@ struct AppointSentView: View {
                             .stroke(lineWidth: 1)
                     }
                     .foregroundStyle(.Red_2)
-
-                    
+                
+                
             }
-
+            
             Spacer()
         }
-        .fullScreenCover(isPresented: $isPresented, content: {
+        .fullScreenCover(isPresented: $isPresented) {
             AppointCheckingView(appoint: Appoint.DUMMY_APM)
-
-        })
+        }
+        
         .padding(.horizontal)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
@@ -58,8 +58,11 @@ struct AppointSentView: View {
                 Button {
                     path.removeLast(path.count)
                 } label: {
-                    Image("cancle")
-                        .tint(.black)
+                    Image("close")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(.trailing, 5)
+                        .foregroundStyle(.black)
                 }
             }
         }

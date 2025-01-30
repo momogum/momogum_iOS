@@ -11,7 +11,7 @@ import SwiftUI
 struct AppointView: View {
     
     @State var stack: NavigationPath = NavigationPath()
-    
+    @State var isPresented: Bool = false
     @State var path: [String] = []
     @State var newAppointViewModel = NewAppointViewModel()
     @State var viewModel = AppointViewModel()
@@ -29,7 +29,8 @@ struct AppointView: View {
                                     .stroke(lineWidth: 3)
                                     .tint(.gray.opacity(0.5)))
                                 .overlay {
-                                    VStack {                                            Image(systemName: "plus.circle.fill")
+                                    VStack {
+                                        Image(systemName: "plus.circle.fill")
                                             .resizable()
                                             .frame(width: 35, height: 35)
                                             .foregroundStyle(.gray.opacity(0.5))
@@ -67,7 +68,7 @@ struct AppointView: View {
                         Text("수락 대기 중인 약속")
                             .font(.mmg(.subheader3))
                             .padding(.leading, 30)
-
+                        
                         
                         if (viewModel.appoints.isEmpty) {
                             
@@ -75,7 +76,7 @@ struct AppointView: View {
                             Text("당신의 결정을 기다리는 약속이 있어요!")
                                 .font(.mmg(.subheader4))
                                 .padding(.leading, 30)
-
+                            
                             
                             ScrollView (.horizontal, showsIndicators: true) {
                                 HStack {
@@ -83,7 +84,7 @@ struct AppointView: View {
                                         .frame(width: 30)
                                     
                                     ForEach(viewModel.appoints) { appoint in
-                                        NearAppointCellView(appoint: appoint)
+                                        NearAppointCellView(isPresented: $isPresented, appoint: appoint)
                                     }
                                 }
                             }
@@ -93,7 +94,7 @@ struct AppointView: View {
                         Text("다가오는 식사 약속")
                             .font(.mmg(.subheader3))
                             .padding(.leading, 30)
-
+                        
                         
                         ScrollView (.horizontal, showsIndicators: true) {
                             HStack {
@@ -101,7 +102,7 @@ struct AppointView: View {
                                     .frame(width: 30)
                                 
                                 ForEach(viewModel.appoints) { appoint in
-                                    WaitingConfirmCellView(appoint: appoint)
+                                    WaitingConfirmCellView(isPresented: $isPresented, appoint: appoint)
                                 }
                             }
                         }
@@ -114,6 +115,9 @@ struct AppointView: View {
             }
             .task {
                 await viewModel.loadAllAppoints()
+            }
+            .fullScreenCover(isPresented: $isPresented) {
+                AppointCheckingView(appoint: Appoint.DUMMY_APM)
             }
         }
     }

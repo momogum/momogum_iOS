@@ -21,9 +21,8 @@ struct AppointCreate1View: View {
         ApmBackgroundView(path: $path) {
             VStack {
                 Text("식사를 함께할 친구를 선택해주세요")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .padding(.vertical)
+                    .font(.mmg(.Body2))
+                    .padding(.vertical, 30)
                 
                 
                 ScrollView (.horizontal) {

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WaitingConfirmCellView: View {
+    @Binding var isPresented: Bool
+
     let appoint: Appoint
     
     let dateFormatter = {
@@ -51,8 +53,8 @@ struct WaitingConfirmCellView: View {
                     
                     Spacer()
                     
-                        NavigationLink {
-                            AppointCheckingView(appoint: appoint)
+                    Button {
+                        isPresented = true
                         } label: {
                             Text("약속 자세히 보기")
                                 .font(.mmg(.Caption1))
@@ -75,5 +77,5 @@ struct WaitingConfirmCellView: View {
 }
 
 #Preview {
-    WaitingConfirmCellView(appoint: Appoint.DUMMY_APM)
+    WaitingConfirmCellView(isPresented: .constant(false), appoint: Appoint.DUMMY_APM)
 }

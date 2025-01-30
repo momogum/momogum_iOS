@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NearAppointCellView: View {
+    @Binding var isPresented: Bool
+
     let appoint: Appoint
     
     let dateFormatter = {
@@ -42,8 +44,8 @@ struct NearAppointCellView: View {
                         .font(.mmg(.Body3))
                     
                     Spacer()
-                    NavigationLink {
-                        AppointCheckingView(appoint: appoint)
+                    Button {
+                        isPresented = true
                     } label: {
                         Text("초대장 열기")
                             .font(.mmg(.Caption1))
@@ -63,5 +65,5 @@ struct NearAppointCellView: View {
 }
 
 #Preview {
-    NearAppointCellView(appoint: Appoint.DUMMY_APM)
+    NearAppointCellView(isPresented: .constant(false), appoint: Appoint.DUMMY_APM)
 }

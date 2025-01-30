@@ -19,53 +19,63 @@ struct AppointCreate3View: View {
         ApmBackgroundView(path: $path) {
             ScrollView {
                 VStack (spacing: 20) {
-                    Text("식사 모임 이름을 알려주세요.")
-                        .font(.mmg(.subheader3))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack (spacing: 0) {
+                        Text("식사 모임 이름을 알려주세요.")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        TextField("ex. 더술 출발, 돈까스 먹방", text: $viewModel.appointName)
+                            .modifier(ApmTextFieldModifier())
+                    }
                     
-                    TextField("ex. 더술 출발, 돈까스 먹방", text: $viewModel.appointName)
-                        .modifier(ApmTextFieldModifier())
+                    VStack (spacing: 0) {
+                        Text("식사 메뉴를 알려주세요.")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        TextField("ex. 더술 닭한마리, 투파피 파스타", text: $viewModel.menuName)
+                            .modifier(ApmTextFieldModifier())
+                    }
                     
-                    Text("식사 메뉴를 알려주세요.")
-                        .font(.mmg(.subheader3))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack (spacing: 20) {
+                        Text("식사 일정을 알려주세요.")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        DatePicker("", selection: $viewModel.pickedDate)
+                            .frame(maxWidth: .infinity)
+                            .labelsHidden()
+                            .datePickerStyle(.wheel)
+                            .environment(\.locale, Locale(identifier: String(Locale.preferredLanguages[0])))
+                            .background(.black_5)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            
+                    }
+                    .padding(.bottom, 20)
                     
-                    TextField("ex. 더술 닭한마리, 투파피 파스타", text: $viewModel.menuName)
-                        .modifier(ApmTextFieldModifier())
-                    
-                    
-                    Text("식사 일정을 알려주세요.")
-                        .font(.mmg(.subheader3))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    DatePicker("", selection: $viewModel.pickedDate)
-                        .labelsHidden()
-                        .datePickerStyle(.wheel)
-                        .environment(\.locale, Locale(identifier: String(Locale.preferredLanguages[0])))
-                    
-                    
-                    Text("어디서 만날까요?")
-                        .font(.mmg(.subheader3))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    TextField("ex. 중앙동 다이소 앞, 학교 쪽문 앞", text: $viewModel.placeName)
-                        .modifier(ApmTextFieldModifier())
-                    
-                    
-                    
-                    Text("특별한 소식이 있나요?")
-                        .font(.mmg(.subheader3))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    TextField("ex. 꾸밈단계 2단계", text: $viewModel.note)
-                        .modifier(ApmTextFieldModifier())
-                        .padding(.bottom, 60)
-
+                    VStack (spacing: 0) {
+                        Text("어디서 만날까요?")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        TextField("ex. 중앙동 다이소 앞, 학교 쪽문 앞", text: $viewModel.placeName)
+                            .modifier(ApmTextFieldModifier())
+                    }
                     
                     
-                    Spacer()
+                    VStack (spacing: 0) {
+                        Text("특별한 소식이 있나요?")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        TextField("ex. 꾸밈단계 2단계", text: $viewModel.note)
+                            .modifier(ApmTextFieldModifier())
+                    }
+                    .padding(.bottom, 60)
+                    
                 }
                 .padding(.horizontal, 30)
+                .padding(.vertical, 50)
             }
             VStack {
                 Spacer()
