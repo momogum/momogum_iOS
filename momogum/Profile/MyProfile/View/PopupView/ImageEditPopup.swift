@@ -20,34 +20,32 @@ struct ImageEditPopup: View {
                 showPopup = false
             } label: {
                 Text("기본 이미지 사용")
-                    .font(.system(size: 20))
-                    .foregroundColor(.black)
-                    .fontWeight(.semibold)
+                    .font(.mmg(.subheader4))
+                    .foregroundColor(Color.black_2)
             }
-            .padding(.bottom, 15)
+            .padding(.bottom, 14)
             
-            Divider().frame(width: 188.5)
+            Divider().frame(width: 160)
             
             // 갤러리에서 선택
             Button {
                 navigationPath.append("Gallery")
             } label: {
                 Text("갤러리에서 선택")
-                    .font(.system(size: 20))
-                    .foregroundColor(.black)
-                    .fontWeight(.semibold)
+                    .font(.mmg(.subheader4))
+                    .foregroundColor(Color.black_2)
             }
-            .padding(.top, 15)
+            .padding(.top, 14)
             .simultaneousGesture(TapGesture().onEnded {
                 showPopup = false
             })
         }
-        .frame(width: 231, height: 146)
-        .background(Color.white)
+        .frame(width: 207, height: 127)
+        .background(Color.black_6)
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.gray, lineWidth: 1)
+                .stroke(Color.black_4, lineWidth: 1)
         )
     }
 }

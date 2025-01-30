@@ -192,7 +192,7 @@ struct EditProfileView: View {
                     }
                 
                 ImageEditPopup(viewModel: viewModel, navigationPath: $navigationPath, showPopup: $showPopup)
-                    .padding(.bottom, UIScreen.main.bounds.height <= 812 ? 200 : 150)
+                    .padding(.bottom, 200)
             }
         }
     }

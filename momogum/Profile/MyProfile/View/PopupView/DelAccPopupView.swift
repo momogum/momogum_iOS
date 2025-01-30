@@ -13,20 +13,18 @@ struct DelAccPopupView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text("정말 탈퇴하시겠습니까?")
-                .font(.system(size: 20))
-                .foregroundColor(.red)
-                .fontWeight(.semibold)
-                .padding(.top, 48)
-                .padding(.bottom, 29)
+                .font(.mmg(.subheader3))
+                .foregroundColor(Color.red)
+                .padding(.top, 43)
+                .padding(.bottom, 24)
             
             Text("삭제된 계정은 다시 복구할 수 없습니다.")
-                .font(.system(size: 16))
-                .foregroundColor(.gray)
-                .fontWeight(.semibold)
+                .font(.mmg(.subheader4))
+                .foregroundColor(Color.black_2)
             
-            Spacer().frame(width: 300, height: 47)
+            Spacer().frame(width: 300, height: 39)
             
-            Divider().frame(width: 269)
+            Divider().frame(width: 252)
             
             Spacer().frame(width: 300, height: 10)
             
@@ -36,9 +34,8 @@ struct DelAccPopupView: View {
                     showDelPopup = false
                 } label: {
                     Text("돌아가기")
-                        .font(.system(size: 20))
-                        .foregroundColor(.gray)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader3))
+                        .foregroundColor(Color.black_2)
                 }
                 .padding(.trailing, 36)
                 
@@ -50,19 +47,18 @@ struct DelAccPopupView: View {
                     showDelPopup = false
                 } label: {
                     Text("회원탈퇴")
-                        .font(.system(size: 20))
-                        .foregroundColor(.red)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader3))
+                        .foregroundColor(Color.red)
                 }
                 .padding(.leading, 36)
             }
         }
-        .frame(width: 310, height: 228)
-        .background(Color.white)
+        .frame(width: 304, height: 222)
+        .background(Color.black_6)
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.gray, lineWidth: 1)
+                .stroke(Color.black_4, lineWidth: 1)
         )
     }
 }
