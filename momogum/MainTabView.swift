@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MainTabVIew: View {
+struct MainTabView: View {
     @State var tabIndex = 0
     
     //     UITabView 색상 초기화
@@ -50,6 +50,6 @@ struct MainTabVIew: View {
 }
 
 #Preview {
-    MainTabVIew()
+    MainTabView()
 }
 
