@@ -13,6 +13,9 @@ class ProfileViewModel {
     var currentPreviewImage: Image? // 편집 중에 보여지는 미리보기 이미지
     var uiImage: UIImage?
     
+    // 기본 프로필 여부 체크
+    var isDefaultProfileImage: Bool = true
+    
     // 유저 정보 (확정)
     // 뷰 확인을 위해 초기값 설정함
     var userName: String = "머머금"
@@ -33,6 +36,7 @@ class ProfileViewModel {
     func convertPreviewImage(from uiImage: UIImage) {
         self.currentPreviewImage = Image(uiImage: uiImage)
         self.uiImage = uiImage
+        self.isDefaultProfileImage = false
     }
     
     // 확정 (완료 버튼 클릭 시 호출)
@@ -54,5 +58,6 @@ class ProfileViewModel {
     // 기본 이미지로 임시 설정
     func setDefaultImage() {
         currentPreviewImage = Image("defaultProfile")
+        self.isDefaultProfileImage = true
     }
 }
