@@ -6,10 +6,16 @@
 //
 
 import Foundation
-
+//Post
 
 @Observable
 class SignupViewModel {
     var username = ""
     var ID = ""
+    
+    func creatUser() async {
+         await AuthManager.shared.creatUser(username: username, ID: ID)
+        username = ""
+        ID = ""
+    }
 }

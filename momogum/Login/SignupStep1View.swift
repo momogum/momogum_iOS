@@ -17,14 +17,33 @@ struct SignupStep1View: View {
     @FocusState private var isFocused: Bool // TextField의 포커스 상태
     
     @State private var showError: Bool = false // 에러 메시지 표시 여부
-    
+    @Binding var path: [String]
     
     
     //MARK: - View
     var body: some View {
 //        @Bindable var signupViewModel = signupViewModel
-
+        HStack{
+            Button {
+                path = []
+            }label:{
+                Image(systemName: "xmark")
+            }
+            .foregroundStyle(Color.black)
+            .padding(.leading, 28)
+            .frame(width: 24, height: 24)
+            
+            Text("정보 입력")
+                .font(.system(size:20))
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity,alignment: .top)
+                .padding(.leading, 107)
+                .padding(.trailing,159)
+                .padding(.bottom,5)
+            
+        }
         SignupBackgroundView{
+            
             VStack{
 
                 
@@ -115,12 +134,15 @@ struct SignupStep1View: View {
                 }
                 Spacer()
 
-                NavigationLink{
-                    SignupStep2View()
-                }label: {
+                NavigationLink(value: "SignupStep2View"){
                     Text("다음")
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                .navigationDestination(for: String.self) { value in
+                    if value == "SignupStep2View" {
+                        SignupStep2View(path: $path)
+                    }
                 }
                 .padding(.trailing, 49)
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -130,16 +152,7 @@ struct SignupStep1View: View {
                 
             }
             .navigationBarBackButtonHidden()
-            .toolbar{
-                ToolbarItem(placement: .topBarLeading){
-                    Button{
-                        dismiss()
-                    } label:{
-                        Image(systemName:"xmark")
-                            .tint(Color.black)
-                    }
-                }
-            }
+
         }
     }
     // 입력 값 검증 함수
@@ -151,5 +164,5 @@ struct SignupStep1View: View {
 }
 
 #Preview {
-    SignupStep1View()
+    SignupStep1View(path: .constant([]))
 }
