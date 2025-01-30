@@ -13,14 +13,13 @@ struct MealCell: View {
 
     var body: some View {
         Text(category)
-            .font(.subheadline)
+            .font(.system(size: 14, weight: .medium))
             .foregroundColor(isSelected ? .white : .black)
-            .padding(.vertical, 10)
-            .padding(.horizontal, 20)
+            .frame(width: 60, height: 32)
             .background(isSelected ? Color.momogumRed : Color.placeholderGray3)
-            .cornerRadius(16)
+            .cornerRadius(8)
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.borderGray, lineWidth: 1)
             )
     }

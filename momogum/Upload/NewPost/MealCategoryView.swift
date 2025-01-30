@@ -15,8 +15,9 @@ struct MealCategoryView: View {
         VStack(alignment: .leading) {
             Text("식사 카테고리 선택")
                 .font(.headline)
-                .padding(.bottom, 8)
                 .padding(.leading, 16)
+
+            Spacer().frame(height: 28)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
