@@ -47,7 +47,7 @@ struct EditProfileView: View {
                     // 프로필 이미지
                     HStack(alignment: .bottom, spacing: 0) {
                         if let profileImage = viewModel.currentPreviewImage {
-                            profileImage
+                            Image(uiImage: profileImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 88, height: 88)
@@ -97,11 +97,14 @@ struct EditProfileView: View {
                                 .fontWeight(.semibold)
                             
                             TextField("이름을 입력하세요", text: $viewModel.draftUserName)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .frame(width: 298, height: 39)
+                                .frame(width: 328, height: 39)
+                            
+                            Rectangle()
+                                .frame(width: 328, height: 1)
+                                .foregroundStyle(.black_4)
                         }
                         .padding(.horizontal, 47)
-                        .padding(.bottom, 51)
+                        .padding(.bottom, 40)
                         
                         
                         // 아이디 수정
@@ -111,11 +114,14 @@ struct EditProfileView: View {
                                 .fontWeight(.semibold)
                             
                             TextField("아이디를 입력하세요", text: $viewModel.draftUserID)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .frame(width: 298, height: 39)
+                                .frame(width: 328, height: 39)
+                            
+                            Rectangle()
+                                .frame(width: 328, height: 1)
+                                .foregroundStyle(.black_4)
                         }
                         .padding(.horizontal, 47)
-                        .padding(.bottom, 51)
+                        .padding(.bottom, 40)
                         
                         
                         // 한 줄 소개 수정
@@ -123,13 +129,34 @@ struct EditProfileView: View {
                             Text("한 줄 소개")
                                 .font(.system(size: 16))
                                 .fontWeight(.semibold)
-                            
-                            TextField("소개를 입력하세요", text: $viewModel.draftUserBio)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .frame(width: 298, height: 39)
+                                .padding(.bottom, 31)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.black_5)
+                                    .frame(width: 320, height: 126)
+                                
+                                TextEditor(text: $viewModel.draftUserBio)
+                                    .scrollContentBackground(.hidden)
+                                    .padding(10)
+                                    .frame(width: 320, height: 126)
+                                    .background(Color.clear)
+                                
+                                if viewModel.draftUserBio.isEmpty {
+                                    Text("소개를 입력하세요")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(Color.black_3)
+                                        .padding(.trailing, 178)
+                                        .padding(.bottom, 70)
+                                }
+                            }
+                            .frame(width: 320, height: 126)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.black_4, lineWidth: 1)
+                            )
                         }
                         .padding(.horizontal, 47)
-                        .padding(.bottom, 101)
+                        .padding(.bottom, 25)
                         
                         // 완료버튼
                         HStack{
@@ -139,8 +166,9 @@ struct EditProfileView: View {
                                 dismiss()
                             } label : {
                                 Rectangle()
-                                    .frame(width: 93, height: 41)
-                                    .foregroundStyle(Color.gray)
+                                    .frame(width: 105, height: 52)
+                                    .foregroundStyle(Color.Red_2)
+                                    .cornerRadius(12)
                                     .overlay(
                                         Text("완료")
                                             .font(.system(size: 20))

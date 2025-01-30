@@ -16,13 +16,15 @@ struct GalleryProfileView: View {
     @State private var selectedImages: [UIImage] = []
     @State private var isPermissionGranted = false
     @State private var showPermissionAlert = false
+    @State private var itemWidth: CGFloat = 0
+    @State private var isNavigating = false
     
     let gridItems: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 4), count: 3)
     
     var body: some View {
         VStack {
             GeometryReader { geometry in
-                let itemWidth = calculateItemWidth(for: geometry.size.width)
+//                let itemWidth = calculateItemWidth(for: geometry.size.width)
                 
                 VStack(spacing: 0) {
                     if isPermissionGranted {
@@ -36,9 +38,14 @@ struct GalleryProfileView: View {
                                         .clipped()
                                         .onTapGesture {
                                             handleImageSelection(image)
-                                            dismiss()
+                                            isNavigating = true
                                         }
                                 }
+                                
+                                NavigationLink(destination: EditImageView(viewModel: viewModel), isActive: $isNavigating) {
+                                    EmptyView()
+                                }
+                                .hidden()
                             }
                             .padding(.horizontal, 25)
                             .padding(.vertical, 4)
@@ -50,7 +57,9 @@ struct GalleryProfileView: View {
                         EmptyView()
                     }
                 }
+                .toolbar(.hidden, for: .tabBar)
                 .onAppear {
+                    itemWidth = calculateItemWidth(for: geometry.size.width)
                     requestPhotoLibraryPermission()
                 }
                 .alert(isPresented: $showPermissionAlert) {
@@ -83,7 +92,7 @@ struct GalleryProfileView: View {
                 } label: {
                     Image("close")
                         .resizable()
-                        .frame(width: 18, height: 18)
+                        .frame(width: 20, height: 20)
                         .tint(.black)
                 }
             }

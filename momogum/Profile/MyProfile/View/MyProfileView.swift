@@ -46,14 +46,14 @@ struct MyProfileView: View {
                                     .frame(width: 24, height: 24)
                             }
                         }
-                        .padding(.horizontal, 31)
+                        .padding(.horizontal, 32)
                         .padding(.top, 23)
                         .padding(.bottom, 20)
                         
                         HStack(spacing: 0){
                             // 프로필 이미지
                             if let profileImage = viewModel.profileImage {
-                                profileImage
+                                Image(uiImage: profileImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 78, height: 78)

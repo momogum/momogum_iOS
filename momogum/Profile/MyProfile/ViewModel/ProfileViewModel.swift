@@ -9,8 +9,8 @@ import SwiftUI
 
 @Observable
 class ProfileViewModel {
-    var profileImage: Image? // 확정된 프로필 이미지
-    var currentPreviewImage: Image? // 편집 중에 보여지는 미리보기 이미지
+    var profileImage: UIImage? // 확정된 프로필 이미지
+    var currentPreviewImage: UIImage? // 편집 중에 보여지는 미리보기 이미지
     var uiImage: UIImage?
     
     // 기본 프로필 여부 체크
@@ -25,16 +25,16 @@ class ProfileViewModel {
     // 유저 정보 (임시)
     var draftUserName: String = "머머금"
     var draftUserID: String = "momogum._."
-    var draftUserBio: String = "오늘은 또 뭘 먹을까!? 🍪"
+    var draftUserBio: String = ""
     
     init() {
-        profileImage = Image("defaultProfile")
+        profileImage = UIImage(named: "defaultProfile")
         currentPreviewImage = profileImage
     }
     
     // 임시 프로필 이미지 변경
     func convertPreviewImage(from uiImage: UIImage) {
-        self.currentPreviewImage = Image(uiImage: uiImage)
+        self.currentPreviewImage = uiImage
         self.uiImage = uiImage
         self.isDefaultProfileImage = false
     }
@@ -57,7 +57,7 @@ class ProfileViewModel {
     
     // 기본 이미지로 임시 설정
     func setDefaultImage() {
-        currentPreviewImage = Image("defaultProfile")
+        currentPreviewImage = UIImage(named: "defaultProfile")
         self.isDefaultProfileImage = true
     }
 }
