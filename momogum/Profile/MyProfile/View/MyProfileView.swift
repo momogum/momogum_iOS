@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyProfileView: View {
+    @State private var navigationPath = NavigationPath()
     @State private var selectedSegment = 0
     @State private var showFollowList = 0
     @State private var isActive = false // 화면 전환 제어
@@ -22,7 +23,7 @@ struct MyProfileView: View {
     
     var body: some View {
         ZStack{
-            NavigationStack{
+            NavigationStack(path: $navigationPath){
                 VStack{
                     VStack{
                         HStack(alignment: .center){
@@ -136,9 +137,9 @@ struct MyProfileView: View {
                     }
                     
                     // 프로필 편집 버튼
-                    NavigationLink{
-                        EditProfileView(viewModel: viewModel)
-                    } label: {
+                    Button {
+                        navigationPath.append("Edit")
+                    }label: {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: 315, height: 36)
                             .foregroundStyle(Color(red: 235 / 255, green: 232 / 255, blue: 232 / 255))
@@ -152,6 +153,16 @@ struct MyProfileView: View {
                     }
                     .padding(.top, 45)
                     .padding(.bottom, 49)
+                    .navigationDestination(for: String.self) { value in
+                        if value == "Edit" {
+                            EditProfileView(navigationPath: $navigationPath, viewModel: viewModel)
+                        } else if value == "Gallery" {
+                            GalleryProfileView(navigationPath: $navigationPath, viewModel: viewModel)
+                        }
+                        else if value == "Image" {
+                            EditImageView(navigationPath: $navigationPath, viewModel: viewModel)
+                        }
+                    }
                     
                     
                     // 내 게시물 / 저장 게시물 SegmentedControl
@@ -169,7 +180,7 @@ struct MyProfileView: View {
                             Rectangle()
                                 .frame(width: 166, height: 2)
                                 .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
-
+                            
                         }
                         .padding(.trailing, 10)
                         
@@ -247,6 +258,3 @@ struct MyProfileView: View {
     }
 }
 
-#Preview {
-    MyProfileView()
-}

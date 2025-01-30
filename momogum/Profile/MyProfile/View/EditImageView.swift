@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditImageView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
     var body: some View {
@@ -16,18 +16,20 @@ struct EditImageView: View {
             HStack(spacing : 0){
                 // back 버튼
                 Button{
-                    dismiss()
+                    viewModel.resetUserData()
+                    navigationPath.removeLast(1)
                 } label: {
                     Image("back")
                         .resizable()
                         .frame(width: 24,height: 24)
                 }
-                .padding(.trailing, 281)
+                .padding(.trailing, 320)
                 
                 
                 // cancle 버튼
                 Button{
-                    dismiss()
+                    viewModel.resetUserData()
+                    navigationPath.removeLast(2)
                 } label: {
                     Image("close")
                         .resizable()
@@ -35,7 +37,6 @@ struct EditImageView: View {
                 }
             }
             .padding(.top, 68)
-            .padding(.horizontal, 32)
             .padding(.bottom, 136)
             
             if let uiImage = viewModel.currentPreviewImage {
@@ -55,7 +56,7 @@ struct EditImageView: View {
             HStack{
                 Spacer()
                 Button{
-                    dismiss()
+                    navigationPath.removeLast(2)
                 } label: {
                     Rectangle()
                         .frame(width: 105, height: 52)
@@ -78,7 +79,4 @@ struct EditImageView: View {
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden()
     }
-}
-#Preview {
-    EditImageView(viewModel: ProfileViewModel())
 }

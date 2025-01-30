@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImageEditPopup: View {
     @Bindable var viewModel: ProfileViewModel
+    @Binding var navigationPath: NavigationPath
     @Binding var showPopup: Bool
     
     var body: some View {
@@ -28,8 +29,8 @@ struct ImageEditPopup: View {
             Divider().frame(width: 188.5)
             
             // 갤러리에서 선택
-            NavigationLink {
-                GalleryProfileView(viewModel: viewModel)
+            Button {
+                navigationPath.append("Gallery")
             } label: {
                 Text("갤러리에서 선택")
                     .font(.system(size: 20))

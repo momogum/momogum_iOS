@@ -10,22 +10,19 @@ import SwiftUI
 import PhotosUI
 
 struct GalleryProfileView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
     @State private var selectedImages: [UIImage] = []
     @State private var isPermissionGranted = false
     @State private var showPermissionAlert = false
     @State private var itemWidth: CGFloat = 0
-    @State private var isNavigating = false
     
     let gridItems: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 4), count: 3)
     
     var body: some View {
         VStack {
             GeometryReader { geometry in
-//                let itemWidth = calculateItemWidth(for: geometry.size.width)
-                
                 VStack(spacing: 0) {
                     if isPermissionGranted {
                         ScrollView {
@@ -38,14 +35,9 @@ struct GalleryProfileView: View {
                                         .clipped()
                                         .onTapGesture {
                                             handleImageSelection(image)
-                                            isNavigating = true
+                                            navigationPath.append("Image")
                                         }
                                 }
-                                
-                                NavigationLink(destination: EditImageView(viewModel: viewModel), isActive: $isNavigating) {
-                                    EmptyView()
-                                }
-                                .hidden()
                             }
                             .padding(.horizontal, 25)
                             .padding(.vertical, 4)
@@ -88,13 +80,14 @@ struct GalleryProfileView: View {
             // 뒤로가기 버튼
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dismiss()
+                    navigationPath.removeLast(1)
                 } label: {
                     Image("close")
                         .resizable()
                         .frame(width: 20, height: 20)
                         .tint(.black)
                 }
+                .padding(.leading, 15)
             }
         }
     }
