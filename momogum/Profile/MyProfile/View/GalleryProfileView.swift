@@ -10,20 +10,19 @@ import SwiftUI
 import PhotosUI
 
 struct GalleryProfileView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
     @State private var selectedImages: [UIImage] = []
     @State private var isPermissionGranted = false
     @State private var showPermissionAlert = false
+    @State private var itemWidth: CGFloat = 0
     
     let gridItems: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 4), count: 3)
     
     var body: some View {
         VStack {
             GeometryReader { geometry in
-                let itemWidth = calculateItemWidth(for: geometry.size.width)
-                
                 VStack(spacing: 0) {
                     if isPermissionGranted {
                         ScrollView {
@@ -36,7 +35,7 @@ struct GalleryProfileView: View {
                                         .clipped()
                                         .onTapGesture {
                                             handleImageSelection(image)
-                                            dismiss()
+                                            navigationPath.append("Image")
                                         }
                                 }
                             }
@@ -50,7 +49,9 @@ struct GalleryProfileView: View {
                         EmptyView()
                     }
                 }
+                .toolbar(.hidden, for: .tabBar)
                 .onAppear {
+                    itemWidth = calculateItemWidth(for: geometry.size.width)
                     requestPhotoLibraryPermission()
                 }
                 .alert(isPresented: $showPermissionAlert) {
@@ -79,13 +80,15 @@ struct GalleryProfileView: View {
             // 뒤로가기 버튼
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    dismiss()
+                    viewModel.resetUserData()
+                    navigationPath.removeLast(1)
                 } label: {
                     Image("close")
                         .resizable()
-                        .frame(width: 18, height: 18)
+                        .frame(width: 20, height: 20)
                         .tint(.black)
                 }
+                .padding(.leading, 15)
             }
         }
     }
@@ -97,10 +100,7 @@ struct GalleryProfileView: View {
     
     private func handleImageSelection(_ image: UIImage) {
         Task {
-            viewModel.uiImage = image
-            viewModel.profileImage = Image(uiImage: image)
-            // convertImage 메서드 호출
-//            await viewModel.convertImage(item: image)
+            await viewModel.convertPreviewImage(from: image)
         }
     }
     

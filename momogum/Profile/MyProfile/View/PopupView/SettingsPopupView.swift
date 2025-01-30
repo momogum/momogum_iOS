@@ -21,12 +21,12 @@ struct SettingsPopupView: View {
                     showPopup = false
                 } label: {
                     Text("로그아웃")
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .foregroundColor(.black)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader4))
+                        .foregroundColor(Color.black_2)
                 }
+                .padding(.bottom, 15)
                 
-                Divider().frame(width: 152)
+                Divider().frame(width: 132)
                 
                 // 회원탈퇴
                 Button {
@@ -34,17 +34,17 @@ struct SettingsPopupView: View {
                     showPopup = false
                 } label: {
                     Text("회원탈퇴")
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .foregroundColor(.red)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader4))
+                        .foregroundColor(Color.red)
                 }
+                .padding(.top, 15)
             }
-            .frame(width: 201, height: 115)
-            .background(Color.white)
+            .frame(width: 159, height: 104)
+            .background(Color.black_6)
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray, lineWidth: 1)
+                    .stroke(Color.black_4, lineWidth: 1)
             )
         }
     }

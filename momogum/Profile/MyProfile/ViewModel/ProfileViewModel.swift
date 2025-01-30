@@ -6,39 +6,58 @@
 //
 
 import SwiftUI
-import PhotosUI
 
 @Observable
 class ProfileViewModel {
-    var selectedItem: PhotosPickerItem?
-    var profileImage: Image?
-    var previousProfileImage: Image?  // 이전 프로필 이미지 저장
+    var profileImage: UIImage? // 확정된 프로필 이미지
+    var currentPreviewImage: UIImage? // 편집 중에 보여지는 미리보기 이미지
     var uiImage: UIImage?
     
-    var userName: String?
-    var userID: String?
-    var userBio: String?
+    // 기본 프로필 여부 체크
+    var isDefaultProfileImage: Bool = true
     
-    // 이미지 변경 함수
-    func convertImage(item: PhotosPickerItem?) async {
-        guard let item = item else { return }
-        guard let data = try? await item.loadTransferable(type: Data.self) else { return }
-        guard let uiImage = UIImage(data: data) else { return }
-        
-        // 이미지를 변경할 때마다 previousProfileImage 갱신
-        previousProfileImage = profileImage
-        
-        // 프로필 이미지 변경
-        self.profileImage = Image(uiImage: uiImage)
-        self.uiImage = uiImage
+    // 유저 정보 (확정)
+    // 뷰 확인을 위해 초기값 설정함
+    var userName: String = "머머금"
+    var userID: String = "momogum._."
+    var userBio: String = "오늘은 또 뭘 먹을까!? 🍪"
+    
+    // 유저 정보 (임시)
+    var draftUserName: String = "머머금"
+    var draftUserID: String = "momogum._."
+    var draftUserBio: String = ""
+    
+    init() {
+        profileImage = UIImage(named: "defaultProfile")
+        currentPreviewImage = profileImage
     }
     
-    // 뒤로가기 버튼 클릭시 이전 이미지로 복원 (프로필 수정 취소)
-    func resetEditingProfileImage() {
-        if let previousImage = previousProfileImage {
-            self.profileImage = previousImage
-        } else {
-            self.profileImage = Image("defaultProfile")
-        }
+    // 임시 프로필 이미지 변경
+    func convertPreviewImage(from uiImage: UIImage) {
+        self.currentPreviewImage = uiImage
+        self.uiImage = uiImage
+        self.isDefaultProfileImage = false
+    }
+    
+    // 확정 (완료 버튼 클릭 시 호출)
+    func saveUserData() {
+        profileImage = currentPreviewImage
+        userName = draftUserName
+        userID = draftUserID
+        userBio = draftUserBio
+    }
+    
+    // 편집 취소 시 초기화
+    func resetUserData() {
+        currentPreviewImage = profileImage
+        draftUserName = userName
+        draftUserID = userID
+        draftUserBio = userBio
+    }
+    
+    // 기본 이미지로 임시 설정
+    func setDefaultImage() {
+        currentPreviewImage = UIImage(named: "defaultProfile")
+        self.isDefaultProfileImage = true
     }
 }

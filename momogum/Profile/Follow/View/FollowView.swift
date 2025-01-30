@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FollowView: View {
     @Environment(\.dismiss) var dismiss
+    @Bindable var viewModel: ProfileViewModel
     
     @Binding var selectedSegment: Int
     
@@ -58,7 +59,7 @@ struct FollowView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("내 유저아이디")
+                Text("\(viewModel.userID)")
                     .frame(height: 20)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)

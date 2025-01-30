@@ -14,16 +14,15 @@ struct LogoutPopupView: View {
         VStack(spacing: 0) {
             // 로그아웃
             Text("지금 로그아웃합니다")
-                .font(.system(size: 20))
-                .foregroundColor(.black)
-                .fontWeight(.semibold)
+                .font(.mmg(.subheader3))
+                .foregroundColor(Color.black_1)
                 .padding(.top, 58)
             
-            Spacer().frame(width: 300, height: 59)
+            Spacer().frame(width: 300, height: 54)
             
-            Divider().frame(width: 269)
+            Divider().frame(width: 252)
             
-            Spacer().frame(width: 300, height: 10)
+            Spacer().frame(width: 300, height: 8)
             
             HStack(alignment: .center, spacing: 0){
                 // 돌아가기
@@ -31,9 +30,8 @@ struct LogoutPopupView: View {
                     showLogoutPopup = false
                 } label: {
                     Text("돌아가기")
-                        .font(.system(size: 20))
-                        .foregroundColor(.gray)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader3))
+                        .foregroundColor(Color.black_2)
                 }
                 .padding(.trailing, 36)
                 
@@ -45,19 +43,18 @@ struct LogoutPopupView: View {
                     showLogoutPopup = false
                 } label: {
                     Text("로그아웃")
-                        .font(.system(size: 20))
-                        .foregroundColor(.red)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader3))
+                        .foregroundColor(Color.red)
                 }
                 .padding(.leading, 36)
             }
         }
-        .frame(width: 310, height: 228)
-        .background(Color.white)
+        .frame(width: 304, height: 222)
+        .background(Color.black_6)
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.gray, lineWidth: 1)
+                .stroke(Color.black_4, lineWidth: 1)
         )
     }
 }
