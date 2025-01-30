@@ -15,6 +15,7 @@ class NewAppointViewModel {
     var placeName: String = ""
     var note: String = ""
     var pickedFriends: [String] = ["친구1", "친구2", "친구3", "친구4"]
+    var pickedImage: String = "default image"
     
     
     
@@ -25,6 +26,7 @@ class NewAppointViewModel {
         placeName = ""
         note = ""
         pickedFriends = []
+        pickedImage = "default image"
     }
     
     func resetAppoint() {
@@ -34,5 +36,6 @@ class NewAppointViewModel {
         placeName = ""
         note = ""
         pickedFriends = []
+        pickedImage = "default image"
     }
 }

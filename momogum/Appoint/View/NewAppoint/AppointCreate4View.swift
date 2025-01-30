@@ -14,182 +14,183 @@ struct AppointCreate4View: View {
     
     @Binding var path: [String]
     
+    let dateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 M월 d일 HH:mm"
+        formatter.locale = Locale(identifier: "ko-KR")
+        return formatter
+    }
+    
     var body: some View {
         @Bindable var viewModel = appointViewModel
         
-        VStack {
-            ZStack {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundStyle(.gray)
-                    .overlay {
-                        Circle()
-                            .stroke(style: StrokeStyle(lineWidth: 2))
-                            .foregroundStyle(.black)
-                    }
-                    .offset(x: -60, y: 0)
-                
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundStyle(.gray)
-                    .overlay {
-                        Circle()
-                            .stroke(style: StrokeStyle(lineWidth: 2))
-                            .foregroundStyle(.black)
-                    }
-                    .offset(x: -30, y: 0)
-                
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundStyle(.gray)
-                    .overlay {
-                        Circle()
-                            .stroke(style: StrokeStyle(lineWidth: 2))
-                            .foregroundStyle(.black)
-                    }
-                    .offset(x: 0, y: 0)
-                
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundStyle(.gray)
-                    .overlay {
-                        Circle()
-                            .stroke(style: StrokeStyle(lineWidth: 2))
-                            .foregroundStyle(.black)
-                    }
-                    .offset(x: 30, y: 0)
-                
-                Image(systemName: "plus.circle")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .background(.gray)
-                    .foregroundStyle(.white)
-                    .clipShape(Circle())
-                    .overlay {
-                        Circle()
-                            .stroke(style: StrokeStyle(lineWidth: 2))
-                            .foregroundStyle(.black)
-                    }
-                    .offset(x: 60, y: 0)
-            }
-            .padding(.bottom)
-            
-            Rectangle()
-                .frame(width: 170, height: 120)
-                .foregroundStyle(.gray.opacity(0.2))
-                .padding()
-            
-            TextField(viewModel.appointName, text: $viewModel.appointName)
-                .padding(.leading)
-                .frame(width: 180, height: 30)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(style: StrokeStyle(lineWidth: 1))
-                }
-                
-            
-            
+        ScrollView {
             VStack {
-                Spacer()
-                
-                Text("식사 메뉴")
-                    .font(.headline)
-                    .foregroundStyle(.black.opacity(0.7))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                ZStack {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(.gray)
+                        .overlay {
+                            Circle()
+                                .stroke(style: StrokeStyle(lineWidth: 2))
+                                .foregroundStyle(.black)
+                        }
+                        .offset(x: -60, y: 0)
                     
-                
-                Text(viewModel.menuName)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 5)
-                
-                Spacer()
-                
-                Text("식사 일정")
-                    .font(.headline)
-                    .foregroundStyle(.black.opacity(0.7))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text("\(viewModel.pickedDate)")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 5)
-                
-                Spacer()
-
-                
-                Text("만나는 장소")
-                    .font(.headline)
-                    .foregroundStyle(.black.opacity(0.7))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text(viewModel.placeName)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 5)
-                
-                Spacer()
-
-                
-                Text("추가 메모")
-                    .font(.headline)
-                    .foregroundStyle(.black.opacity(0.7))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text(viewModel.note)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 5)
-                
-                Spacer()
-
-                
-            }
-            .padding(.horizontal, 30)
-            
-            Button {
-                viewModel.createAppoint()
-                print("button pressed")
-                path.append("Sent")
-            } label: {
-                Text("초대장 보내기")
-                    .fontWeight(.bold)
-                    .frame(width: 270, height: 40)
-                    .background(.black.opacity(0.7))
-                    .foregroundStyle(.white)
-                    .clipShape(Rectangle())
-            }
-        }
-        .padding(.horizontal)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("약속잡기")
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .tint(.black)
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(.gray)
+                        .overlay {
+                            Circle()
+                                .stroke(style: StrokeStyle(lineWidth: 2))
+                                .foregroundStyle(.black)
+                        }
+                        .offset(x: -30, y: 0)
+                    
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(.gray)
+                        .overlay {
+                            Circle()
+                                .stroke(style: StrokeStyle(lineWidth: 2))
+                                .foregroundStyle(.black)
+                        }
+                        .offset(x: 0, y: 0)
+                    
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundStyle(.gray)
+                        .overlay {
+                            Circle()
+                                .stroke(style: StrokeStyle(lineWidth: 2))
+                                .foregroundStyle(.black)
+                        }
+                        .offset(x: 30, y: 0)
+                    
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .background(.gray)
+                        .foregroundStyle(.white)
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle()
+                                .stroke(style: StrokeStyle(lineWidth: 2))
+                                .foregroundStyle(.black)
+                        }
+                        .offset(x: 60, y: 0)
                 }
                 
+                Rectangle()
+                    .frame(width: 170, height: 120)
+                    .foregroundStyle(.gray.opacity(0.2))
+                    .padding(.vertical, 30)
+                
+                
+                
+                VStack (spacing: 0) {
+                    Text("식사 모임명")
+                        .font(.mmg(.Body3))
+                        .foregroundStyle(.black_2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    ApmEditingTextFieldView(target: $viewModel.appointName)
+                    
+                    Text("식사 메뉴")
+                        .font(.mmg(.Body3))
+                        .foregroundStyle(.black_2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    
+                    ApmEditingTextFieldView(target: $viewModel.menuName)
+                    
+                    Text("식사 일정")
+                        .font(.mmg(.Body3))
+                        .foregroundStyle(.black_2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    ZStack {
+                        Text("\(viewModel.pickedDate, formatter: dateFormatter())")
+                            .modifier(ApmTextFieldModifier())
+                        HStack {
+                            Spacer()
+                            Button {
+                                print()
+                            } label: {
+                                Image("pencil")
+                                    .resizable()
+                                    .frame(width: 16, height: 16)
+                            }
+                            .padding(.trailing, 10)
+                        }
+
+                        
+                    }
+                    
+                    
+                    Text("만나는 장소")
+                        .font(.mmg(.Body3))
+                        .foregroundStyle(.black_2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    ApmEditingTextFieldView(target: $viewModel.placeName)
+                    
+                    Text("추가 메모")
+                        .font(.mmg(.Body3))
+                        .foregroundStyle(.black_2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    ApmEditingTextFieldView(target: $viewModel.note)
+                    
+                    Button {
+                        viewModel.createAppoint()
+                        path.append("Sent")
+                    } label: {
+                        Text("초대장 보내기")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 60)
+                            .background(.Red_2)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 24))
+                    }
+                    .padding(.vertical, 20)
+                }
+                .padding(.horizontal, 30)
             }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    viewModel.resetAppoint()
-                    path.removeLast(path.count)
-                } label: {
-                    Image(systemName: "xmark")
-                        .tint(.black)
+            .padding(.horizontal)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("약속잡기")
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("back")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(.leading, 5)
+                            .foregroundStyle(.black)
+                    }
+                    
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.resetAppoint()
+                        path.removeLast(path.count)
+                    } label: {
+                        Image("close")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(.leading, 5)
+                            .foregroundStyle(.black)
+                    }
                 }
             }
         }
