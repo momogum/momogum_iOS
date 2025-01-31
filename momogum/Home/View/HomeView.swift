@@ -29,7 +29,7 @@ struct HomeView: View {
                     Image("LoGo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 106, height: 37)
+                        .frame(width: 107, height: 37)
                         .clipped() // 이미지 외부 영역 제거
                         .padding(.leading, 20)
                         .padding(.top, 20)
@@ -62,6 +62,7 @@ struct HomeView: View {
                 
                 Spacer()
                     .frame(height: 40)
+                
                 // Story
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
@@ -70,11 +71,11 @@ struct HomeView: View {
                                 Circle()
                                     .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255)) // #CFCFCF 색상
                                     .cornerRadius(10)
-                                    .frame(width: 88, height: 88)
+                                    .frame(width: 80, height: 80)
                             }
                             Text("내 스토리")
                                 .bold()
-                                .font(.system(size: 10))
+                                .font(.mmg(.Caption2))
                         }
                         .padding(.leading, 24)
                     }
@@ -84,7 +85,7 @@ struct HomeView: View {
                 HStack {
                     Text("다양한 밥일기 \n둘려보기")
                         .bold()
-                        .font(.system(size: 24))
+                        .font(.mmg(.subheader1))
                         .padding(.leading, 24) // 텍스트 왼쪽에 20pt 여백 추가
                     Spacer()
                 }
@@ -97,6 +98,7 @@ struct HomeView: View {
                                 selectedButtonIndex = index // 선택된 버튼 인덱스 업데이트
                             }) {
                                 Text(buttonLabel(for: index))
+                                    .font(.mmg(.subheader4))
                                     .padding(.horizontal, 16)
                                     .frame(height: 32) // 높이는 고정
                                     .fixedSize(horizontal: true, vertical: false) // 텍스트 길이에 맞춰 너비 자동 조정
@@ -136,7 +138,7 @@ struct HomeView: View {
                                                     .frame(width: 36, height: 36)
                                                 
                                                 Text("식사메뉴")
-                                                    .font(.system(size: 14, weight: .bold))
+                                                    .font(.mmg(.Caption1))
                                                     .foregroundColor(.black)
                                                 
                                                 Spacer() // 남은 공간 채우기
