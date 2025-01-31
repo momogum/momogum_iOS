@@ -39,18 +39,10 @@ struct Story2View: View {
                 Spacer()
             }
         }
-        .frame(maxHeight: .infinity, alignment: .top) // 화면 위쪽으로 정렬
+        Spacer()
+        //.frame(maxHeight: .infinity, alignment: .top) // 화면 위쪽으로 정렬
         .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss() // 뒤로가기 동작
-                }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                }
-            }
-        }
+
     }
 }
 
