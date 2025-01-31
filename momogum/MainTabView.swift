@@ -8,8 +8,9 @@
 
 import SwiftUI
 
-struct MainTabVIew: View {
+struct MainTabView: View {
     @State var tabIndex = 0
+    @State private var uploadViewID = UUID()
     
     //     UITabView 색상 초기화
     init() {
@@ -24,7 +25,8 @@ struct MainTabVIew: View {
                     Text("홈")
                 }
                 .tag(0)
-            GalleryPickerView()
+            GalleryPickerView(tabIndex: $tabIndex)
+                .id(uploadViewID)
                 .tabItem{
                     Image(systemName: "plus")
                     Text("업로드")
@@ -45,11 +47,16 @@ struct MainTabVIew: View {
             
         }
         .tint(Color(UIColor(red: 224/255, green: 90/255, blue: 85/255, alpha: 1.0)))
-
+        
+        .onChange(of: tabIndex) { newTab in
+                    if newTab == 1 {
+                        uploadViewID = UUID()
+                    }
+                }
     }
 }
 
 #Preview {
-    MainTabVIew()
+    MainTabView()
 }
 

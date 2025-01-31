@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct MyProfileView: View {
+    @State private var navigationPath = NavigationPath()
     @State private var selectedSegment = 0
     @State private var showFollowList = 0
     @State private var isActive = false // 화면 전환 제어
+    // 팝업창 제어
     @State private var showPopup = false
     @State private var showLogoutPopup = false
     @State private var showDelPopup = false
@@ -21,7 +23,7 @@ struct MyProfileView: View {
     
     var body: some View {
         ZStack{
-            NavigationStack{
+            NavigationStack(path: $navigationPath){
                 VStack{
                     VStack{
                         HStack(alignment: .center){
@@ -30,7 +32,7 @@ struct MyProfileView: View {
                             Spacer().frame(width: 24, height: 24)
                             
                             // 내 유저 아이디
-                            Text("내 유저 아이디")
+                            Text("\(viewModel.userID)")
                                 .frame(height: 20)
                                 .fontWeight(.semibold)
                             
@@ -45,25 +47,37 @@ struct MyProfileView: View {
                                     .frame(width: 24, height: 24)
                             }
                         }
-                        .padding(.horizontal, 31)
+                        .padding(.horizontal, 32)
                         .padding(.top, 23)
                         .padding(.bottom, 20)
                         
                         HStack(spacing: 0){
                             // 프로필 이미지
                             if let profileImage = viewModel.profileImage {
-                                profileImage
+                                Image(uiImage: profileImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 88, height: 88)
+                                    .frame(width: 78, height: 78)
                                     .clipShape(Circle())
+                                    .padding(3)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(lineWidth: 4)
+                                            .foregroundStyle(Color.black_4)
+                                    )
                                     .padding(.trailing, 35)
                             } else {
                                 Image("defaultProfile")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 88, height: 88)
+                                    .frame(width: 78, height: 78)
                                     .clipShape(Circle())
+                                    .padding(3)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(lineWidth: 4)
+                                            .foregroundStyle(Color.black_4)
+                                    )
                                     .padding(.trailing, 35)
                             }
                             
@@ -71,14 +85,14 @@ struct MyProfileView: View {
                             VStack(alignment: .leading){
                                 VStack(alignment: .leading){
                                     // 이름
-                                    Text("이름")
+                                    Text("\(viewModel.userName)")
                                         .frame(height: 16, alignment: .leading)
                                         .fontWeight(.semibold)
                                     
-                                    Text("한 줄 소개")
-                                        .frame(height: 12, alignment: .leading)
+                                    Text("\(viewModel.userBio)")
+                                        .font(.system(size: 13))
                                         .fontWeight(.semibold)
-                                        .foregroundStyle(.gray)
+                                        .foregroundStyle(Color.black_2)
                                 }
                                 .padding(.bottom, 16)
                                 
@@ -108,7 +122,7 @@ struct MyProfileView: View {
                                     
                                     Spacer()
                                     
-                                    NavigationLink(destination: FollowView(selectedSegment: $showFollowList), isActive: $isActive) {
+                                    NavigationLink(destination: FollowView(viewModel: viewModel, selectedSegment: $showFollowList), isActive: $isActive) {
                                         EmptyView()
                                     }
                                     
@@ -123,9 +137,9 @@ struct MyProfileView: View {
                     }
                     
                     // 프로필 편집 버튼
-                    NavigationLink{
-                        EditProfileView(viewModel: viewModel)
-                    } label: {
+                    Button {
+                        navigationPath.append("Edit")
+                    }label: {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: 315, height: 36)
                             .foregroundStyle(Color(red: 235 / 255, green: 232 / 255, blue: 232 / 255))
@@ -139,43 +153,71 @@ struct MyProfileView: View {
                     }
                     .padding(.top, 45)
                     .padding(.bottom, 49)
+                    .navigationDestination(for: String.self) { value in
+                        if value == "Edit" {
+                            EditProfileView(navigationPath: $navigationPath, viewModel: viewModel)
+                        } else if value == "Gallery" {
+                            GalleryProfileView(navigationPath: $navigationPath, viewModel: viewModel)
+                        }
+                        else if value == "Image" {
+                            EditImageView(navigationPath: $navigationPath, viewModel: viewModel)
+                        }
+                    }
                     
                     
                     // 내 게시물 / 저장 게시물 SegmentedControl
                     HStack {
-                        Image(systemName: "doc.text")
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(selectedSegment == 0 ? Color.black : .gray)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                selectedSegment = (selectedSegment == 1) ? 0 : selectedSegment
-                            }
+                        VStack(spacing: 0){
+                            Image(systemName: "doc.text")
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
+                                .cornerRadius(8)
+                                .onTapGesture {
+                                    selectedSegment = (selectedSegment == 1) ? 0 : selectedSegment
+                                }
+                                .padding(.bottom, 16)
+                            
+                            Rectangle()
+                                .frame(width: 166, height: 2)
+                                .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
+                            
+                        }
+                        .padding(.trailing, 10)
                         
-                        Image(systemName: "bookmark")
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(selectedSegment == 0 ? Color.gray : .black)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                selectedSegment = (selectedSegment == 0) ? 1 : selectedSegment
-                            }
+                        VStack(spacing: 0){
+                            Image(systemName: "bookmark")
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(selectedSegment == 0 ? Color.black_4 : .momogumRed)
+                                .cornerRadius(8)
+                                .onTapGesture {
+                                    selectedSegment = (selectedSegment == 0) ? 1 : selectedSegment
+                                }
+                                .padding(.bottom, 16)
+                            
+                            Rectangle()
+                                .frame(width: 166, height: 2)
+                                .foregroundStyle(selectedSegment == 0 ? Color.black_4 : .momogumRed)
+                        }
                     }
                     .padding(.bottom, 41)
+                    .padding(.horizontal, 10)
                     
                     // 게시물 Grid
                     ScrollView{
                         if selectedSegment == 0 {
-                            LazyVGrid(columns: columns, spacing: 16) {
+                            LazyVGrid(columns: columns, spacing: 20) {
                                 ForEach(0..<30, id: \.self) { index in
-                                    Rectangle()
-                                        .frame(width: 160,height: 228)
-                                        .foregroundStyle(Color.gray)
+                                    CardPostCell(selectedSegment: $selectedSegment)
                                 }
                             }
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal, 20)
                         } else if selectedSegment == 1 {
-                            Text("저장된 콘텐츠가 없습니다.")
-                                .padding()
-                                .foregroundStyle(.gray)
+                            LazyVGrid(columns: columns, spacing: 20) {
+                                ForEach(0..<30, id: \.self) { index in
+                                    CardPostCell(selectedSegment: $selectedSegment)
+                                }
+                            }
+                            .padding(.horizontal, 20)
                         }
                     }
                     
@@ -194,7 +236,7 @@ struct MyProfileView: View {
                 
                 SettingsPopupView(showPopup: $showPopup, showLogoutPopup: $showLogoutPopup, showDelPopup: $showDelPopup)
                     .padding(.bottom, UIScreen.main.bounds.height <= 812 ? 450 : 505)
-                    .padding(.leading, UIScreen.main.bounds.height <= 812 ? 105 : 155)
+                    .padding(.leading, UIScreen.main.bounds.height <= 812 ? 180 : 195)
                     .padding(.trailing, 37)
             } else if showLogoutPopup {
                 Color.black.opacity(0.001)
@@ -215,3 +257,7 @@ struct MyProfileView: View {
         }
     }
 }
+#Preview{
+    MyProfileView()
+}
+

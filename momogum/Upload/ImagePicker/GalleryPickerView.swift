@@ -4,13 +4,13 @@
 //
 //  Created by 조승연 on 1/17/25.
 //
+
 import SwiftUI
-import PhotosUI
 
 struct GalleryPickerView: View {
-    @State private var selectedImages: [UIImage] = []
-    @State private var isPermissionGranted = false
-    @State private var showPermissionAlert = false
+    @StateObject private var viewModel = GalleryPickerViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var tabIndex: Int
 
     var body: some View {
         NavigationView {
@@ -23,11 +23,15 @@ struct GalleryPickerView: View {
                 let gridItemSize = (geometry.size.width - 48) / 3
 
                 ZStack(alignment: .top) {
-                    if isPermissionGranted {
+                    if viewModel.isPermissionGranted {
                         ScrollView {
                             LazyVGrid(columns: gridItems, spacing: 8) {
-                                ForEach(selectedImages, id: \.self) { image in
-                                    NavigationLink(destination: ImageEditorView(image: image)) {
+                                ForEach(viewModel.images, id: \UIImage.hash) { image in
+                                    NavigationLink(
+                                        destination: ImageEditorView(image: image, tabIndex: $tabIndex)
+                                            .navigationBarBackButtonHidden(true)
+                                            .navigationBarHidden(true)
+                                    ) {
                                         Image(uiImage: image)
                                             .resizable()
                                             .scaledToFill()
@@ -46,25 +50,36 @@ struct GalleryPickerView: View {
                     }
 
                     VStack {
-                        ZStack {
+                        HStack {
+                            Button(action: {
+                                tabIndex = 0
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .foregroundColor(.black)
+                                    .font(.title2)
+                            }
+                            .frame(width: 44, height: 44)
+
                             Text("사진 선택")
                                 .font(.headline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
+                                .padding(.leading, -50)
+                                .frame(maxWidth: .infinity, alignment: .center)
 
-                            HStack {
-                                Spacer()
-                            }
-                            .padding(.horizontal, 16)
+                            Spacer()
                         }
+                        .padding(.horizontal, 16)
                         .frame(height: 60)
                         .background(Color.white)
+
+                        Spacer()
                     }
                 }
                 .onAppear {
-                    requestPhotoLibraryPermission()
+                    viewModel.requestPhotoLibraryPermission()
                 }
-                .alert(isPresented: $showPermissionAlert) {
+                .alert(isPresented: $viewModel.showPermissionAlert) {
                     Alert(
                         title: Text("권한 필요"),
                         message: Text("사진 라이브러리에 접근하려면 권한이 필요합니다."),
@@ -78,53 +93,12 @@ struct GalleryPickerView: View {
                 }
             }
         }
-    }
-
-    private func requestPhotoLibraryPermission() {
-        PHPhotoLibrary.requestAuthorization { status in
-            DispatchQueue.main.async {
-                switch status {
-                case .authorized, .limited:
-                    isPermissionGranted = true
-                    fetchPhotos()
-                case .denied, .restricted:
-                    isPermissionGranted = false
-                    showPermissionAlert = true
-                default:
-                    break
-                }
-            }
-        }
-    }
-
-    private func fetchPhotos() {
-        guard isPermissionGranted else { return }
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-
-        fetchResult.enumerateObjects { asset, _, _ in
-            let imageManager = PHImageManager.default()
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            options.deliveryMode = .highQualityFormat
-
-            imageManager.requestImage(
-                for: asset,
-                targetSize: CGSize(width: 200, height: 200),
-                contentMode: .aspectFill,
-                options: options
-            ) { image, _ in
-                if let image = image {
-                    DispatchQueue.main.async {
-                        selectedImages.append(image)
-                    }
-                }
-            }
-        }
+        .toolbar(.hidden, for: .tabBar)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    GalleryPickerView() // 수정: 기본값 전달
+    GalleryPickerView(tabIndex: .constant(0))
 }
