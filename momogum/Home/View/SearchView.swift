@@ -20,25 +20,31 @@ struct SearchView: View {
                     // 텍스트 필드 왼쪽의 검색 아이콘
                     if !isEditing {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
+                            .frame(width: 48, height: 48)
+                            .foregroundColor(.black)
                             .padding(.leading, 8)
                     }
                     
                     // 텍스트 필드
                     TextField("계정 및 키워드 검색", text: $searchQuery, onEditingChanged: { editing in
-                        isEditing = editing // 편집 상태 업데이트
+                        withAnimation {
+                            isEditing = editing // 편집 상태 업데이트 (애니메이션 효과 추가)
+                        }
                     })
+                    .font(.mmg(.subheader4))
                     .foregroundColor(.primary)
                     .padding(8)
                     
-                    // 텍스트 필드 오른쪽 끝에 표시할 'close_cc' 이미지
+                    // 텍스트 필드 오른쪽 끝에 'close_cc' 버튼
                     if isEditing {
                         Button(action: {
-                            searchQuery = "" // 입력 초기화
-                            isEditing = false // 편집 상태 종료
+                            withAnimation {
+                                searchQuery = "" // 입력 초기화
+                                isEditing = false // 편집 상태 종료
+                            }
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // 키보드 닫기
                         }) {
-                            Image("close_cc") // 커스텀 이미지
+                            Image("close_cc")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 48, height: 48)
@@ -53,57 +59,61 @@ struct SearchView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 24)
                 
-                // 텍스트 필드 하단에 회색 구분선 추가
-                Divider()
-                    .background(Color.gray)
-                    .padding(.top, 20)
-                
-                // 버튼들 (계정, 키워드)
-                HStack(spacing: 48) { // 버튼 간격 설정
-                    Button(action: {
-                        selectedButton = "계정"
-                    }) {
-                        VStack {
-                            Text("계정")
-                                .fontWeight(selectedButton == "계정" ? .bold : .regular)
-                                .foregroundColor(selectedButton == "계정" ? .black : .gray)
-                                .frame(width: 140, height: 48) // 버튼 크기 설정
+                // 사용자가 입력 중일 때만 보이도록 설정
+                if isEditing {
+                    VStack {
+                        Divider()
+                            .background(Color.gray)
+                            .padding(.top, 20)
+                        
+                        HStack(spacing: 48) {
+                            Button(action: {
+                                selectedButton = "계정"
+                            }) {
+                                VStack {
+                                    Text("계정")
+                                        .font(.mmg(.subheader4))
+                                        .fontWeight(selectedButton == "계정" ? .bold : .regular)
+                                        .foregroundColor(selectedButton == "계정" ? .black : .gray)
+                                        .frame(width: 140, height: 48)
+                                    
+                                    Rectangle()
+                                        .fill(selectedButton == "계정" ? Color.black : Color.gray)
+                                        .frame(width: 140, height: 2)
+                                        .padding(.top, 2)
+                                }
+                            }
                             
-                            // 언더바
-                            Rectangle()
-                                .fill(selectedButton == "계정" ? Color.black : Color.gray)
-                                .frame(height: 2)
-                                .padding(.top, 2)
+                            Button(action: {
+                                selectedButton = "키워드"
+                            }) {
+                                VStack {
+                                    Text("키워드")
+                                        .font(.mmg(.subheader4))
+                                        .fontWeight(selectedButton == "키워드" ? .bold : .regular)
+                                        .foregroundColor(selectedButton == "키워드" ? .black : .gray)
+                                        .frame(width: 140, height: 48)
+                                    
+                                    Rectangle()
+                                        .fill(selectedButton == "키워드" ? Color.black : Color.gray)
+                                        .frame(width: 140, height: 2)
+                                        .padding(.top, 2)
+                                }
+                            }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 12)
                     }
-                    
-                    Button(action: {
-                        selectedButton = "키워드"
-                    }) {
-                        VStack {
-                            Text("키워드")
-                                .fontWeight(selectedButton == "키워드" ? .bold : .regular)
-                                .foregroundColor(selectedButton == "키워드" ? .black : .gray)
-                                .frame(width: 140, height: 48) // 버튼 크기 설정
-                            
-                            // 언더바
-                            Rectangle()
-                                .fill(selectedButton == "키워드" ? Color.black : Color.gray)
-                                .frame(height: 2)
-                                .padding(.top, 2)
-                        }
-                    }
+                    .transition(.opacity) // 부드럽게 사라지는 효과 추가
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
             }
             Spacer()
         }
         .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                HStack(spacing: 0) { // 쉐브론과 텍스트를 배치
-                    // 쉐브론 아이콘
+                HStack(spacing: 0) {
+                    // 뒤로가기 버튼
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
@@ -114,9 +124,8 @@ struct SearchView: View {
                     Spacer()
                         .frame(width: 130) // 쉐브론과 텍스트 간격
                     
-                    // "검색하기" 텍스트
                     Text("검색하기")
-                        .font(.system(size: 18, weight: .bold)) // 텍스트 크기 및 굵기
+                        .font(.mmg(.subheader3))
                         .foregroundColor(.black)
                 }
             }
