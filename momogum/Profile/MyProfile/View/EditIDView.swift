@@ -1,5 +1,5 @@
 //
-//  EditNameView.swift
+//  EditIDView.swift
 //  momogum
 //
 //  Created by 류한비 on 1/31/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditNameView: View {
+struct EditIDView: View {
     @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
@@ -23,10 +23,10 @@ struct EditNameView: View {
                         .resizable()
                         .frame(width: 24,height: 24)
                 }
-                .padding(.trailing,UIScreen.main.bounds.height <= 812 ? 90 : 103)
+                .padding(.trailing,UIScreen.main.bounds.height <= 812 ? 64 : 77)
                 .padding(.leading, 28)
                 
-                Text("이름 변경")
+                Text("유저아이디 변경")
                     .font(.mmg(.subheader3))
                     .foregroundColor(.black)
                 
@@ -38,21 +38,19 @@ struct EditNameView: View {
             .padding(.bottom, 102)
             
             VStack(alignment: .leading, spacing: 0){
-                Text("변경할 이름을 입력해주세요")
+                Text("변경할 유저아이디를")
                     .font(.system(size: 24))
                     .fontWeight(.semibold)
-                    .padding(.bottom, 12)
                 
-                Text("12자 이내의 한글, 영문 사용 가능해요:)")
-                    .font(.system(size: 16))
-                    .foregroundColor(Color.black_3)
-                    .padding(.leading, 3)
+                Text("입력해주세요.")
+                    .font(.system(size: 24))
+                    .fontWeight(.semibold)
             }
-            .padding(.bottom, 68)
-            .padding(.trailing, 74)
+            .padding(.bottom, 72)
+            .padding(.trailing, 136)
             
             VStack(alignment: .center){
-                TextField("변경할 이름 입력", text: $viewModel.draftUserName)
+                TextField("변경할 유저아이디 입력", text: $viewModel.draftUserID)
                     .frame(width: 328, height: 39)
                     .font(.mmg(.subheader4))
                     .padding(.leading, 12)
@@ -64,7 +62,7 @@ struct EditNameView: View {
             .padding(.horizontal, 47)
             .padding(.bottom, 344)
             .onAppear {
-                viewModel.draftUserName = ""
+                viewModel.draftUserID = ""
             }
             
             HStack(spacing: 0){

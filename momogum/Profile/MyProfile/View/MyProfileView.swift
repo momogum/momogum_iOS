@@ -163,6 +163,8 @@ struct MyProfileView: View {
                             EditImageView(navigationPath: $navigationPath, viewModel: viewModel)
                         case "EditNameView":
                             EditNameView(navigationPath: $navigationPath, viewModel: viewModel)
+                        case "EditIDView":
+                            EditIDView(navigationPath: $navigationPath, viewModel: viewModel)
                         default:
                             EmptyView()                            
                         }

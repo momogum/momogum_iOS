@@ -28,18 +28,18 @@ struct EditProfileView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                     }
-                    .padding(.trailing, 110)
+                    .padding(.trailing, 104)
+                    .padding(.leading, 40)
                     
                     Text("프로필 편집")
-                        .frame(height: 20)
-                        .fontWeight(.semibold)
+                        .font(.mmg(.subheader3))
                         .foregroundColor(.black)
                     
                     Spacer()
                     
                 }
-                .padding(.top, 77)
-                .padding(.horizontal, 30)
+                .padding(.top, 82)
+                .padding(.trailing, 32)
                 
                 // 프로필 이미지
                 HStack(alignment: .bottom, spacing: 0) {
@@ -75,7 +75,7 @@ struct EditProfileView: View {
                         .frame(width: 16, height: 16)
                         .padding(.bottom, 5)
                 }
-                .padding(.top, UIScreen.main.bounds.height <= 812 ? 30 : 81)
+                .padding(.top, UIScreen.main.bounds.height <= 812 ? 30 : 75)
                 .onTapGesture {
                     if viewModel.isDefaultProfileImage {
                         navigationPath.append("GalleryProfileView")
@@ -116,11 +116,18 @@ struct EditProfileView: View {
                     // 아이디 수정
                     VStack(alignment: .leading){
                         Text("사용자 아이디")
-                            .font(.system(size: 16))
-                            .fontWeight(.semibold)
-                        
-                        TextField("아이디를 입력하세요", text: $viewModel.draftUserID)
-                            .frame(width: 328, height: 39)
+                            .font(.mmg(.subheader4))
+                        ZStack{
+                            TextField("아이디를 입력하세요", text: $viewModel.draftUserID)
+                                .frame(width: 328, height: 39)
+                                .padding(.leading, 12)
+                                .font(.mmg(.Body3))
+                                .disabled(true)
+                            
+                            Rectangle() //텍스트 필드 클릭을 위함
+                                .frame(width: 328, height: 30)
+                                .foregroundStyle(Color.white.opacity(0.001))
+                        }
                         
                         Rectangle()
                             .frame(width: 328, height: 1)
@@ -128,7 +135,9 @@ struct EditProfileView: View {
                     }
                     .padding(.horizontal, 47)
                     .padding(.bottom, 40)
-                    
+                    .onTapGesture {
+                        navigationPath.append("EditIDView")
+                    }
                     
                     // 한 줄 소개 수정
                     VStack(alignment: .leading){
