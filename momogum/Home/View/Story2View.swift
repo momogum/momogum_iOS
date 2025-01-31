@@ -10,6 +10,7 @@ import SwiftUI
 struct Story2View: View {
     var userID: String
     @Environment(\.presentationMode) var presentationMode // 뒤로가기 기능
+    @State private var showReportSheet = false // 신고하기 모달을 표시할 상태 변수
     
     var body: some View {
         VStack {
@@ -19,8 +20,8 @@ struct Story2View: View {
                 .foregroundStyle(.black_3)
                 .padding(.top, 8)
             
-            HStack{
-                VStack{
+            HStack {
+                VStack {
                     Text("유저아이디")
                         .font(.mmg(.subheader4))
                         .bold()
@@ -32,17 +33,26 @@ struct Story2View: View {
                         .padding(.leading, 96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                
                 Image("exclamation")
                     .padding(.leading, 8)
-                Image("close_s")
-                    .padding(.leading, 1)
+                    .onTapGesture {
+                        showReportSheet.toggle() // 모달 띄우기
+                    }
+                
+                Button(action: {  // 이미지 클릭 시 홈으로 돌아가기
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image("close_s")
+                }
                 Spacer()
             }
         }
         Spacer()
-        //.frame(maxHeight: .infinity, alignment: .top) // 화면 위쪽으로 정렬
+        .sheet(isPresented: $showReportSheet) {
+            ReportView()
+        }
         .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
-
     }
 }
 
