@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StoryView: View {
     var userID: String
+    @Binding var tabIndex: Int
     @Environment(\.presentationMode) var presentationMode // 뒤로가기 기능
     
     var body: some View {
@@ -36,7 +37,7 @@ struct StoryView: View {
                     .frame(width: 95, height: 95)
             }
             
-            NavigationLink(destination: GalleryPickerView()) {
+            NavigationLink(destination: GalleryPickerView(tabIndex: $tabIndex)) {
                 Text("바로 밥일기 작성하기")
                     .font(.headline)
                     .foregroundColor(Color(red: 224/255, green: 90/255, blue: 85/255)) // E05A55 색상
@@ -68,5 +69,5 @@ struct StoryView: View {
 }
 
 #Preview {
-    StoryView(userID: "유저아이디")
+    StoryView(userID: "유저아이디", tabIndex: .constant(0))
 }

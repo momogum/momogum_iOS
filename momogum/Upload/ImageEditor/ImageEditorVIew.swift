@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ImageEditorView: View {
     @StateObject private var viewModel: ImageEditorViewModel
+    @Binding var tabIndex: Int 
     @Environment(\.dismiss) var dismiss
     @State private var navigationPath = NavigationPath()
 
-    init(image: UIImage) {
+    init(image: UIImage, tabIndex: Binding<Int>) {
         _viewModel = StateObject(wrappedValue: ImageEditorViewModel(image: image))
+        _tabIndex = tabIndex
     }
 
     var body: some View {
@@ -54,9 +56,9 @@ struct ImageEditorView: View {
 
                     VStack {
                         HStack {
-                            // Custom Back Button
+                            // Custom Back Button (Chevron)
                             Button(action: {
-                                dismiss()
+                                dismiss()  
                             }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(.black)
@@ -67,6 +69,8 @@ struct ImageEditorView: View {
                             Spacer()
 
                             Button(action: {
+                                viewModel.resetToOriginalImage()
+                                tabIndex = 0
                                 dismiss()
                             }) {
                                 Image(systemName: "xmark")
@@ -83,7 +87,7 @@ struct ImageEditorView: View {
                         Button(action: {
                             if let editedImage = viewModel.finalizeImage(frameSize: frameSize) {
                                 viewModel.image = editedImage
-                                navigationPath.append(viewModel.image) 
+                                navigationPath.append(viewModel.image)
                             }
                         }) {
                             Text("다음")
@@ -103,6 +107,7 @@ struct ImageEditorView: View {
             }
             .navigationDestination(for: UIImage.self) { image in
                 NewPostView(
+                    tabIndex: $tabIndex,
                     editedImage: image,
                     onReset: { viewModel.resetToOriginalImage() }
                 )
@@ -121,7 +126,5 @@ struct ImageEditorView: View {
 }
 
 #Preview {
-    NavigationStack {
-        ImageEditorView(image: UIImage(systemName: "photo") ?? UIImage())
-    }
+    ImageEditorView(image: UIImage(systemName: "photo") ?? UIImage(), tabIndex: .constant(0))
 }

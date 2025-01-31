@@ -10,6 +10,7 @@ import SwiftUI
 struct GalleryPickerView: View {
     @StateObject private var viewModel = GalleryPickerViewModel()
     @Environment(\.presentationMode) var presentationMode
+    @Binding var tabIndex: Int
 
     var body: some View {
         NavigationView {
@@ -27,7 +28,7 @@ struct GalleryPickerView: View {
                             LazyVGrid(columns: gridItems, spacing: 8) {
                                 ForEach(viewModel.images, id: \UIImage.hash) { image in
                                     NavigationLink(
-                                        destination: ImageEditorView(image: image)
+                                        destination: ImageEditorView(image: image, tabIndex: $tabIndex)
                                             .navigationBarBackButtonHidden(true)
                                             .navigationBarHidden(true)
                                     ) {
@@ -51,7 +52,7 @@ struct GalleryPickerView: View {
                     VStack {
                         HStack {
                             Button(action: {
-                                presentationMode.wrappedValue.dismiss()
+                                tabIndex = 0
                             }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(.black)
@@ -94,10 +95,10 @@ struct GalleryPickerView: View {
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
-        .navigationBarHidden(true) 
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    GalleryPickerView()
+    GalleryPickerView(tabIndex: .constant(0))
 }
