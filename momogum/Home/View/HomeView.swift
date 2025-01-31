@@ -78,6 +78,18 @@ struct HomeView: View {
                                 .font(.mmg(.Caption2))
                         }
                         .padding(.leading, 24)
+                        VStack {
+                            NavigationLink(destination: Story2View(userID: "")) {
+                                Circle()
+                                    .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255)) // #CFCFCF 색상
+                                    .cornerRadius(10)
+                                    .frame(width: 80, height: 80)
+                            }
+                            Text("momogum._.")
+                                .bold()
+                                .font(.mmg(.Caption2))
+                        }
+                        .padding(.leading, 16)
                     }
                 }
                 Spacer()
