@@ -142,8 +142,7 @@ struct EditProfileView: View {
                     // 한 줄 소개 수정
                     VStack(alignment: .leading){
                         Text("한 줄 소개")
-                            .font(.system(size: 16))
-                            .fontWeight(.semibold)
+                            .font(.mmg(.subheader4))
                             .padding(.bottom, 31)
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
@@ -154,15 +153,20 @@ struct EditProfileView: View {
                                 .scrollContentBackground(.hidden)
                                 .padding(10)
                                 .frame(width: 320, height: 126)
+                                .font(.mmg(.Body3))
                                 .background(Color.clear)
+                                .disabled(true)
                             
                             if viewModel.draftUserBio.isEmpty {
                                 Text("소개를 입력하세요")
-                                    .font(.system(size: 16))
-                                    .foregroundColor(Color.black_3)
+                                    .font(.mmg(.Body3))
                                     .padding(.trailing, 178)
                                     .padding(.bottom, 70)
                             }
+                            
+                            Rectangle() //텍스트 필드 클릭을 위함
+                                .frame(width: 320, height: 126)
+                                .foregroundStyle(Color.white.opacity(0.001))
                         }
                         .frame(width: 320, height: 126)
                         .overlay(
@@ -172,6 +176,9 @@ struct EditProfileView: View {
                     }
                     .padding(.horizontal, 47)
                     .padding(.bottom, 25)
+                    .onTapGesture {
+                        navigationPath.append("EditBioView")
+                    }
                     
                     // 완료버튼
                     HStack{

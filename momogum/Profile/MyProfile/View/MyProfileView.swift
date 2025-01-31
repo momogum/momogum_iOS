@@ -165,6 +165,8 @@ struct MyProfileView: View {
                             EditNameView(navigationPath: $navigationPath, viewModel: viewModel)
                         case "EditIDView":
                             EditIDView(navigationPath: $navigationPath, viewModel: viewModel)
+                        case "EditBioView":
+                            EditBioView(navigationPath: $navigationPath, viewModel: viewModel)
                         default:
                             EmptyView()                            
                         }
