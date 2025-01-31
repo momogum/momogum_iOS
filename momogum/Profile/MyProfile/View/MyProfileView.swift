@@ -138,7 +138,7 @@ struct MyProfileView: View {
                     
                     // 프로필 편집 버튼
                     Button {
-                        navigationPath.append("Edit")
+                        navigationPath.append("EditProfileView")
                     }label: {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: 315, height: 36)
@@ -154,13 +154,17 @@ struct MyProfileView: View {
                     .padding(.top, 45)
                     .padding(.bottom, 49)
                     .navigationDestination(for: String.self) { value in
-                        if value == "Edit" {
+                        switch value {
+                        case "EditProfileView":
                             EditProfileView(navigationPath: $navigationPath, viewModel: viewModel)
-                        } else if value == "Gallery" {
+                        case "GalleryProfileView":
                             GalleryProfileView(navigationPath: $navigationPath, viewModel: viewModel)
-                        }
-                        else if value == "Image" {
+                        case "EditImageView":
                             EditImageView(navigationPath: $navigationPath, viewModel: viewModel)
+                        case "EditNameView":
+                            EditNameView(navigationPath: $navigationPath, viewModel: viewModel)
+                        default:
+                            EmptyView()                            
                         }
                     }
                     

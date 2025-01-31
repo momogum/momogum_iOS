@@ -78,9 +78,8 @@ struct EditProfileView: View {
                 .padding(.top, UIScreen.main.bounds.height <= 812 ? 30 : 81)
                 .onTapGesture {
                     if viewModel.isDefaultProfileImage {
-                        navigationPath.append("Gallery")
+                        navigationPath.append("GalleryProfileView")
                     } else {
-                        // 아닐 경우 팝업 표시
                         showPopup = true
                     }
                 }
@@ -89,11 +88,19 @@ struct EditProfileView: View {
                     // 이름 수정
                     VStack(alignment: .leading){
                         Text("이름")
-                            .font(.system(size: 16))
-                            .fontWeight(.semibold)
+                            .font(.mmg(.subheader4))
                         
-                        TextField("이름을 입력하세요", text: $viewModel.draftUserName)
-                            .frame(width: 328, height: 39)
+                        ZStack{
+                            TextField("이름을 입력하세요", text: $viewModel.draftUserName)
+                                .frame(width: 328, height: 39)
+                                .padding(.leading, 12)
+                                .font(.mmg(.Body3))
+                                .disabled(true)
+                            
+                            Rectangle() //텍스트 필드 클릭을 위함
+                                .frame(width: 328, height: 30)
+                                .foregroundStyle(Color.white.opacity(0.001))
+                        }
                         
                         Rectangle()
                             .frame(width: 328, height: 1)
@@ -101,6 +108,9 @@ struct EditProfileView: View {
                     }
                     .padding(.horizontal, 47)
                     .padding(.bottom, 40)
+                    .onTapGesture {
+                        navigationPath.append("EditNameView")
+                    }
                     
                     
                     // 아이디 수정
@@ -167,9 +177,8 @@ struct EditProfileView: View {
                                 .cornerRadius(12)
                                 .overlay(
                                     Text("완료")
-                                        .font(.system(size: 20))
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.white)
+                                        .font(.mmg(.subheader3))
+                                        .foregroundStyle(Color.black_6)
                                 )
                         }
                     }
