@@ -15,6 +15,16 @@ struct AppointCreate1View: View {
     @State var searchText = ""
     @State var isEditing: Bool = false
     
+    var filteredFriends: [String] {
+        if searchText.isEmpty {
+            return appointViewModel.friends
+        } else {
+            return appointViewModel.friends.filter { friend in
+                return friend.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
+    
     
     var body: some View {
         @Bindable var viewModel = appointViewModel
@@ -49,29 +59,45 @@ struct AppointCreate1View: View {
                 
                 /// 친구 목록
                 ScrollView {
-                    Text("친구")
-                        .font(.mmg(.subheader3))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom, 15)
-                    
-                    LazyVStack (spacing: 20) {
-                        ForEach(viewModel.friends, id: \.self) { friend in
+                    VStack {
+                        Text("친구")
+                            .font(.mmg(.subheader3))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.bottom, 15)
+                        
+                        /// 선택된 친구 상단 표시
+                        ForEach(filteredFriends.filter { viewModel.pickedFriends.contains($0) },
+                                id: \.self) { friend in
                             HStack {
                                 AppointFriendListCellView(friend: friend)
-                                
-                                viewModel.pickedFriends.contains(friend) ? Image("selected") : Image("unselected")
-                                
+                                Image("selected")
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 toggleSelection(for: friend)
                             }
                         }
+                        
+                        // 전체 친구 표시
+                        ForEach(filteredFriends.filter { !viewModel.pickedFriends.contains($0) },
+                                id: \.self) { friend in
+                            HStack {
+                                AppointFriendListCellView(friend: friend)
+                                Image("unselected")
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                toggleSelection(for: friend)
+                            }
+                        }
+                        
                     }
+                    .padding(.bottom, 100)
                 }
                 .scrollIndicators(.hidden)
             }
             .padding(.horizontal, 30)
+            
             
             /// '다음 버튼'
             if !viewModel.pickedFriends.isEmpty {

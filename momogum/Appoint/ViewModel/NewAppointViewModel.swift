@@ -15,12 +15,19 @@ class NewAppointViewModel {
     var placeName: String = ""
     var note: String = ""
     var pickedFriends: [String] = ["친구1", "친구2", "친구3", "친구4"]
-    var pickedImage: String = "default image"
+    var pickedImage: String = ""
     
     var friends: [String] = ["친구1", "친구2", "친구3", "친구4", "친구5", "친구6", "친구7", "친구8", "친구9", "친구10"]
     
     /// 초대장을 발송 및 저장소 초기화
     func createAppoint() {
+        print(appointName)
+        print(menuName)
+        print(pickedDate)
+        print(placeName)
+        print(note)
+        print(pickedFriends)
+        print(pickedImage)
         resetAppoint()
     }
     

@@ -14,6 +14,7 @@ struct AppointCreate2View: View {
     @Binding var path: [String]
     
     var body: some View {
+        @Bindable var viewModel = appointViewModel
 
         ApmBackgroundView(path: $path) {
             VStack {
@@ -29,17 +30,11 @@ struct AppointCreate2View: View {
                     
                     ScrollView (.horizontal, showsIndicators: false) {
                         HStack {
-                            Rectangle()
-                                .frame(width: 170, height: 120)
-                                .foregroundStyle(.gray.opacity(0.2))
-                            
-                            Rectangle()
-                                .frame(width: 170, height: 120)
-                                .foregroundStyle(.gray.opacity(0.2))
-                            
-                            Rectangle()
-                                .frame(width: 170, height: 120)
-                                .foregroundStyle(.gray.opacity(0.2))
+                            ForEach(0..<5) { i in
+                                Rectangle()
+                                    .frame(width: 170, height: 120)
+                                    .foregroundStyle(.gray.opacity(0.2))
+                            }
                         }
                     }
                     
@@ -91,20 +86,8 @@ struct AppointCreate2View: View {
                 .padding(.leading, 20)
 
             }
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    NavigationLink(value: "create3") {
-                        Text("다음")
-                            .font(.mmg(.subheader3))
-                            .frame(width: 100, height: 50)
-                            .background(.Red_2)
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .padding(30)
-                    }
-                }
+            if viewModel.pickedImage != "" {
+                ApmHoveringNavButton(navLinkValue: "create3")
             }
         }
     }
