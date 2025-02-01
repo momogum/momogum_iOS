@@ -89,6 +89,7 @@ struct AppointView: View {
                                 }
                             }
                             .padding(.vertical, 20)
+                            .scrollIndicators(.hidden)
                         }
                         
                         Text("다가오는 식사 약속")
@@ -107,6 +108,8 @@ struct AppointView: View {
                             }
                         }
                         .padding(.vertical, 10)
+                        .scrollIndicators(.hidden)
+
                     }
                 }
             }

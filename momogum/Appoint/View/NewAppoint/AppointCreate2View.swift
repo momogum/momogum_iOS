@@ -86,7 +86,7 @@ struct AppointCreate2View: View {
                 .padding(.leading, 20)
 
             }
-            if viewModel.pickedImage != "" {
+            if true {
                 ApmHoveringNavButton(navLinkValue: "create3")
             }
         }

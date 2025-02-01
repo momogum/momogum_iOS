@@ -49,6 +49,8 @@ struct AppointCreate1View: View {
                 /// 검색바
                 HStack {
                     Image("search")
+                        .resizable()
+                        .frame(width: 20, height: 20)
                         .padding(.horizontal, 10)
                     
                     TextField("닉네임 or 유저 아이디로 검색", text: $searchText)
@@ -59,7 +61,7 @@ struct AppointCreate1View: View {
                 
                 /// 친구 목록
                 ScrollView {
-                    VStack {
+                    VStack (spacing: 20) {
                         Text("친구")
                             .font(.mmg(.subheader3))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -71,6 +73,8 @@ struct AppointCreate1View: View {
                             HStack {
                                 AppointFriendListCellView(friend: friend)
                                 Image("selected")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
@@ -84,6 +88,8 @@ struct AppointCreate1View: View {
                             HStack {
                                 AppointFriendListCellView(friend: friend)
                                 Image("unselected")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
