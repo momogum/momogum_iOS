@@ -11,12 +11,14 @@ struct EditIDView: View {
     @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
+    @State private var showCloseButton = false
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0){
             HStack(alignment: .center){
                 // back 버튼
                 Button{
-                    viewModel.resetUserData()
+                    viewModel.resetUserID()
                     navigationPath.removeLast(1)
                 } label: {
                     Image("close_s")
@@ -50,11 +52,33 @@ struct EditIDView: View {
             .padding(.trailing, 136)
             
             VStack(alignment: .center){
-                TextField("변경할 유저아이디 입력", text: $viewModel.draftUserID)
-                    .frame(width: 328, height: 39)
-                    .font(.mmg(.subheader4))
-                    .padding(.leading, 12)
-                
+                ZStack{
+                    HStack{
+                        TextField("변경할 유저아이디 입력", text: $viewModel.draftUserID)
+                            .frame(width: 268, height: 39)
+                            .font(.mmg(.subheader4))
+                            .padding(.leading, 12)
+                            .onChange(of: viewModel.draftUserID) { newValue in
+                                showCloseButton = !newValue.isEmpty
+                            }
+                        Spacer().frame(width: 50, height: 39)
+                    }
+                    
+                    if showCloseButton {
+                        HStack{
+                            Spacer().frame(width: 288, height: 39)
+                            Button{
+                                viewModel.draftUserID = ""
+                                showCloseButton = false
+                            }label:{
+                                Image("close_cc")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                            }
+                        }
+                        
+                    }
+                }
                 Rectangle()
                     .frame(width: 328, height: 1)
                     .foregroundStyle(.black_2)

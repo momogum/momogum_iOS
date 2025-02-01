@@ -11,12 +11,17 @@ struct EditNameView: View {
     @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
+    @State private var showCloseButton = false
+    private let maxLength = 12
+    @State private var underBarColor: Color = Color.black_4
+    @State private var showerrorMessage = false
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0){
             HStack(alignment: .center){
                 // back 버튼
                 Button{
-                    viewModel.resetUserData()
+                    viewModel.resetUserName()
                     navigationPath.removeLast(1)
                 } label: {
                     Image("close_s")
@@ -51,15 +56,60 @@ struct EditNameView: View {
             .padding(.bottom, 68)
             .padding(.trailing, 74)
             
-            VStack(alignment: .center){
-                TextField("변경할 이름 입력", text: $viewModel.draftUserName)
-                    .frame(width: 328, height: 39)
-                    .font(.mmg(.subheader4))
-                    .padding(.leading, 12)
+            VStack(alignment: .leading, spacing: 0){
+                ZStack {
+                    HStack {
+                        TextField("변경할 이름 입력", text: $viewModel.draftUserName)
+                            .frame(width: 268, height: 39)
+                            .font(.mmg(.subheader4))
+                            .padding(.leading, 12)
+                            .onChange(of: viewModel.draftUserName) { newValue in
+                                if newValue.count > maxLength { // 길이 제한
+                                    viewModel.draftUserName = String(newValue.prefix(maxLength))
+                                }
+                                
+                                // 숫자 입력 제한
+                                let containsNumber = newValue.contains(where: { $0.isNumber })
+                                if containsNumber {
+                                    underBarColor = Color.Red_1
+                                    showerrorMessage = true
+                                } else {
+                                    underBarColor = Color.black_4
+                                    showerrorMessage = false
+                                }
+                                
+                                showCloseButton = !newValue.isEmpty
+                            }
+                        Spacer().frame(width: 50, height: 39)
+                    }
+                    
+                    if showCloseButton {
+                        HStack{
+                            Spacer().frame(width: 288, height: 39)
+                            Button{
+                                viewModel.draftUserName = ""
+                                showCloseButton = false
+                            }label:{
+                                Image("close_cc")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                            }
+                        }
+                    }
+                }
                 
                 Rectangle()
                     .frame(width: 328, height: 1)
-                    .foregroundStyle(.black_2)
+                    .foregroundStyle(underBarColor)
+                    .padding(.top, 5)
+                
+                if showerrorMessage {
+                    Text("잘못된 입력입니다.")
+                        .font(.mmg(.Caption1))
+                        .foregroundStyle(Color.Red_1)
+                        .padding(.top, 8)
+                        .padding(.leading, 11)
+                }
             }
             .padding(.horizontal, 47)
             .padding(.bottom, 344)
@@ -70,11 +120,14 @@ struct EditNameView: View {
             HStack(spacing: 0){
                 Spacer()
                 Button{
-                    navigationPath.removeLast(1)
+                    if showerrorMessage == false {
+                        navigationPath.removeLast(1)
+                    }
                 }label:{
                     Text("완료")
                         .font(.mmg(.subheader3))
-                    .foregroundStyle(Color.black_4)}
+                        .foregroundStyle(Color.black_4)
+                }
             }
             .padding(.trailing, 62.5)
             

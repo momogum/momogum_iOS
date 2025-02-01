@@ -176,7 +176,8 @@ struct MyProfileView: View {
                     // 내 게시물 / 저장 게시물 SegmentedControl
                     HStack {
                         VStack(spacing: 0){
-                            Image(systemName: "doc.text")
+                            Image(selectedSegment == 0 ? "card_red2" : "card_black4")
+                                .resizable()
                                 .frame(width: 24, height: 24)
                                 .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
                                 .cornerRadius(8)
@@ -193,8 +194,9 @@ struct MyProfileView: View {
                         .padding(.trailing, 10)
                         
                         VStack(spacing: 0){
-                            Image(systemName: "bookmark")
-                                .frame(width: 24, height: 24)
+                            Image(selectedSegment == 0 ? "bookmark_black4" : "bookmark_red2")
+                                .resizable()
+                                .frame(width: 22, height: 22)
                                 .foregroundStyle(selectedSegment == 0 ? Color.black_4 : .momogumRed)
                                 .cornerRadius(8)
                                 .onTapGesture {

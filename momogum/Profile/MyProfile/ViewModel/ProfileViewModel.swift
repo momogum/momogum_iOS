@@ -50,8 +50,18 @@ class ProfileViewModel {
     // 편집 취소 시 초기화
     func resetUserData() {
         currentPreviewImage = profileImage
+        resetUserName()
+        resetUserID()
+        resetUserBio()
+    }
+    
+    func resetUserName() {
         draftUserName = userName
+    }
+    func resetUserID() {
         draftUserID = userID
+    }
+    func resetUserBio() {
         draftUserBio = userBio
     }
     

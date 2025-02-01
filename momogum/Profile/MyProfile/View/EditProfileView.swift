@@ -140,7 +140,7 @@ struct EditProfileView: View {
                     }
                     
                     // 한 줄 소개 수정
-                    VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 0){
                         Text("한 줄 소개")
                             .font(.mmg(.subheader4))
                             .padding(.bottom, 31)
@@ -160,6 +160,7 @@ struct EditProfileView: View {
                             if viewModel.draftUserBio.isEmpty {
                                 Text("소개를 입력하세요")
                                     .font(.mmg(.Body3))
+                                    .foregroundStyle(Color.black_3)
                                     .padding(.trailing, 178)
                                     .padding(.bottom, 70)
                             }

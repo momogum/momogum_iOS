@@ -11,12 +11,14 @@ struct EditBioView: View {
     @Binding var navigationPath: NavigationPath
     @Bindable var viewModel: ProfileViewModel
     
+    private let maxLength = 40
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0){
             HStack(alignment: .center){
                 // back 버튼
                 Button{
-                    viewModel.resetUserData()
+                    viewModel.resetUserBio()
                     navigationPath.removeLast(1)
                 } label: {
                     Image("close_s")
@@ -37,7 +39,7 @@ struct EditBioView: View {
             .padding(.trailing, 32)
             .padding(.bottom, 182)
             
-            VStack(alignment: .center){
+            VStack(alignment: .center, spacing: 0){
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.black_5)
@@ -49,19 +51,24 @@ struct EditBioView: View {
                         .font(.mmg(.Body3))
                         .frame(width: 320, height: 126)
                         .background(Color.clear)
-                    
-                    if viewModel.draftUserBio.isEmpty {
-                        Text("소개를 입력하세요")
-                            .font(.mmg(.Body3))
-                            .padding(.trailing, 178)
-                            .padding(.bottom, 70)
-                    }
+                        .onChange(of: viewModel.draftUserBio) { newValue in
+                            if newValue.count > maxLength {
+                                viewModel.draftUserBio = String(newValue.prefix(maxLength)) // 초과 글자 제거
+                            }
+                        }
                 }
                 .frame(width: 320, height: 126)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.black_4, lineWidth: 1)
                 )
+                
+                Text("\(viewModel.draftUserBio.count) / 40")
+                    .font(.mmg(.Caption3))
+                    .foregroundStyle(Color.black_2)
+                    .padding(.leading, 262)
+                    .padding(.top, 16)
+                
             }
             .padding(.horizontal, 37)
             .padding(.bottom, 330)
@@ -76,7 +83,8 @@ struct EditBioView: View {
                 }label:{
                     Text("완료")
                         .font(.mmg(.subheader3))
-                    .foregroundStyle(Color.black_4)}
+                        .foregroundStyle(viewModel.draftUserBio.count != 0 ? Color.Red_2 : Color.black_4)
+                }
             }
             .padding(.trailing, 62.5)
             
