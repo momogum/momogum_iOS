@@ -63,9 +63,8 @@ struct EditImageView: View {
                         .cornerRadius(12)
                         .overlay(
                             Text("다음")
-                                .font(.system(size: 20))
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.white)
+                                .font(.mmg(.subheader3))
+                                .foregroundStyle(Color.black_6)
                         )
                 }
             }

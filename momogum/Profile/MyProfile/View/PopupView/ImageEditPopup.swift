@@ -29,7 +29,7 @@ struct ImageEditPopup: View {
             
             // 갤러리에서 선택
             Button {
-                navigationPath.append("Gallery")
+                navigationPath.append("GalleryProfileView")
             } label: {
                 Text("갤러리에서 선택")
                     .font(.mmg(.subheader4))

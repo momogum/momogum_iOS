@@ -90,6 +90,10 @@ extension ShapeStyle where Self == Color {
         Color(hex: 0xFFE3E0)
     }
     
+    static var Green_1: Color {
+        Color(hex: 0x4D8D50)
+    }
+    
     static var signupStartTextblack : Color{
         Color(hex: 0x4F4F4F)
     }

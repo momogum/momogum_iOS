@@ -35,7 +35,7 @@ struct GalleryProfileView: View {
                                         .clipped()
                                         .onTapGesture {
                                             handleImageSelection(image)
-                                            navigationPath.append("Image")
+                                            navigationPath.append("EditImageView")
                                         }
                                 }
                             }

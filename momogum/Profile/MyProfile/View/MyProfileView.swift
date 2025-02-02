@@ -138,7 +138,7 @@ struct MyProfileView: View {
                     
                     // 프로필 편집 버튼
                     Button {
-                        navigationPath.append("Edit")
+                        navigationPath.append("EditProfileView")
                     }label: {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: 315, height: 36)
@@ -154,13 +154,21 @@ struct MyProfileView: View {
                     .padding(.top, 45)
                     .padding(.bottom, 49)
                     .navigationDestination(for: String.self) { value in
-                        if value == "Edit" {
+                        switch value {
+                        case "EditProfileView":
                             EditProfileView(navigationPath: $navigationPath, viewModel: viewModel)
-                        } else if value == "Gallery" {
+                        case "GalleryProfileView":
                             GalleryProfileView(navigationPath: $navigationPath, viewModel: viewModel)
-                        }
-                        else if value == "Image" {
+                        case "EditImageView":
                             EditImageView(navigationPath: $navigationPath, viewModel: viewModel)
+                        case "EditNameView":
+                            EditNameView(navigationPath: $navigationPath, viewModel: viewModel)
+                        case "EditIDView":
+                            EditIDView(navigationPath: $navigationPath, viewModel: viewModel)
+                        case "EditBioView":
+                            EditBioView(navigationPath: $navigationPath, viewModel: viewModel)
+                        default:
+                            EmptyView()                            
                         }
                     }
                     
@@ -168,7 +176,8 @@ struct MyProfileView: View {
                     // 내 게시물 / 저장 게시물 SegmentedControl
                     HStack {
                         VStack(spacing: 0){
-                            Image(systemName: "doc.text")
+                            Image(selectedSegment == 0 ? "card_red2" : "card_black4")
+                                .resizable()
                                 .frame(width: 24, height: 24)
                                 .foregroundStyle(selectedSegment == 0 ? Color.momogumRed : .black_4)
                                 .cornerRadius(8)
@@ -185,8 +194,9 @@ struct MyProfileView: View {
                         .padding(.trailing, 10)
                         
                         VStack(spacing: 0){
-                            Image(systemName: "bookmark")
-                                .frame(width: 24, height: 24)
+                            Image(selectedSegment == 0 ? "bookmark_black4" : "bookmark_red2")
+                                .resizable()
+                                .frame(width: 22, height: 22)
                                 .foregroundStyle(selectedSegment == 0 ? Color.black_4 : .momogumRed)
                                 .cornerRadius(8)
                                 .onTapGesture {
