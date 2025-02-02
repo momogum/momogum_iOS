@@ -114,7 +114,7 @@ struct MyProfileView: View {
                                         .foregroundStyle(Color.black_1)
                                         .padding(.bottom, 16)
                                     
-                                    Text("17")
+                                    Text("\(viewModel.followerCount.formattedFollowerCount())")
                                         .font(.mmg(.subheader4))
                                         .foregroundStyle(Color.black_1)
                                 }
@@ -132,7 +132,7 @@ struct MyProfileView: View {
                                         .foregroundStyle(Color.black_1)
                                         .padding(.bottom, 16)
                                     
-                                    Text("17")
+                                    Text("\(viewModel.followingCount.formattedFollowerCount())")
                                         .font(.mmg(.subheader4))
                                         .foregroundStyle(Color.black_1)
                                 }

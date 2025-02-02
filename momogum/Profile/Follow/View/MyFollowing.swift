@@ -11,6 +11,18 @@ struct MyFollowing: View {
     @State private var search: String = ""
     @State private var showCloseButton = false
     @State private var isEditing = false // 텍스트필드 활성화 여부
+    @State private var loadedFollowings = 20 // 초기 로딩 개수
+    @State private var allFollowings: [String] = [] // 전체 팔로잉 리스트
+    
+    @Bindable var viewModel: ProfileViewModel
+    
+    var filteredFollowings: [String] {
+        if search.isEmpty {
+            return Array(allFollowings.prefix(loadedFollowings)) // 검색어가 없으면 현재 로드된 만큼만 반환
+        } else {
+            return allFollowings.filter { $0.localizedCaseInsensitiveContains(search) } // 검색어가 포함된 데이터만 반환
+        }
+    }
     
     var body: some View {
         VStack{
@@ -85,17 +97,39 @@ struct MyFollowing: View {
                 
                 
                 // 팔로워 목록
-                ForEach(0..<20){_ in
-                    FollowingCell()
+                ForEach(filteredFollowings.indices, id: \.self) { index in
+                    let userID = filteredFollowings[index] // userID만 저장된 배열
+                    
+                    FollowingCell(userID: userID)
+                        .onAppear {
+                            if index == filteredFollowings.count - 1 {
+                                loadMoreFollowers()
+                            }
+                        }
                         .listRowSeparator(.hidden)
                         .buttonStyle(PlainButtonStyle())
+                        .padding(.horizontal, 5)
                 }
             }
             .listStyle(PlainListStyle())
         }
+        .onAppear {
+            generateFollowers()
+        }
     }
-}
-
-#Preview {
-    MyFollowing()
+    
+    // 더미 데이터 생성 (테스트용)
+    private func generateFollowers() {
+        allFollowings = (0..<viewModel.followingCount).map { "유저 아이디\($0 + 1)" }
+    }
+    
+    // 더 많은 팔로워 로드 (페이징)
+    private func loadMoreFollowers() {
+        let nextBatch = min(loadedFollowings + 20, allFollowings.count)
+        if loadedFollowings < nextBatch {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                loadedFollowings = nextBatch
+            }
+        }
+    }
 }

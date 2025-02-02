@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FollowerCell: View {
+    var userID: String
+    
     var body: some View {
         HStack(alignment: .center, spacing: 0){
             // 프로필 사진
@@ -20,7 +22,7 @@ struct FollowerCell: View {
             
             VStack(alignment: .leading, spacing: 0){
                 // 유저 아이디
-                Text("유저 아이디")
+                Text("\(userID)")
                     .font(.mmg(.subheader4))
                     .foregroundStyle(Color.black_1)
                     .padding(.bottom, 4)
@@ -30,8 +32,8 @@ struct FollowerCell: View {
                     .font(.mmg(.Caption3))
                     .foregroundStyle(Color.black_1)
             }
-            .padding(.trailing, 67)
             
+            Spacer()
             
             // 맞팔로우 버튼
             Button{
@@ -62,8 +64,4 @@ struct FollowerCell: View {
         }
         .frame(maxWidth: .infinity)
     }
-}
-
-#Preview {
-    FollowerCell()
 }

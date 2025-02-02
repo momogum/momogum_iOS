@@ -27,6 +27,10 @@ class ProfileViewModel {
     var draftUserID: String = "momogum._."
     var draftUserBio: String = "오늘은 또 뭘 먹을까!? 🍪"
     
+    // 팔로워 / 팔로잉 수 (임시)
+    var followerCount : Int = 236
+    var followingCount : Int = 1245
+    
     init() {
         profileImage = UIImage(named: "defaultProfile")
         currentPreviewImage = profileImage
