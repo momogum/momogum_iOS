@@ -68,9 +68,9 @@ struct EditNameView: View {
                                     viewModel.draftUserName = String(newValue.prefix(maxLength))
                                 }
                                 
-                                // 숫자 입력 제한
-                                let containsNumber = newValue.contains(where: { $0.isNumber })
-                                if containsNumber {
+                                // 숫자 및 특수문자 입력 제한
+                                let hasInvalidChar = newValue.rangeOfCharacter(from: CharacterSet.letters.union(.whitespaces).inverted) != nil
+                                if hasInvalidChar {
                                     underBarColor = Color.Red_1
                                     showerrorMessage = true
                                 } else {
