@@ -67,7 +67,7 @@ struct HomeView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         VStack {
-                            NavigationLink(destination: StoryView(userID: "")) {
+                            NavigationLink(destination: StoryView(userID: "", tabIndex: $tabIndex)) {
                                 Circle()
                                     .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255)) // #CFCFCF 색상
                                     .cornerRadius(10)
@@ -131,7 +131,7 @@ struct HomeView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(columns: columns, spacing: 16) { // columns는 이미 정의된 GridItem 배열
                             ForEach(0..<6) { index in
-                                NavigationLink(destination: GalleryPickerView()) {
+                                NavigationLink(destination: GalleryPickerView(tabIndex: $tabIndex)) {
                                     VStack(spacing: 0) {
                                         // 상단 이미지 부분
                                         Rectangle()
