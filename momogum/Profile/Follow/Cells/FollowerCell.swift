@@ -9,36 +9,58 @@ import SwiftUI
 
 struct FollowerCell: View {
     var body: some View {
-        HStack{
+        HStack(alignment: .center, spacing: 0){
             // 프로필 사진
-            Image("pixelsImage")
+            Image("defaultProfile")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 55, height: 55)
+                .frame(width: 52, height: 52)
                 .clipShape(Circle())
-                .padding(5)
-                .overlay(
-                    Circle()
-                        .stroke(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255), lineWidth: 4)
-                )
-                .padding(.trailing, 20)
+                .padding(.trailing, 16)
             
-            VStack(alignment: .leading){
-                // 유저이름
-                Text("이름")
-                    .frame(height: 16)
-                    .fontWeight(.semibold)
-                
+            VStack(alignment: .leading, spacing: 0){
                 // 유저 아이디
                 Text("유저 아이디")
-                    .frame(height: 12)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color.gray)
+                    .font(.mmg(.subheader4))
+                    .foregroundStyle(Color.black_1)
+                    .padding(.bottom, 4)
+                
+                // 유저이름
+                Text("이름")
+                    .font(.mmg(.Caption3))
+                    .foregroundStyle(Color.black_1)
             }
+            .padding(.trailing, 67)
             
-            Spacer()
             
+            // 맞팔로우 버튼
+            Button{
+                
+            } label: {
+                RoundedRectangle(cornerRadius: 4)
+                    .frame(width: 72, height: 28)
+                    .foregroundStyle(Color.Red_2)
+                    .overlay(
+                        Text("맞팔로우")
+                            .font(.mmg(.subheader4))
+                            .foregroundStyle(Color.black_6)
+                            .padding(6)
+                    )
+            }
+            .padding(.trailing, 27)
+            
+            
+            // 취소버튼
+            Button{
+                
+            } label: {
+                Image("close_s")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            }
+            .padding(.trailing, 12)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

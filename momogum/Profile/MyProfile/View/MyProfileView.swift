@@ -99,17 +99,17 @@ struct MyProfileView: View {
                             
                         }
                         .edgesIgnoringSafeArea(.all)
-                        .padding(.leading, 32)
+                        .padding(.horizontal, 32)
                         .padding(.bottom, 24)
                         
                         HStack(alignment: .center, spacing: 0){
-                            // 팔로우
+                            // 팔로워
                             Button(action: {
                                 showFollowList = 0
                                 isActive = true // 팔로워 버튼 클릭 시 화면 전환
                             }) {
                                 VStack(alignment: .center, spacing: 0){
-                                    Text("팔로우")
+                                    Text("팔로워")
                                         .font(.mmg(.subheader4))
                                         .foregroundStyle(Color.black_1)
                                         .padding(.bottom, 16)

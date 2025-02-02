@@ -13,24 +13,26 @@ struct MyFollowing: View {
     var body: some View {
         VStack{
             List{
-                Section {
-                    HStack {
-                        Spacer()
-                        // 검색바
-                        RoundedRectangle(cornerRadius: 12)
-                            .frame(width: 336, height: 40)
-                            .foregroundStyle(Color(red: 235 / 255, green: 232 / 255, blue: 232 / 255))
-                            .overlay(
-                                TextField("검색", text: $search)
-                                    .padding(.horizontal, 16)
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 16)) 
-                            )
-                        Spacer()
-                    }
-                    .listRowInsets(EdgeInsets())
-                    .padding(.bottom, 44)
+                HStack(alignment: .center, spacing: 0) {
+                    Spacer()
+                    //검색바
+                    TextField("닉네임 or 유저아이디로 검색", text: $search)
+                        .padding(.horizontal, 23)
+                        .frame(width: 353, height: 52)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.black_5)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(red: 235 / 255, green: 232 / 255, blue: 232 / 255), lineWidth: 1)
+                        )
+                        .font(.mmg(.subheader4))
+                        .foregroundStyle(Color.black_3)
+                    Spacer()
                 }
+                .listRowInsets(EdgeInsets())
+                .padding(.bottom, 36)
                 
                 
                 // 팔로워 목록

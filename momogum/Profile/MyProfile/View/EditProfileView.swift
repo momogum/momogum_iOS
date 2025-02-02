@@ -18,7 +18,7 @@ struct EditProfileView: View {
     var body: some View {
         ZStack{
             VStack(alignment: .center, spacing: 0){
-                HStack(alignment: .center){
+                HStack(alignment: .center, spacing: 0){
                     // back 버튼
                     Button{
                         viewModel.resetUserData() // 임시 이미지 초기화
