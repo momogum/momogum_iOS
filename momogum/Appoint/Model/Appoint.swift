@@ -16,7 +16,7 @@ struct Appoint: Codable, Identifiable {
     var menuName: String
     var pickedDate: Date
     var placeName: String
-    var note: String?
+    var note: String
     var pickedFriends: [String]
     
     var isConfirmed: Bool = false

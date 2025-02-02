@@ -23,10 +23,33 @@ class NewAppointViewModel {
     var pickedDate: Date = Date()
     var placeName: String = ""
     var note: String = ""
+    
     var pickedFriends: [String] = []
     var pickedImage: String = ""
     
+    
     var friends: [String] = ["친구1", "친구2", "친구3", "친구4", "친구5", "친구6", "친구7", "친구8", "친구9", "친구10"]
+    var ApmCards: [ApmCard] = []
+
+    
+    
+    /// 약속잡기 초대장 이미지 로드
+    func loadAppointmentCard() {
+        let urls = ["http://15.164.59.139:8080/Appointment/card/fun", "http://15.164.59.139:8080/Appointment/card/basic"]
+        
+        for url in urls {
+            AF.request(url, method: .get).responseString() { response in
+                switch response.result {
+                case .success(let data):
+                    print("성공적으로 데이터를 받았습니다: \(data)")
+                case .failure(let error):
+                    print("요청 실패: \(error.localizedDescription)")
+                }
+            }
+        }
+        print("================")
+        
+    }
     
     /// 초대장을 발송 및 저장소 초기화
     func createAppoint() {
@@ -44,19 +67,12 @@ class NewAppointViewModel {
         resetAppoint()
         
         let url = "http://15.164.59.139:8080/Appointment/name"
-//        let encoder = JSONEncoder()
-//        encoder.dateEncodingStrategy = .iso8601
-        
-//        guard let jsonData = try? encoder.encode(sendingData) else {
-//            fatalError("Couldn't encode JSON")
-//        }
         
         AF.request(url,
                    method: .post,
                    parameters: parm,
                    encoding: JSONEncoding.default,
-                   headers: ["Content-Type": "application/json"])
-        .responseString { response in
+                   headers: ["Content-Type": "application/json"]).responseString { response in
             
             switch response.result {
             case .success(let responseBody):
@@ -65,7 +81,6 @@ class NewAppointViewModel {
                 print("Error: \(error)")
                 return
             }
-            
         }
     }
     

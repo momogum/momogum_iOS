@@ -28,6 +28,7 @@ struct AppointCreate3View: View {
                             .modifier(ApmTextFieldModifier())
                     }
                     
+                    
                     VStack (spacing: 0) {
                         Text("식사 메뉴를 알려주세요.")
                             .font(.mmg(.subheader3))
@@ -77,6 +78,8 @@ struct AppointCreate3View: View {
                 .padding(.horizontal, 30)
                 .padding(.vertical, 50)
             }
+            
+            /// 다음 호버 버튼
             VStack {
                 Spacer()
                 HStack {

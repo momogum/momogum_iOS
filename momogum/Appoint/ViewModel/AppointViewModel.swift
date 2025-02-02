@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class AppointViewModel {
     
@@ -19,16 +20,16 @@ class AppointViewModel {
     
     
     func loadAllAppoints() async {
-//        do {
-//            let documents = try await Firestore.firestore().collection("posts").order(by: "date", descending: true).getDocuments().documents
-//            
-//            let appoints = try documents.map({ document in
-//                return try document.data(as: Appoint.self)
-//            })
-//            self.appoints = appoints
-//            
-//        } catch {
-//            print("DEBUG : Failed to load appoints with error \(error.localizedDescription)")
-//        }
+        //        do {
+        //            let documents = try await Firestore.firestore().collection("posts").order(by: "date", descending: true).getDocuments().documents
+        //
+        //            let appoints = try documents.map({ document in
+        //                return try document.data(as: Appoint.self)
+        //            })
+        //            self.appoints = appoints
+        //
+        //        } catch {
+        //            print("DEBUG : Failed to load appoints with error \(error.localizedDescription)")
+        //        }
     }
 }

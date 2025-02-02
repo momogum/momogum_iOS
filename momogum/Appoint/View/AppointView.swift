@@ -21,7 +21,10 @@ struct AppointView: View {
             ScrollView {
                 VStack (alignment: .leading) {
                     HStack {
-                        NavigationLink(value: "create1") {
+                        Button {
+                            path.append("create1")
+                            newAppointViewModel.loadAppointmentCard()
+                        } label: {
                             Rectangle()
                                 .frame(width: 336, height: 146)
                                 .tint(Color.white.opacity(1))
@@ -61,6 +64,47 @@ struct AppointView: View {
                             }
                             
                         }
+
+//                        NavigationLink(value: "create1") {
+//                            Rectangle()
+//                                .frame(width: 336, height: 146)
+//                                .tint(Color.white.opacity(1))
+//                                .overlay(RoundedRectangle(cornerRadius: 20)
+//                                    .stroke(lineWidth: 3)
+//                                    .tint(.gray.opacity(0.5)))
+//                                .overlay {
+//                                    VStack {
+//                                        Image(systemName: "plus.circle.fill")
+//                                            .resizable()
+//                                            .frame(width: 35, height: 35)
+//                                            .foregroundStyle(.gray.opacity(0.5))
+//                                            .padding(.bottom, 16)
+//                                        
+//                                        Text("식사 약속 만들기")
+//                                            .foregroundStyle(.black)
+//                                            .font(.mmg(.subheader3))
+//                                    }
+//                                }
+//                                .padding(.vertical, 30)
+//                        }
+//                        .navigationDestination(for: String.self) { value in
+//                            if value == "create1" {
+//                                AppointCreate1View(path: $path)
+//                                    .environment(newAppointViewModel)
+//                            } else if (value == "create2") {
+//                                AppointCreate2View(path: $path)
+//                                    .environment(newAppointViewModel)
+//                            } else if (value == "create3") {
+//                                AppointCreate3View(path: $path)
+//                                    .environment(newAppointViewModel)
+//                            } else if (value == "create4") {
+//                                AppointCreate4View(path: $path)
+//                                    .environment(newAppointViewModel)
+//                            } else {
+//                                AppointSentView(path: $path)
+//                            }
+//                            
+//                        }
                     }
                     .frame(maxWidth: .infinity)
                     
