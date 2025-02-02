@@ -12,7 +12,7 @@ struct AppointCreate3View: View {
     @Environment(NewAppointViewModel.self) var appointViewModel
     
     @Binding var path: [String]
-
+    
     var body: some View {
         @Bindable var viewModel = appointViewModel
         
@@ -29,69 +29,80 @@ struct AppointCreate3View: View {
                     }
                     
                     
-                    VStack (spacing: 0) {
-                        Text("식사 메뉴를 알려주세요.")
-                            .font(.mmg(.subheader3))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        TextField("ex. 더술 닭한마리, 투파피 파스타", text: $viewModel.menuName)
-                            .modifier(ApmTextFieldModifier())
-                    }
-                    
-                    VStack (spacing: 20) {
-                        Text("식사 일정을 알려주세요.")
-                            .font(.mmg(.subheader3))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        DatePicker("", selection: $viewModel.pickedDate)
-                            .frame(maxWidth: .infinity)
-                            .labelsHidden()
-                            .datePickerStyle(.wheel)
-                            .environment(\.locale, Locale(identifier: String(Locale.preferredLanguages[0])))
-                            .background(.black_5)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    if (viewModel.appointName != "") {
+                        VStack (spacing: 0) {
+                            Text("식사 메뉴를 알려주세요.")
+                                .font(.mmg(.subheader3))
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             
+                            TextField("ex. 더술 닭한마리, 투파피 파스타", text: $viewModel.menuName)
+                                .modifier(ApmTextFieldModifier())
+                        }
                     }
-                    .padding(.bottom, 20)
                     
-                    VStack (spacing: 0) {
-                        Text("어디서 만날까요?")
-                            .font(.mmg(.subheader3))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    if (viewModel.menuName != "") {
+                        VStack (spacing: 20) {
+                            Text("식사 일정을 알려주세요.")
+                                .font(.mmg(.subheader3))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            DatePicker("", selection: $viewModel.pickedDate)
+                                .frame(maxWidth: .infinity)
+                                .labelsHidden()
+                                .datePickerStyle(.wheel)
+                                .environment(\.locale, Locale(identifier: String(Locale.preferredLanguages[0])))
+                                .background(.black_5)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                            
+                        }
+                        .padding(.bottom, 20)
                         
-                        TextField("ex. 중앙동 다이소 앞, 학교 쪽문 앞", text: $viewModel.placeName)
-                            .modifier(ApmTextFieldModifier())
                     }
                     
-                    
-                    VStack (spacing: 0) {
-                        Text("특별한 소식이 있나요?")
-                            .font(.mmg(.subheader3))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        TextField("ex. 꾸밈단계 2단계", text: $viewModel.note)
-                            .modifier(ApmTextFieldModifier())
+                    if (viewModel.menuName != "") {
+                        VStack (spacing: 0) {
+                            Text("어디서 만날까요?")
+                                .font(.mmg(.subheader3))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            TextField("ex. 중앙동 다이소 앞, 학교 쪽문 앞", text: $viewModel.placeName)
+                                .modifier(ApmTextFieldModifier())
+                        }
                     }
-                    .padding(.bottom, 60)
+                    
+                    if (viewModel.placeName != "") {
+                        VStack (spacing: 0) {
+                            Text("특별한 소식이 있나요?")
+                                .font(.mmg(.subheader3))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            TextField("ex. 꾸밈단계 2단계", text: $viewModel.note)
+                                .modifier(ApmTextFieldModifier())
+                        }
+                        .padding(.bottom, 60)
+                    }
                     
                 }
                 .padding(.horizontal, 30)
                 .padding(.vertical, 50)
             }
             
+            
             /// 다음 호버 버튼
-            VStack {
-                Spacer()
-                HStack {
+            if (viewModel.note != "") {
+                VStack {
                     Spacer()
-                    NavigationLink(value: "create4") {
-                        Text("다음")
-                            .font(.mmg(.subheader3))
-                            .frame(width: 100, height: 50)
-                            .background(.Red_2)
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .padding(30)
+                    HStack {
+                        Spacer()
+                        NavigationLink(value: "create4") {
+                            Text("다음")
+                                .font(.mmg(.subheader3))
+                                .frame(width: 100, height: 50)
+                                .background(.Red_2)
+                                .foregroundStyle(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .padding(30)
+                        }
                     }
                 }
             }
