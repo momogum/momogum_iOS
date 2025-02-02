@@ -90,7 +90,7 @@ struct EditNameView: View {
                                 viewModel.draftUserName = ""
                                 showCloseButton = false
                             }label:{
-                                Image("close_cc")
+                                Image("close_black3")
                                     .resizable()
                                     .frame(width: 24, height: 24)
                             }
