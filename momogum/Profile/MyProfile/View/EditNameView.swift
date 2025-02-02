@@ -109,10 +109,12 @@ struct EditNameView: View {
                         .foregroundStyle(Color.Red_1)
                         .padding(.top, 8)
                         .padding(.leading, 11)
+                } else {
+                    Spacer().frame(width: 328, height: 24)
                 }
             }
             .padding(.horizontal, 47)
-            .padding(.bottom, 344)
+            .padding(.bottom, 323)
             .onAppear {
                 viewModel.draftUserName = ""
             }
@@ -120,13 +122,15 @@ struct EditNameView: View {
             HStack(spacing: 0){
                 Spacer()
                 Button{
-                    if showerrorMessage == false {
+                    if (viewModel.draftUserName.count <= maxLength) &&
+                        (showerrorMessage == false) &&
+                        (viewModel.draftUserName.count != 0) {
                         navigationPath.removeLast(1)
                     }
                 }label:{
                     Text("완료")
                         .font(.mmg(.subheader3))
-                        .foregroundStyle(Color.black_4)
+                        .foregroundStyle((viewModel.draftUserName.count <= maxLength) && (showerrorMessage == false) && (viewModel.draftUserName.count != 0) ? Color.Red_2 : Color.black_4)
                 }
             }
             .padding(.trailing, 62.5)

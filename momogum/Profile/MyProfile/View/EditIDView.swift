@@ -12,6 +12,11 @@ struct EditIDView: View {
     @Bindable var viewModel: ProfileViewModel
     
     @State private var showCloseButton = false
+    @State private var underBarColor: Color = Color.black_4
+    @State private var isIDAvailable = false // 중복확인
+    @State private var checkCircle1 = false // 최소 5자 ~ 최대 20자
+    @State private var checkCircle2 = false // 영어 소문자, 숫자, 특수문자( “.”, “_”) 사용 가능
+    private let maxLength = 20
     
     var body: some View {
         VStack(alignment: .center, spacing: 0){
@@ -51,7 +56,7 @@ struct EditIDView: View {
             .padding(.bottom, 72)
             .padding(.trailing, 136)
             
-            VStack(alignment: .center){
+            VStack(alignment: .leading, spacing: 0){
                 ZStack{
                     HStack{
                         TextField("변경할 유저아이디 입력", text: $viewModel.draftUserID)
@@ -59,6 +64,27 @@ struct EditIDView: View {
                             .font(.mmg(.subheader4))
                             .padding(.leading, 12)
                             .onChange(of: viewModel.draftUserID) { newValue in
+                                let allowedCharacters = CharacterSet.lowercaseLetters
+                                    .union(.decimalDigits) // 영문 소문자 + 숫자
+                                    .union(CharacterSet(charactersIn: "._")) // 특수문자 . 과 _
+                                
+                                // 최소 5자, 최대 20자 확인
+                                checkCircle1 = (5...20).contains(newValue.count)
+                                
+                                // 입력된 문자가 모두 허용된 문자 범위 내에 있는지 확인 (5자 이상부터 감지)
+                                checkCircle2 = newValue.count >= 5 && newValue.unicodeScalars.allSatisfy
+                                { allowedCharacters.contains($0) }
+                                
+                                // underBarColor
+                                if newValue.count < 5 {
+                                    underBarColor = Color.black_4 // 기본값
+                                } else if checkCircle1 && checkCircle2 {
+                                    underBarColor = Color.Green_1 // 모든 조건 만족 (성공)
+                                } else {
+                                    underBarColor = Color.Red_1 // 오류
+                                }
+                                
+                                
                                 showCloseButton = !newValue.isEmpty
                             }
                         Spacer().frame(width: 50, height: 39)
@@ -81,7 +107,36 @@ struct EditIDView: View {
                 }
                 Rectangle()
                     .frame(width: 328, height: 1)
-                    .foregroundStyle(.black_2)
+                    .foregroundStyle(underBarColor)
+                    .padding(.top, 5)
+                
+                if isIDAvailable == false {
+                    VStack(alignment: .leading, spacing: 0){
+                        HStack(spacing: 0){
+                            Image(checkCircle1 ? "check_circle_green" : "check_circle")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                                .padding(.trailing, 8)
+                            
+                            Text("최소 5자 ~ 최대 20자")
+                                .font(.mmg(.Caption2))
+                                .foregroundStyle(Color.black_3)
+                        }
+                        .padding(.bottom, 12)
+                        
+                        HStack(spacing: 0){
+                            Image(checkCircle2 ? "check_circle_green" : "check_circle")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                                .padding(.trailing, 8)
+                            
+                            Text("영어 소문자, 숫자, 특수문자( “.”, “_”) 사용 가능")
+                                .font(.mmg(.Caption2))
+                                .foregroundStyle(Color.black_3)
+                        }
+                    }
+                    .padding(.top, 24)
+                }
             }
             .padding(.horizontal, 47)
             .padding(.bottom, 344)
@@ -92,11 +147,15 @@ struct EditIDView: View {
             HStack(spacing: 0){
                 Spacer()
                 Button{
-                    navigationPath.removeLast(1)
+                    if checkCircle1 && checkCircle2 == true{
+                        navigationPath.removeLast(1)
+                    }
                 }label:{
-                    Text("완료")
+                    Text("중복확인")
                         .font(.mmg(.subheader3))
-                    .foregroundStyle(Color.black_4)}
+                        .foregroundStyle(
+                            checkCircle1 && checkCircle2 == true ? Color.Red_2 : Color.black_4)
+                }
             }
             .padding(.trailing, 62.5)
             
