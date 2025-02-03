@@ -43,7 +43,7 @@ struct Story2View: View {
                 Button(action: {  // 이미지 클릭 시 홈으로 돌아가기
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image("close_s")
+                    Image("close")
                 }
                 Spacer()
             }
