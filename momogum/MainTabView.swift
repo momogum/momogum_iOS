@@ -21,7 +21,7 @@ struct MainTabView: View {
             TabView(selection: $tabIndex) {
                 HomeView(tabIndex: $tabIndex)
                     .tag(0)
-                GalleryPickerView()
+                GalleryPickerView(tabIndex: .constant(1))
                     .tag(1)
                 AppointView()
                     .tag(2)
