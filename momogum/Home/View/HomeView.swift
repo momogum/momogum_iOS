@@ -30,7 +30,7 @@ struct HomeView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 107, height: 37)
-                        .clipped() // 이미지 외부 영역 제거
+                        .clipped()
                         .padding(.leading, 20)
                         .padding(.top, 20)
                     
@@ -56,34 +56,58 @@ struct HomeView: View {
                             .padding(.top, 20)
                     }
                 }
-                .background(Color.clear) // 배경을 투명하게 설정
+                .background(Color.clear)
                 .cornerRadius(10)
                 .padding(.horizontal, 16)
                 
                 Spacer()
                     .frame(height: 40)
                 
-                // Story
+                // ✅ 기존 코드 유지 + 스토리 테두리 추가
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         VStack {
                             NavigationLink(destination: StoryView(userID: "", tabIndex: $tabIndex)) {
-                                Circle()
-                                    .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255)) // #CFCFCF 색상
-                                    .cornerRadius(10)
-                                    .frame(width: 80, height: 80)
+                                ZStack {
+                                    // 테두리 추가 (스토리가 있으면 그라데이션, 없으면 회색)
+                                    Circle()
+                                        .strokeBorder(
+                                            Color.gray.opacity(0.5),
+                                            lineWidth: 6
+                                        )
+                                        .frame(width: 90, height: 90)
+                                    
+                                    // 기존 원 (프로필 이미지)
+                                    Circle()
+                                        .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255))
+                                        .frame(width: 76, height: 76)
+                                }
                             }
                             Text("내 스토리")
                                 .bold()
                                 .font(.mmg(.Caption2))
                         }
                         .padding(.leading, 24)
+                        
                         VStack {
                             NavigationLink(destination: Story2View(userID: "")) {
-                                Circle()
-                                    .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255)) // #CFCFCF 색상
-                                    .cornerRadius(10)
-                                    .frame(width: 80, height: 80)
+                                ZStack {
+                                    // 스토리가 있으면 그라데이션 테두리, 없으면 회색 테두리
+                                    Circle()
+                                        .strokeBorder(
+                                            LinearGradient(gradient: Gradient(colors: [
+                                                Color(red: 249 / 255, green: 143 / 255, blue: 140 / 255),
+                                                Color(red: 224 / 255, green: 90 / 255, blue: 85 / 255)
+                                            ]), startPoint: .topLeading, endPoint: .bottomTrailing),
+                                            lineWidth: 6
+                                        )
+                                        .frame(width: 90, height: 90)
+                                    
+                                    // 기존 원 (프로필 이미지)
+                                    Circle()
+                                        .foregroundColor(Color(red: 207 / 255, green: 207 / 255, blue: 207 / 255))
+                                        .frame(width: 76, height: 76)
+                                }
                             }
                             Text("momogum._.")
                                 .bold()
@@ -92,13 +116,15 @@ struct HomeView: View {
                         .padding(.leading, 16)
                     }
                 }
+                
                 Spacer()
                     .frame(height: 60)
+                
                 HStack {
                     Text("다양한 밥일기 \n둘려보기")
                         .bold()
                         .font(.mmg(.subheader1))
-                        .padding(.leading, 24) // 텍스트 왼쪽에 20pt 여백 추가
+                        .padding(.leading, 24)
                     Spacer()
                 }
                 
@@ -124,8 +150,8 @@ struct HomeView: View {
                     .padding(.top, 24)
                     .padding(.leading, 12)
                 }
-
-
+                
+                
                 
                 if selectedButtonIndex != nil {
                     ScrollView(.vertical, showsIndicators: false) {
