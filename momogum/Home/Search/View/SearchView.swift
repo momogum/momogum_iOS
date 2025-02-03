@@ -47,7 +47,7 @@ struct SearchView: View {
                             Image("close_cc")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 48, height: 48)
+                                .frame(width: 24, height: 24)
                                 .padding(.trailing, 8)
                         }
                     }

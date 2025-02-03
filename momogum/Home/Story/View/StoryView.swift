@@ -26,14 +26,17 @@ struct StoryView: View {
             
             HStack {
                 Image("no")
+                    .resizable()
                     .scaledToFit()
                     .frame(width: 95, height: 95)
                 
                 Image("notbad")
+                    .resizable()
                     .scaledToFit()
                     .frame(width: 95, height: 95)
                 
                 Image("yes")
+                    .resizable()
                     .scaledToFit()
                     .frame(width: 95, height: 95)
             }
@@ -50,7 +53,7 @@ struct StoryView: View {
                             .stroke(Color(red: 224/255, green: 90/255, blue: 85/255), lineWidth: 2)
                     )
             }
-            .padding(.top, 114)
+            .padding(.top, 100)
             
             Spacer() // 아래쪽에 빈 공간 추가
         }
