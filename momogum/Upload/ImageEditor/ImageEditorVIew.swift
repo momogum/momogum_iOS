@@ -56,7 +56,6 @@ struct ImageEditorView: View {
 
                     VStack {
                         HStack {
-                            // Custom Back Button (Chevron)
                             Button(action: {
                                 dismiss()  
                             }) {
