@@ -11,6 +11,7 @@ struct GalleryPickerView: View {
     @StateObject private var viewModel = GalleryPickerViewModel()
     @Environment(\.presentationMode) var presentationMode
     @Binding var tabIndex: Int
+    @Binding var isTabBarHidden: Bool
 
     var body: some View {
         NavigationView {
@@ -52,6 +53,7 @@ struct GalleryPickerView: View {
                     VStack {
                         HStack {
                             Button(action: {
+                                isTabBarHidden = false
                                 tabIndex = 0
                             }) {
                                 Image(systemName: "chevron.left")
@@ -77,6 +79,7 @@ struct GalleryPickerView: View {
                     }
                 }
                 .onAppear {
+                    isTabBarHidden = true
                     viewModel.requestPhotoLibraryPermission()
                 }
                 .alert(isPresented: $viewModel.showPermissionAlert) {
@@ -100,5 +103,5 @@ struct GalleryPickerView: View {
 }
 
 #Preview {
-    GalleryPickerView(tabIndex: .constant(1))
+    GalleryPickerView(tabIndex: .constant(1), isTabBarHidden: .constant(false))
 }

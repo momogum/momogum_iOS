@@ -41,7 +41,7 @@ struct StoryView: View {
                     .frame(width: 95, height: 95)
             }
             
-            NavigationLink(destination: GalleryPickerView(tabIndex: $tabIndex)) {
+            NavigationLink(destination: GalleryPickerView(tabIndex: $tabIndex, isTabBarHidden: .constant(false))) {
                 Text("바로 밥일기 작성하기")
                     .font(.mmg(.subheader3))
                     .foregroundColor(Color(red: 224/255, green: 90/255, blue: 85/255)) // E05A55 색상

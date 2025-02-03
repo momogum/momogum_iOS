@@ -71,7 +71,7 @@ struct NewPostView: View {
                             categories: ["한식", "중식", "일식", "양식", "아시안", "패스트푸드", "카페", "기타"],
                             selectedCategory: $viewModel.newPost.selectedCategory
                         )
-                        .onChange(of: viewModel.newPost.selectedCategory) { _ in
+                        .onChange(of: viewModel.newPost.selectedCategory) { _, _ in
                             withAnimation {
                                 scrollViewProxy.scrollTo("placeID", anchor: .top)
                             }
@@ -84,7 +84,7 @@ struct NewPostView: View {
                                 .id("placeID")
                                 .padding(.top, 20)
                                 .transition(.opacity)
-                                .onChange(of: viewModel.newPost.tags) { _ in
+                                .onChange(of: viewModel.newPost.tags) { _, _ in
                                     withAnimation {
                                         scrollViewProxy.scrollTo("placeID", anchor: .top)
                                     }
@@ -96,7 +96,7 @@ struct NewPostView: View {
                         if !viewModel.newPost.tags.isEmpty {
                             MealPlaceView(mealPlace: $viewModel.newPost.mealPlace)
                                 .id("placeID")
-                                .onChange(of: viewModel.newPost.mealPlace) { _ in
+                                .onChange(of: viewModel.newPost.mealPlace) { _, _ in
                                     if !viewModel.newPost.mealPlace.isEmpty {
                                         withAnimation {
                                             scrollViewProxy.scrollTo("experienceID", anchor: .bottom)
@@ -110,7 +110,7 @@ struct NewPostView: View {
                         if !viewModel.newPost.mealPlace.isEmpty {
                             MealExperienceView(newExperience: $viewModel.newPost.newExperience)
                                 .id("experienceID")
-                                .onChange(of: viewModel.newPost.newExperience) { newValue in
+                                .onChange(of: viewModel.newPost.newExperience) { _, newValue in
                                     if !newValue.isEmpty {
                                         withAnimation {
                                             scrollViewProxy.scrollTo("finalID", anchor: .bottom)
@@ -124,7 +124,7 @@ struct NewPostView: View {
                         if !viewModel.newPost.newExperience.isEmpty {
                             MealIconView(selectedIcon: $viewModel.newPost.selectedIcon)
                                 .id("iconID")
-                                .onChange(of: viewModel.newPost.selectedIcon) { _ in
+                                .onChange(of: viewModel.newPost.selectedIcon) { _, _ in
                                     if viewModel.newPost.selectedIcon != nil {
                                         withAnimation {
                                             scrollViewProxy.scrollTo("uploadButton", anchor: .bottom)
