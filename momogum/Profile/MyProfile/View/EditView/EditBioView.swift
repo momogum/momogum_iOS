@@ -51,7 +51,7 @@ struct EditBioView: View {
                         .font(.mmg(.Body3))
                         .frame(width: 320, height: 126)
                         .background(Color.clear)
-                        .onChange(of: viewModel.draftUserBio) { newValue in
+                        .onChange(of: viewModel.draftUserBio) { _, newValue in
                             if newValue.count > maxLength {
                                 viewModel.draftUserBio = String(newValue.prefix(maxLength)) // 초과 글자 제거
                             }

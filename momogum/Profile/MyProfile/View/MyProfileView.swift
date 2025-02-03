@@ -11,7 +11,7 @@ struct MyProfileView: View {
     @State private var navigationPath = NavigationPath()
     @State private var selectedSegment = 0
     @State private var showFollowList = 0
-    @State private var isActive = false // 화면 전환 제어
+    @State private var navigateToFollowView = false // 화면 전환 제어
     // 팝업창 제어
     @State private var showPopup = false
     @State private var showLogoutPopup = false
@@ -106,7 +106,7 @@ struct MyProfileView: View {
                             // 팔로워
                             Button(action: {
                                 showFollowList = 0
-                                isActive = true // 팔로워 버튼 클릭 시 화면 전환
+                                navigateToFollowView = true
                             }) {
                                 VStack(alignment: .center, spacing: 0){
                                     Text("팔로워")
@@ -124,7 +124,7 @@ struct MyProfileView: View {
                             // 팔로잉
                             Button(action: {
                                 showFollowList = 1
-                                isActive = true // 팔로잉 버튼 클릭 시 화면 전환
+                                navigateToFollowView = true
                             }) {
                                 VStack(alignment: .center, spacing: 0){
                                     Text("팔로잉")
@@ -138,10 +138,6 @@ struct MyProfileView: View {
                                 }
                             }
                             .padding(.trailing, 67)
-                            
-                            NavigationLink(destination: FollowView(viewModel: viewModel, selectedSegment: $showFollowList), isActive: $isActive) {
-                                EmptyView()
-                            }
                             
                             // 프로필 편집 버튼
                             Button {
@@ -165,6 +161,9 @@ struct MyProfileView: View {
                                         }
                                     )
                                     .contentShape(Rectangle())
+                            }
+                            .navigationDestination(isPresented: $navigateToFollowView) {
+                                FollowView(viewModel: viewModel, selectedSegment: $showFollowList)
                             }
                             .navigationDestination(for: String.self) { value in
                                 switch value {
@@ -282,8 +281,5 @@ struct MyProfileView: View {
             
         }
     }
-}
-#Preview{
-    MyProfileView()
 }
 

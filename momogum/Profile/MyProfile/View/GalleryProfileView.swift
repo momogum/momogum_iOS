@@ -99,9 +99,7 @@ struct GalleryProfileView: View {
     }
     
     private func handleImageSelection(_ image: UIImage) {
-        Task {
-            await viewModel.convertPreviewImage(from: image)
-        }
+        viewModel.convertPreviewImage(from: image)
     }
     
     private func requestPhotoLibraryPermission() {
@@ -123,26 +121,37 @@ struct GalleryProfileView: View {
     
     private func fetchPhotos() {
         guard isPermissionGranted else { return }
+        
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         let imageManager = PHImageManager.default()
         let options = PHImageRequestOptions()
-        options.isSynchronous = true
+        options.isSynchronous = false
         options.deliveryMode = .highQualityFormat
         
-        fetchResult.enumerateObjects { asset, _, _ in
-            imageManager.requestImage(
-                for: asset,
-                targetSize: CGSize(width: 200, height: 200),
-                contentMode: .aspectFill,
-                options: options
-            ) { image, _ in
+        Task {
+            for index in 0..<fetchResult.count {
+                let asset = fetchResult.object(at: index)
+                let image = await fetchImage(for: asset, with: imageManager, options: options)
                 if let image = image {
                     DispatchQueue.main.async {
                         selectedImages.append(image)
                     }
                 }
+            }
+        }
+    }
+    
+    private func fetchImage(for asset: PHAsset, with manager: PHImageManager, options: PHImageRequestOptions) async -> UIImage? {
+        return await withCheckedContinuation { continuation in
+            manager.requestImage(
+                for: asset,
+                targetSize: CGSize(width: 200, height: 200),
+                contentMode: .aspectFill,
+                options: options
+            ) { image, _ in
+                continuation.resume(returning: image)
             }
         }
     }

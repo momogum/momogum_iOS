@@ -12,9 +12,9 @@ struct EditNameView: View {
     @Bindable var viewModel: ProfileViewModel
     
     @State private var showCloseButton = false
-    private let maxLength = 12
     @State private var underBarColor: Color = Color.black_4
     @State private var showerrorMessage = false
+    private let maxLength = 12
     
     var body: some View {
         VStack(alignment: .center, spacing: 0){
@@ -63,7 +63,7 @@ struct EditNameView: View {
                             .frame(width: 268, height: 39)
                             .font(.mmg(.subheader4))
                             .padding(.leading, 12)
-                            .onChange(of: viewModel.draftUserName) { newValue in
+                            .onChange(of: viewModel.draftUserName) { _, newValue in
                                 if newValue.count > maxLength { // 길이 제한
                                     viewModel.draftUserName = String(newValue.prefix(maxLength))
                                 }

@@ -63,7 +63,7 @@ struct EditIDView: View {
                             .frame(width: 268, height: 39)
                             .font(.mmg(.subheader4))
                             .padding(.leading, 12)
-                            .onChange(of: viewModel.draftUserID) { newValue in
+                            .onChange(of: viewModel.draftUserID) { _, newValue in
                                 let allowedCharacters = CharacterSet.lowercaseLetters
                                     .union(.decimalDigits) // 영문 소문자 + 숫자
                                     .union(CharacterSet(charactersIn: "._")) // 특수문자 . 과 _
