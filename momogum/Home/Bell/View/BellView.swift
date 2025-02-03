@@ -11,9 +11,28 @@ struct BellView: View {
     @Environment(\.presentationMode) var presentationMode // 뒤로가기 기능
     
     var body: some View {
-        VStack {
-
+        VStack{
+            HStack {
+                Text("읽지않음")
+                    .font(.mmg(.subheader4))
+                    .foregroundColor(.black)
+                    .padding(.leading, 26)
+                    .padding(.top, 21)
+                Spacer()
+                
+            }
+            .padding(.bottom, 52)
+            HStack{
+                Text("최근30일")
+                    .font(.mmg(.subheader4))
+                    .foregroundColor(.black_2)
+                    .padding(.leading, 26)
+                    .padding(.top, 125)
+                Spacer()
+                
+            }
         }
+        Spacer()
         .navigationBarBackButtonHidden(true) // 기본 백 버튼 숨기기
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -42,4 +61,3 @@ struct BellView: View {
 #Preview {
     BellView()
 }
-

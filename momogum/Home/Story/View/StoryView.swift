@@ -14,32 +14,36 @@ struct StoryView: View {
     
     var body: some View {
         VStack {
-            Text("오늘의 한 끼는 어땠나요?🍽️")
-                .font(.title)
+            Text("오늘의 한 끼는 어땠나요? 🍽️")
+                .font(.mmg(.Header3))
                 .bold()
                 .padding(.top, 170)
             
             Text("당신의 한 끼를 기록하고, 공유해주세요 :)")
+                .font(.mmg(.Body2))
                 .padding(.top, 1)
                 .padding(.bottom, 92)
             
             HStack {
                 Image("no")
+                    .resizable()
                     .scaledToFit()
                     .frame(width: 95, height: 95)
                 
                 Image("notbad")
+                    .resizable()
                     .scaledToFit()
                     .frame(width: 95, height: 95)
                 
                 Image("yes")
+                    .resizable()
                     .scaledToFit()
                     .frame(width: 95, height: 95)
             }
             
             NavigationLink(destination: GalleryPickerView(tabIndex: $tabIndex)) {
                 Text("바로 밥일기 작성하기")
-                    .font(.headline)
+                    .font(.mmg(.subheader3))
                     .foregroundColor(Color(red: 224/255, green: 90/255, blue: 85/255)) // E05A55 색상
                     .padding()
                     .frame(width: 312, height: 52)
@@ -49,7 +53,7 @@ struct StoryView: View {
                             .stroke(Color(red: 224/255, green: 90/255, blue: 85/255), lineWidth: 2)
                     )
             }
-            .padding(.top, 114)
+            .padding(.top, 100)
             
             Spacer() // 아래쪽에 빈 공간 추가
         }
