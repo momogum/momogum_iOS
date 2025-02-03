@@ -100,5 +100,5 @@ struct GalleryPickerView: View {
 }
 
 #Preview {
-    GalleryPickerView(tabIndex: .constant(0))
+    GalleryPickerView(tabIndex: .constant(1))
 }
