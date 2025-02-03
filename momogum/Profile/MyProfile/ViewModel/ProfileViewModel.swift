@@ -25,7 +25,7 @@ class ProfileViewModel {
     // 유저 정보 (임시)
     var draftUserName: String = "머머금"
     var draftUserID: String = "momogum._."
-    var draftUserBio: String = ""
+    var draftUserBio: String = "오늘은 또 뭘 먹을까!? 🍪"
     
     init() {
         profileImage = UIImage(named: "defaultProfile")
@@ -50,8 +50,18 @@ class ProfileViewModel {
     // 편집 취소 시 초기화
     func resetUserData() {
         currentPreviewImage = profileImage
+        resetUserName()
+        resetUserID()
+        resetUserBio()
+    }
+    
+    func resetUserName() {
         draftUserName = userName
+    }
+    func resetUserID() {
         draftUserID = userID
+    }
+    func resetUserBio() {
         draftUserBio = userBio
     }
     

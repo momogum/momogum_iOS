@@ -14,29 +14,27 @@ struct AppointPickedFriendCellView: View {
     var body: some View {
         @Bindable var viewModel = appointViewModel
         
-        VStack {
-            ZStack {
-                Image(systemName: "person.circle.fill")
+        ZStack {
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .frame(width: 50, height: 50)
+                .foregroundStyle(.gray.opacity(0.2))
+            
+            Button {
+                viewModel.pickedFriends.removeAll(where: { $0 == friend })
+            } label: {
+                Image("close_cc")
                     .resizable()
-                    .frame(width: 60, height: 60)
-                    .foregroundStyle(.gray.opacity(0.5))
-                
-                Button {
-                    viewModel.pickedFriends.removeAll(where: { $0 == friend })
-                } label: {
-                    Image(systemName: "xmark.circle")
-                        .resizable()
-                        .background(.gray)
-                        .clipShape(Circle())
-                        .frame(width: 30, height: 30)
-                        .offset(x: 25, y: -25)
-                }
+                    .clipShape(Circle())
+                    .frame(width: 18, height: 18)
             }
-            Text(friend)
+            .offset(x: 18, y: -18)
         }
-        .frame(width: 80, height: 110)
-        .padding(.top, 5)
+        .padding(.top, 3)
+        .padding(.trailing, 3)
+        .padding(.bottom, 10)
     }
+    
 }
 
 #Preview {
