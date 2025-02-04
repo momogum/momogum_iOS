@@ -141,7 +141,7 @@ struct NewPostView: View {
                         Color.clear.frame(height: 1).id("finalID")
 
                         if viewModel.newPost.selectedIcon != nil {
-                            NavigationLink(destination: DonePostView(uploadedImage: editedImage)) {
+                            NavigationLink(destination: DonePostView(uploadedImage: editedImage,tabIndex: $tabIndex, isTabBarHidden: $isTabBarHidden)) {
                                 Text("밥일기 업로드 하기")
                                     .font(.system(size: 17, weight: .bold))
                                     .frame(width: 340, height: 58)

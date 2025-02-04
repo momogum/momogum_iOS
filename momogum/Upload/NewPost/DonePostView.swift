@@ -10,11 +10,15 @@ import SwiftUI
 struct DonePostView: View {
     @Environment(\.dismiss) var dismiss
     let uploadedImage: UIImage
+    @Binding var tabIndex: Int 
+    @Binding var isTabBarHidden: Bool  // 추가됨
 
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
+                    tabIndex = 0  // HomeView로 이동
+                    isTabBarHidden = false  // 탭바 다시 보이게 설정
                     dismiss()
                 }) {
                     Image(systemName: "chevron.left")
@@ -63,5 +67,9 @@ struct DonePostView: View {
 }
 
 #Preview {
-    DonePostView(uploadedImage: UIImage(systemName: "photo") ?? UIImage())
+    DonePostView(
+        uploadedImage: UIImage(systemName: "photo") ?? UIImage(),
+        tabIndex: .constant(0),  // 추가됨
+        isTabBarHidden: .constant(false)  // 추가됨
+    )
 }
