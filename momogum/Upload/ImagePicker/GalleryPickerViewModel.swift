@@ -64,5 +64,27 @@ class GalleryPickerViewModel: ObservableObject {
             }
         }
     }
-}
 
+    func imageGridView(gridItemSize: CGFloat, tabIndex: Binding<Int>, isTabBarHidden: Binding<Bool>) -> some View {
+        LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8),
+            GridItem(.flexible(), spacing: 8)
+        ], spacing: 8) {
+            ForEach(images, id: \.hashValue) { image in
+                NavigationLink(
+                    destination: ImageEditorView(image: image, tabIndex: tabIndex, isTabBarHidden: isTabBarHidden)
+                        .onAppear {
+                            isTabBarHidden.wrappedValue = true  
+                        }
+                ) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: gridItemSize, height: gridItemSize)
+                        .clipped()
+                }
+            }
+        }
+    }
+}

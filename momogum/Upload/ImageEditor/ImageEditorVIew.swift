@@ -70,6 +70,7 @@ struct ImageEditorView: View {
                             Spacer()
 
                             Button(action: {
+                                dismiss()
                                 tabIndex = 0
                                 isTabBarHidden = false
                                 viewModel.resetToOriginalImage()
@@ -106,21 +107,18 @@ struct ImageEditorView: View {
                     .zIndex(1)
                 }
             }
-            .navigationDestination(for: UIImage.self) { image in
-                NewPostView(
-                    editedImage: image,
-                    onReset: { viewModel.resetToOriginalImage() }
-                )
-            }
             .navigationBarBackButtonHidden(true)
-            .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
-        }
-        .onAppear {
-            UITabBar.appearance().isHidden = true
-        }
-        .onDisappear {
-            UITabBar.appearance().isHidden = false
+            .onAppear {
+                isTabBarHidden = true
+                UITabBar.appearance().isHidden = true
+            }
+            .onDisappear {
+                if tabIndex == 0 {  
+                    isTabBarHidden = false
+                    UITabBar.appearance().isHidden = false
+                }
+            }
         }
     }
 }

@@ -9,28 +9,20 @@ import SwiftUI
 
 struct GalleryPickerView: View {
     @StateObject private var viewModel = GalleryPickerViewModel()
-    @Environment(\.presentationMode) var presentationMode
     @Binding var isTabBarHidden: Bool
     @Binding var tabIndex: Int
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GeometryReader { geometry in
-                let gridItems = [
-                    GridItem(.flexible(), spacing: 8),
-                    GridItem(.flexible(), spacing: 8),
-                    GridItem(.flexible(), spacing: 8)
-                ]
                 let gridItemSize = (geometry.size.width - 48) / 3
 
                 ZStack(alignment: .top) {
                     if viewModel.isPermissionGranted {
                         ScrollView {
-                            LazyVGrid(columns: gridItems, spacing: 8) {
-                                imageGrid(gridItemSize: gridItemSize)
-                            }
-                            .padding(.top, 80)
-                            .padding(.horizontal, 16)
+                            viewModel.imageGridView(gridItemSize: gridItemSize, tabIndex: $tabIndex, isTabBarHidden: $isTabBarHidden)
+                                .padding(.top, 80)
+                                .padding(.horizontal, 16)
                         }
                     } else {
                         Text("사진 권한이 필요합니다. 설정에서 권한을 허용해주세요.")
@@ -72,25 +64,7 @@ struct GalleryPickerView: View {
                 }
             }
         }
-        .toolbar(.hidden, for: .tabBar)
-        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
-    }
-
-    private func imageGrid(gridItemSize: CGFloat) -> some View {
-        ForEach(viewModel.images, id: \UIImage.hash) { image in
-            NavigationLink(
-                destination: ImageEditorView(image: image, tabIndex: $tabIndex, isTabBarHidden: $isTabBarHidden)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarHidden(true)
-            ) {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: gridItemSize, height: gridItemSize)
-                    .clipped()
-            }
-        }
     }
 }
 
