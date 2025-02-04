@@ -89,7 +89,7 @@ struct ImageEditorView: View {
                         Button(action: {
                             if let editedImage = viewModel.finalizeImage(frameSize: frameSize) {
                                 viewModel.image = editedImage
-                                navigationPath.append(viewModel.image)
+                                navigationPath.append(editedImage) 
                             }
                         }) {
                             Text("다음")
@@ -114,10 +114,18 @@ struct ImageEditorView: View {
                 UITabBar.appearance().isHidden = true
             }
             .onDisappear {
-                if tabIndex == 0 {  
+                if tabIndex == 0 {
                     isTabBarHidden = false
                     UITabBar.appearance().isHidden = false
                 }
+            }
+            .navigationDestination(for: UIImage.self) { editedImage in
+                NewPostView(
+                    editedImage: editedImage,
+                    onReset: {
+                        viewModel.resetToOriginalImage()
+                    }
+                )
             }
         }
     }
