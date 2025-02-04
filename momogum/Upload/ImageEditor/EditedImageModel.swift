@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct EditedImageModel {
+struct EditedImageModel: Identifiable, Hashable {
+    let id = UUID() 
     var image: UIImage
     var scale: CGFloat = 1.0
     var offset: CGSize = .zero
