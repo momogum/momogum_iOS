@@ -9,12 +9,17 @@ import SwiftUI
 
 struct MyCardView: View {
     @StateObject private var viewModel = MyCardViewModel()
+    @Binding var tabIndex: Int
+    @Binding var isTabBarHidden: Bool
 
     var body: some View {
         ZStack(alignment: .top) {
             VStack(spacing: 0) {
                 HStack {
-                    Button(action: {}) {
+                    Button(action: {
+                        isTabBarHidden = false
+                        tabIndex = 3
+                    }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.black)
                             .font(.title2)
@@ -162,9 +167,18 @@ struct MyCardView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+
+        // ✅ 추가된 코드: 탭 인덱스가 1(업로드)로 변경되면 GalleryPickerView가 보이도록 함
+        .onChange(of: tabIndex) {_, newValue in
+            if newValue == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    tabIndex = 1 // ✅ 강제로 다시 렌더링하여 GalleryPickerView가 나오도록 함
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    MyCardView()
+    MyCardView(tabIndex: .constant(1), isTabBarHidden: .constant(false))
 }

@@ -11,14 +11,14 @@ struct DonePostView: View {
     @Environment(\.dismiss) var dismiss
     let uploadedImage: UIImage
     @Binding var tabIndex: Int 
-    @Binding var isTabBarHidden: Bool  // 추가됨
+    @Binding var isTabBarHidden: Bool
 
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    tabIndex = 0  // HomeView로 이동
-                    isTabBarHidden = false  // 탭바 다시 보이게 설정
+                    tabIndex = 0
+                    isTabBarHidden = false
                     dismiss()
                 }) {
                     Image(systemName: "chevron.left")
@@ -47,7 +47,7 @@ struct DonePostView: View {
 
             Spacer().frame(height: 90)
 
-            NavigationLink(destination: MyCardView()) {
+            NavigationLink(destination: MyCardView(tabIndex: $tabIndex, isTabBarHidden: $isTabBarHidden)) {
                 Text("바로 확인하기")
                     .font(.system(size: 20, weight: .bold))
                     .frame(width: 340, height: 58)
@@ -69,7 +69,7 @@ struct DonePostView: View {
 #Preview {
     DonePostView(
         uploadedImage: UIImage(systemName: "photo") ?? UIImage(),
-        tabIndex: .constant(0),  // 추가됨
-        isTabBarHidden: .constant(false)  // 추가됨
+        tabIndex: .constant(0),
+        isTabBarHidden: .constant(false)
     )
 }
