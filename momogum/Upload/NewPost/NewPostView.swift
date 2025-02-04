@@ -13,6 +13,8 @@ struct NewPostView: View {
 
     let editedImage: UIImage
     let onReset: () -> Void
+    @Binding var tabIndex: Int
+    @Binding var isTabBarHidden: Bool
 
     var body: some View {
         ZStack {
@@ -41,6 +43,8 @@ struct NewPostView: View {
                             Spacer()
 
                             Button(action: {
+                                tabIndex = 0
+                                isTabBarHidden = false
                                 dismiss()
                             }) {
                                 Image(systemName: "xmark")
@@ -155,6 +159,14 @@ struct NewPostView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            isTabBarHidden = true
+        }
+        .onDisappear {
+            if tabIndex == 0 {
+                isTabBarHidden = false
+            }
+        }
     }
 }
 
@@ -162,7 +174,9 @@ struct NewPostView: View {
     NavigationView {
         NewPostView(
             editedImage: UIImage(systemName: "photo") ?? UIImage(),
-            onReset: {}
+            onReset: {},
+            tabIndex: .constant(0),
+            isTabBarHidden: .constant(false)
         )
     }
 }

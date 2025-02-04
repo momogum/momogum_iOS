@@ -124,7 +124,9 @@ struct ImageEditorView: View {
                     editedImage: editedImage.image,
                     onReset: {
                         viewModel.resetToOriginalImage()
-                    }
+                    },
+                    tabIndex: $tabIndex,
+                    isTabBarHidden: $isTabBarHidden
                 )
             }
         }
