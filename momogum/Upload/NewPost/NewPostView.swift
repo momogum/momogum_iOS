@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NewPostView: View {
-    @Binding var tabIndex: Int
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = NewPostViewModel()
 
@@ -42,7 +41,7 @@ struct NewPostView: View {
                             Spacer()
 
                             Button(action: {
-                                tabIndex = 0
+                                dismiss()
                             }) {
                                 Image(systemName: "xmark")
                                     .foregroundColor(.black)
@@ -162,7 +161,6 @@ struct NewPostView: View {
 #Preview {
     NavigationView {
         NewPostView(
-            tabIndex: .constant(0),
             editedImage: UIImage(systemName: "photo") ?? UIImage(),
             onReset: {}
         )

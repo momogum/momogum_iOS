@@ -22,7 +22,7 @@ struct MainTabView: View {
                 HomeView(tabIndex: $tabIndex)
                     .tag(0)
 
-                GalleryPickerView(tabIndex: .constant(1), isTabBarHidden: $isTabBarHidden)
+                GalleryPickerView(isTabBarHidden: $isTabBarHidden, tabIndex: $tabIndex)
                     .tag(1)
 
                 AppointView()

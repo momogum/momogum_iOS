@@ -10,8 +10,8 @@ import SwiftUI
 struct GalleryPickerView: View {
     @StateObject private var viewModel = GalleryPickerViewModel()
     @Environment(\.presentationMode) var presentationMode
-    @Binding var tabIndex: Int
     @Binding var isTabBarHidden: Bool
+    @Binding var tabIndex: Int
 
     var body: some View {
         NavigationView {
@@ -27,19 +27,7 @@ struct GalleryPickerView: View {
                     if viewModel.isPermissionGranted {
                         ScrollView {
                             LazyVGrid(columns: gridItems, spacing: 8) {
-                                ForEach(viewModel.images, id: \UIImage.hash) { image in
-                                    NavigationLink(
-                                        destination: ImageEditorView(image: image, tabIndex: $tabIndex)
-                                            .navigationBarBackButtonHidden(true)
-                                            .navigationBarHidden(true)
-                                    ) {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: gridItemSize, height: gridItemSize)
-                                            .clipped()
-                                    }
-                                }
+                                imageGrid(gridItemSize: gridItemSize)
                             }
                             .padding(.top, 80)
                             .padding(.horizontal, 16)
@@ -53,8 +41,8 @@ struct GalleryPickerView: View {
                     VStack {
                         HStack {
                             Button(action: {
-                                isTabBarHidden = false
                                 tabIndex = 0
+                                isTabBarHidden = false
                             }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(.black)
@@ -82,26 +70,30 @@ struct GalleryPickerView: View {
                     isTabBarHidden = true
                     viewModel.requestPhotoLibraryPermission()
                 }
-                .alert(isPresented: $viewModel.showPermissionAlert) {
-                    Alert(
-                        title: Text("권한 필요"),
-                        message: Text("사진 라이브러리에 접근하려면 권한이 필요합니다."),
-                        primaryButton: .default(Text("설정으로 이동"), action: {
-                            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                                UIApplication.shared.open(settingsURL)
-                            }
-                        }),
-                        secondaryButton: .cancel()
-                    )
-                }
             }
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
+
+    private func imageGrid(gridItemSize: CGFloat) -> some View {
+        ForEach(viewModel.images, id: \UIImage.hash) { image in
+            NavigationLink(
+                destination: ImageEditorView(image: image, tabIndex: $tabIndex, isTabBarHidden: $isTabBarHidden)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarHidden(true)
+            ) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: gridItemSize, height: gridItemSize)
+                    .clipped()
+            }
+        }
+    }
 }
 
 #Preview {
-    GalleryPickerView(tabIndex: .constant(1), isTabBarHidden: .constant(false))
+    GalleryPickerView(isTabBarHidden: .constant(false), tabIndex: .constant(1))
 }
