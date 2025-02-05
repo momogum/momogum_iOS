@@ -167,15 +167,6 @@ struct MyCardView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-
-        // ✅ 추가된 코드: 탭 인덱스가 1(업로드)로 변경되면 GalleryPickerView가 보이도록 함
-        .onChange(of: tabIndex) {_, newValue in
-            if newValue == 1 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    tabIndex = 1 // ✅ 강제로 다시 렌더링하여 GalleryPickerView가 나오도록 함
-                }
-            }
-        }
     }
 }
 
