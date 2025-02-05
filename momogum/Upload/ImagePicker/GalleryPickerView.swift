@@ -66,6 +66,12 @@ struct GalleryPickerView: View {
             }
         }
         .navigationBarHidden(true)
+        .id(forceReload) // 강제 렌더링
+            .onChange(of: tabIndex) {_, newValue in
+                if newValue == 1 {
+                    forceReload.toggle() // ✅ forceReload 값 변경 → 뷰 강제 재렌더링
+                }
+            }
     }
 }
 
