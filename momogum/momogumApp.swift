@@ -8,12 +8,23 @@
 import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
+import FirebaseCore
+
+class FirebaseAppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
+
 
 @main
 struct momogumApp: App {
   
-    @UIApplicationDelegateAdaptor var appDelegate : AppDelegate
-    
+    @UIApplicationDelegateAdaptor var appDelegate : FirebaseAppDelegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 //    init() {
 //
 //        let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] ?? "" //없을 땐 빈칸
