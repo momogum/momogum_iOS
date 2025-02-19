@@ -118,7 +118,7 @@ import FirebaseMessaging
 import FirebaseInAppMessaging
 
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] ?? ""
@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         KakaoSDK.initSDK(appKey: kakaoAppKey as! String)
         FirebaseApp.configure()
         
-        
+
         //  In-App Messaging 활성화
         InAppMessaging.inAppMessaging().messageDisplaySuppressed = true
         // 푸시 알림 권한 요청
@@ -141,18 +141,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
-    // ✅ FCM 등록 토큰 받기 (Firebase가 이 메서드를 감지하도록 수정)
+    
+    
+    
+    
+    // ✅ FCM 등록 토큰 받기 (Firebase가 이 메서드를 감지하도록 수정) ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else {
             print("❌ FCM 등록 토큰을 받지 못함")
             return
         }
-        print("✅ FCM 등록 토큰: \(fcmToken)")
+        print("✅ FCM 등록 토큰 2222: \(fcmToken)")
         
         // 🔹 서버로 FCM 토큰 전송 가능
         let dataDict: [String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     }
+    
+    
     
     //푸시 알림 권한 요청 및 등록
     private func requestNotificationAuthorization(_ application: UIApplication) {
@@ -171,10 +177,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // APNs 토큰을 FCM에 등록
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
         let tokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("📲 APNs Device Token: \(tokenString)")
+
+        // ✅ FirebaseMessaging에 APNs 토큰 설정
+        Messaging.messaging().apnsToken = deviceToken
     }
+
+    func fetchFCMToken() {
+           Messaging.messaging().token { token, error in
+               if let error = error {
+                   print("❌ FCM 토큰 가져오기 실패: \(error.localizedDescription)")
+               } else if let token = token {
+                   print("✅ FCM 등록 토큰11111: \(token)")
+               }
+           }
+       }
+   
     
     // ❌ APNs 등록 실패 시 로그 출력
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
